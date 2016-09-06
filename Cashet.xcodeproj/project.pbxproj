@@ -31,6 +31,7 @@
 		EE789BBA1D7882DE00B75897 /* CheckButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EE789BB91D7882DE00B75897 /* CheckButton.m */; };
 		EE789BBD1D7890EE00B75897 /* BuyProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE789BBC1D7890EE00B75897 /* BuyProductViewController.m */; };
 		EE789BC01D78A21E00B75897 /* IWantThisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE789BBF1D78A21E00B75897 /* IWantThisViewController.m */; };
+		EE8812A31D7F5DA200E5DF57 /* credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE8812A21D7F5DA200E5DF57 /* credentials.plist */; };
 		EE92FE601D5CFAC800395DC7 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = EE92FE4C1D5CFAC800395DC7 /* Reachability.m */; };
 		EE92FE631D5CFAC800395DC7 /* SearchViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE92FE531D5CFAC800395DC7 /* SearchViewTableViewCell.m */; };
 		EE92FE641D5CFAC800395DC7 /* SubmitButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EE92FE551D5CFAC800395DC7 /* SubmitButton.m */; };
@@ -110,6 +111,7 @@
 		EE789BBC1D7890EE00B75897 /* BuyProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyProductViewController.m; sourceTree = "<group>"; };
 		EE789BBE1D78A21E00B75897 /* IWantThisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWantThisViewController.h; sourceTree = "<group>"; };
 		EE789BBF1D78A21E00B75897 /* IWantThisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWantThisViewController.m; sourceTree = "<group>"; };
+		EE8812A21D7F5DA200E5DF57 /* credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = credentials.plist; sourceTree = "<group>"; };
 		EE92FE4B1D5CFAC800395DC7 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		EE92FE4C1D5CFAC800395DC7 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		EE92FE521D5CFAC800395DC7 /* SearchViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewTableViewCell.h; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				EE03149D1D5BB75E00C873B2 /* Assets.xcassets */,
 				EE03149F1D5BB75E00C873B2 /* LaunchScreen.storyboard */,
 				EE0314A21D5BB75E00C873B2 /* Info.plist */,
+				EE8812A21D7F5DA200E5DF57 /* credentials.plist */,
 				EE0314911D5BB75E00C873B2 /* Supporting Files */,
 			);
 			path = Cashet;
@@ -455,6 +458,7 @@
 			files = (
 				EE0314A11D5BB75E00C873B2 /* LaunchScreen.storyboard in Resources */,
 				EE03149E1D5BB75E00C873B2 /* Assets.xcassets in Resources */,
+				EE8812A31D7F5DA200E5DF57 /* credentials.plist in Resources */,
 				EE03149C1D5BB75E00C873B2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

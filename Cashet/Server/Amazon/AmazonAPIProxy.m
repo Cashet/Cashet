@@ -14,15 +14,13 @@
 #import <CommonCrypto/CommonHMAC.h>
 
 #define BASE_URL @"http://webservices.amazon.com/"
-#define AWSAccessKeyId	@""
-#define AWSSecretKey	@""
-#define AssociateTag	@""
 
 @interface AmazonAPIProxy()
 
 @property(nonatomic, retain) AFHTTPSessionManager *netmanager;
 @property(nonatomic, retain) Reachability *internetReachable;
 @property(nonatomic, retain) NSMutableData *data;
+@property(nonatomic, retain) NSDictionary *credentials;
 
 @end
 
@@ -52,6 +50,10 @@
 
 - (void)_initialize
 {
+    NSString *path = [[NSBundle mainBundle] bundlePath];
+    NSString *customPlistPath = [path stringByAppendingPathComponent:@"credentials.plist"];
+    self.credentials = [NSDictionary dictionaryWithContentsOfFile:customPlistPath];
+    
     self.internetReachable = [Reachability reachabilityWithHostname:(NSString*)BASE_URL];
     
     self.netmanager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:BASE_URL]];
@@ -97,8 +99,8 @@
         
         [self.netmanager setRequestSerializer:reqSerializer];
         
-        NSArray* array = @[ [NSString stringWithFormat:@"AWSAccessKeyId=%@", AWSAccessKeyId],
-                            [NSString stringWithFormat:@"AssociateTag=%@", AssociateTag],
+        NSArray* array = @[ [NSString stringWithFormat:@"AWSAccessKeyId=%@", self.credentials[@"AWSAccessKeyId"]],
+                            [NSString stringWithFormat:@"AssociateTag=%@", self.credentials[@"AssociateTag"]],
                             @"Availability=Available",
                             [NSString stringWithFormat:@"Keywords=%@", [string urlencode]],
                             @"Operation=ItemSearch",
@@ -133,7 +135,7 @@
     
     NSString* string = [NSString stringWithFormat:@"GET\nwebservices.amazon.com\n/onca/xml\n%@", paramsString];
     
-    NSData *keyData = [AWSSecretKey dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *keyData = [self.credentials[@"AWSSecretKey"] dataUsingEncoding:NSUTF8StringEncoding];
     NSData *paramData = [string dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableData* hash = [NSMutableData dataWithLength:CC_SHA256_DIGEST_LENGTH ];
     CCHmac(kCCHmacAlgSHA256, keyData.bytes, keyData.length, paramData.bytes, paramData.length, hash.mutableBytes);
