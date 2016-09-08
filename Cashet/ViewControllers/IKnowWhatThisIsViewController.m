@@ -8,12 +8,19 @@
 
 #import "IKnowWhatThisIsViewController.h"
 #import "SearchViewTableViewCell.h"
+#import "AmazonAPIProxy.h"
+#import "AmazonResponse.h"
+#import "AmazonItem.h"
+#import <UIImageView+AFNetworking.h>
+
+#define MAX_PAGES 5 // Defined by Amazon's API
 
 @interface IKnowWhatThisIsViewController () <UITableViewDelegate, UITableViewDataSource>
 
-@property(nonatomic, retain) NSMutableArray *contentList;
-@property(nonatomic, retain) NSMutableArray *filteredContentList;
+@property(nonatomic, retain) NSMutableArray<AmazonItem*> *items;
 @property(nonatomic, assign) BOOL isSearching;
+@property(nonatomic, assign) AmazonResponse* response;
+@property(nonatomic, assign) long currentPage;
 
 @end
 
@@ -22,19 +29,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+  
     self.title = @"I Know What This Is";
     
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     self.tableView.allowsSelection = NO;
     
-    self.contentList = [NSMutableArray new];
-    [self.contentList addObject:@{@"title": @"Outray Unisex Retro Way…", @"subtitle": @"Price $8.00 & Free Shipping", @"image":@"one"}];
-    [self.contentList addObject:@{@"title": @"Outray Vintage Retro…", @"subtitle": @"Price $6.40 & Free Shipping", @"image":@"two"}];
-    [self.contentList addObject:@{@"title": @"Outray Half Frame Wayfa…", @"subtitle": @"Price $7.50 & Free Shipping", @"image":@"three"}];
-    [self.contentList addObject:@{@"title": @"Outray Unisex Frame Wayfa…", @"subtitle": @"Price $6.50 & Free Shipping", @"image":@"four"}];
-    
-    self.filteredContentList = [[NSMutableArray alloc] init];
+    [[AmazonAPIProxy sharedInstance] getProductsMatchingString:self.product.name category:self.product.category.name callback:^(AmazonResponse* response, NSError *error) {
+        
+        self.currentPage = 0;
+        self.response = response;
+        
+        self.items = self.response.items.mutableCopy;
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,21 +60,6 @@
 }
 */
 
-- (void)searchTableList
-{
-    NSString *searchString = self.searchBar.text;
-    
-    for (NSDictionary *item in self.contentList) {
-        NSString* title = item[@"title"];
-        
-        if ([[title uppercaseString] containsString:[searchString uppercaseString]]) {
-            [self.filteredContentList addObject:item];
-        }
-    }
-    
-    [self.tableView reloadData];
-}
-
 #pragma mark - UISearchBarDelegate
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
@@ -83,19 +75,31 @@
 {
     NSLog(@"Text change - %d", self.isSearching);
     
-    //Remove all objects first.
-    [self.filteredContentList removeAllObjects];
+    [self _search];
+}
+
+- (void)_search
+{
+    [self.items removeAllObjects];
     
-    if([searchText length] != 0) {
-        self.isSearching = YES;
-        [self searchTableList];
-    }
-    else {
-        self.isSearching = NO;
+    [self showActivityIndicator];
+    
+    [[AmazonAPIProxy sharedInstance] getProductsMatchingString:self.product.name category:self.product.category.name callback:^(AmazonResponse* response, NSError *error) {
         
-        [self.filteredContentList addObjectsFromArray:self.contentList];
-        [self.tableView reloadData];
-    }
+        [self hideActivityIndicator];
+        
+        if (!error) {
+            self.currentPage = 0;
+            self.response = response;
+            
+            self.items = self.response.items.mutableCopy;
+            
+            [self.tableView reloadData];
+            
+        } else {
+            [self showErrorDialogWithMessage:error.localizedDescription];
+        }
+    }];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
@@ -106,7 +110,7 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     NSLog(@"Search Clicked");
-    [self searchTableList];
+    [self _search];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -114,7 +118,12 @@
 {
     CGFloat scale = self.view.frame.size.width / 320;
     
-    return 100 * scale;
+    if (indexPath.row == self.items.count) {
+        return 44 * scale;
+        
+    } else {
+        return 100 * scale;
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -124,45 +133,68 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.isSearching) {
-        return [self.filteredContentList count];
-    }
-    else {
-        return [self.contentList count];
-    }
+    return self.items.count + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SearchViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    
-    NSDictionary* item = nil;
-    
-    // Configure the cell...
-    if (self.isSearching) {
-        item = [self.filteredContentList objectAtIndex:indexPath.row];
+    if (indexPath.row == self.items.count) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Loading"];
+        UIActivityIndicatorView* activityIndicator = [[cell subviews][0] viewWithTag:100];
+        [activityIndicator startAnimating];
+        
+        if (self.currentPage < MAX_PAGES) {
+            [self _loadMoreResults];
+        }
+        
+        return cell;
+        
     } else {
-        item = [self.contentList objectAtIndex:indexPath.row];
+        SearchViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+        
+        AmazonItem* item = self.items[indexPath.row];
+   
+        cell.productName.text = item.title;
+        cell.descriptionLabel.attributedText = [self _attributedTextForText: item.lowestNewPriceFormatted];
+        [cell.productImage setImageWithURL:[NSURL URLWithString:item.imageURL]];
+        cell.submitButton.tag = indexPath.row;
+        
+        return cell;
     }
+}
+
+- (void)_loadMoreResults
+{
+    self.currentPage++;
     
-    cell.productName.text = item[@"title"];
-    cell.descriptionLabel.attributedText = [self _attributedTextForText: item[@"subtitle"]];
-    [cell.productImage setImage:[UIImage imageNamed:item[@"image"]]];
-    cell.submitButton.tag = indexPath.row;
-    
-    return cell;
-    
+    [[AmazonAPIProxy sharedInstance] getProductsMatchingString:self.product.name category:self.product.category.name page:self.currentPage callback:^(AmazonResponse* response, NSError *error) {
+        
+        [self hideActivityIndicator];
+        
+        if (!error) {
+            self.response = response;
+            [self.items addObjectsFromArray:self.response.items];
+            
+            [self.tableView reloadData];
+            
+        } else {
+            [self showErrorDialogWithMessage:error.localizedDescription];
+        }
+    }];
 }
 
 - (NSAttributedString*)_attributedTextForText:(NSString*)text
 {
-#pragma mark - Hardcoded
-    NSMutableAttributedString *string = [[NSMutableAttributedString alloc]initWithString:text];
+    NSString* fulltext = [NSString stringWithFormat:@"Price %@", text];
+    
+    NSRange range = [fulltext rangeOfString:text];
+    
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:fulltext];
     
     [string addAttribute:NSForegroundColorAttributeName
                    value:[UIColor whiteColor]
-                   range:NSMakeRange(6, 5)];
-    [string addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:12] range:NSMakeRange(6, 5)];
+                   range:range];
+    [string addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:12] range:range];
     
     return string;
 }

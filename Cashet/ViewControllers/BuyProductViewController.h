@@ -12,6 +12,8 @@
 
 @interface BuyProductViewController : BaseViewController
 
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+
 @property (retain, nonatomic) Product *product;
 
 @end

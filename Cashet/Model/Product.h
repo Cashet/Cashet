@@ -28,5 +28,6 @@
 @property (nonatomic, retain) NSNumber<Optional>* created;
 @property (nonatomic, retain) NSNumber<Optional>* updated;
 @property (nonatomic, retain) Category<Optional>* category;
+@property (nonatomic, retain) NSString<Optional>* amazonPage;
 
 @end

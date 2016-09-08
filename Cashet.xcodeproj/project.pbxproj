@@ -51,6 +51,8 @@
 		EEB35DEB1D7479ED00A242F9 /* RequestProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB35DEA1D7479EC00A242F9 /* RequestProductViewController.m */; };
 		EEB35DEE1D747BEF00A242F9 /* CategoriesListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB35DED1D747BEF00A242F9 /* CategoriesListViewController.m */; };
 		EEB35DF11D74888500A242F9 /* GoogleImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB35DF01D74888500A242F9 /* GoogleImageCell.m */; };
+		EEBD78851D808D740087A160 /* AmazonResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBD78841D808D740087A160 /* AmazonResponse.m */; };
+		EEBD78881D8097100087A160 /* AmazonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBD78871D8097100087A160 /* AmazonItem.m */; };
 		EEC2E53E1D6630E200B37190 /* MovieActorDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC2E53D1D6630E200B37190 /* MovieActorDetailViewController.m */; };
 		EEC2E5411D66370D00B37190 /* ProductCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC2E5401D66370D00B37190 /* ProductCategoryTableViewCell.m */; };
 		EEC2E5441D665B2200B37190 /* ProductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC2E5431D665B2200B37190 /* ProductTableViewCell.m */; };
@@ -150,6 +152,10 @@
 		EEB35DED1D747BEF00A242F9 /* CategoriesListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesListViewController.m; sourceTree = "<group>"; };
 		EEB35DEF1D74888500A242F9 /* GoogleImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleImageCell.h; sourceTree = "<group>"; };
 		EEB35DF01D74888500A242F9 /* GoogleImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleImageCell.m; sourceTree = "<group>"; };
+		EEBD78831D808D740087A160 /* AmazonResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmazonResponse.h; sourceTree = "<group>"; };
+		EEBD78841D808D740087A160 /* AmazonResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmazonResponse.m; sourceTree = "<group>"; };
+		EEBD78861D8097100087A160 /* AmazonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmazonItem.h; sourceTree = "<group>"; };
+		EEBD78871D8097100087A160 /* AmazonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmazonItem.m; sourceTree = "<group>"; };
 		EEC2E53C1D6630E200B37190 /* MovieActorDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieActorDetailViewController.h; sourceTree = "<group>"; };
 		EEC2E53D1D6630E200B37190 /* MovieActorDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieActorDetailViewController.m; sourceTree = "<group>"; };
 		EEC2E53F1D66370D00B37190 /* ProductCategoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductCategoryTableViewCell.h; sourceTree = "<group>"; };
@@ -250,6 +256,10 @@
 			children = (
 				EE46B3A21D7F41A4006AEB41 /* AmazonAPIProxy.h */,
 				EE46B3A31D7F41A4006AEB41 /* AmazonAPIProxy.m */,
+				EEBD78831D808D740087A160 /* AmazonResponse.h */,
+				EEBD78841D808D740087A160 /* AmazonResponse.m */,
+				EEBD78861D8097100087A160 /* AmazonItem.h */,
+				EEBD78871D8097100087A160 /* AmazonItem.m */,
 			);
 			path = Amazon;
 			sourceTree = "<group>";
@@ -530,6 +540,7 @@
 				EEB35DEB1D7479ED00A242F9 /* RequestProductViewController.m in Sources */,
 				EE789BBA1D7882DE00B75897 /* CheckButton.m in Sources */,
 				EE99512C1D64B21800942095 /* ItemCollectionViewCell.m in Sources */,
+				EEBD78881D8097100087A160 /* AmazonItem.m in Sources */,
 				EE2389D51D6E3EF700B421C8 /* CategoryItemProductState.m in Sources */,
 				EE92FE651D5CFAC800395DC7 /* MyNavigationController.m in Sources */,
 				EE92FE601D5CFAC800395DC7 /* Reachability.m in Sources */,
@@ -541,6 +552,7 @@
 				EE92FE8A1D5D1C9000395DC7 /* SearchMovieActorViewController.m in Sources */,
 				EE2389CE1D6E337500B421C8 /* CategoryItemCollectionViewCell.m in Sources */,
 				EE46B39C1D7F1FC6006AEB41 /* ServerResponse.m in Sources */,
+				EEBD78851D808D740087A160 /* AmazonResponse.m in Sources */,
 				EE0314931D5BB75E00C873B2 /* main.m in Sources */,
 				EE46B38D1D7F1F01006AEB41 /* GIImage.m in Sources */,
 				EE92FE911D5D1D5700395DC7 /* ColorHelper.m in Sources */,

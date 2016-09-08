@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LQI-L2-zR2">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -106,8 +107,23 @@
                     <view key="view" contentMode="scaleToFill" id="YoZ-qE-6ZZ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P40-G0-07k">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                        </subviews>
                         <color key="backgroundColor" red="0.12549020349979401" green="0.12549020349979401" blue="0.12549020349979401" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="P40-G0-07k" firstAttribute="bottom" secondItem="hBw-j2-53X" secondAttribute="top" id="7tW-fJ-hP2"/>
+                            <constraint firstAttribute="trailing" secondItem="P40-G0-07k" secondAttribute="trailing" id="Aaj-xn-GQE"/>
+                            <constraint firstItem="P40-G0-07k" firstAttribute="leading" secondItem="YoZ-qE-6ZZ" secondAttribute="leading" id="LcC-ZE-xEx"/>
+                            <constraint firstItem="P40-G0-07k" firstAttribute="top" secondItem="YoZ-qE-6ZZ" secondAttribute="top" id="NBL-Mf-JEp"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="webView" destination="P40-G0-07k" id="L0c-ka-zvp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fdE-Ig-WBD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -256,6 +272,44 @@ CQ
                                             <outlet property="productName" destination="CcR-Fb-vq2" id="1ti-N9-kEc"/>
                                             <outlet property="submitButton" destination="b7l-pY-vf3" id="SGA-D3-7iR"/>
                                         </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Loading" rowHeight="44" id="g9s-iK-Xmz">
+                                        <rect key="frame" x="0.0" y="128" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g9s-iK-Xmz" id="YLb-ev-7TJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <activityIndicatorView opaque="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Xmw-J7-keP">
+                                                    <rect key="frame" x="290" y="12" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Xmw-J7-keP" firstAttribute="centerY" secondItem="YLb-ev-7TJ" secondAttribute="centerY" id="zPj-q6-Ii9"/>
+                                                <constraint firstItem="Xmw-J7-keP" firstAttribute="centerX" secondItem="YLb-ev-7TJ" secondAttribute="centerX" id="zhR-gJ-5J9"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.12549020349979401" green="0.12549020349979401" blue="0.12549020349979401" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Last" rowHeight="44" id="d8h-F7-68B">
+                                        <rect key="frame" x="0.0" y="172" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="d8h-F7-68B" id="FfC-zQ-Yit">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="To view more result do a more detailed search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="44" translatesAutoresizingMaskIntoConstraints="NO" id="Wtj-dz-M7O">
+                                                    <rect key="frame" x="279" y="11" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Wtj-dz-M7O" firstAttribute="centerX" secondItem="FfC-zQ-Yit" secondAttribute="centerX" id="ScI-wi-bSF"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.12549020349979401" green="0.12549020349979401" blue="0.12549020349979401" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -902,7 +956,7 @@ CQ
                                             <rect key="frame" x="0.0" y="0.0" width="151" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="BRu-gR-euk">
+                                                <activityIndicatorView opaque="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="BRu-gR-euk">
                                                     <rect key="frame" x="57" y="31" width="37" height="37"/>
                                                 </activityIndicatorView>
                                             </subviews>

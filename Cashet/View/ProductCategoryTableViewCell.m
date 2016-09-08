@@ -97,7 +97,7 @@
             [self.delegate productCategoryTableViewCell:self moviedatabaseItem:self.moviedatabaseItem];
             
         } else {
-            [self.delegate productCategoryTableViewCell:self didSelectCategory:self.items[indexPath.row]];
+            [self.delegate productCategoryTableViewCell:self didSelectCategory:self.items[indexPath.row-1]];
         }
     }
     

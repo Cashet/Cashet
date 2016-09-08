@@ -143,7 +143,7 @@
     }];
     
     UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"activity indicator" forIndexPath:indexPath];
-    [cell viewWithTag:100].hidden = (indexPath.row == 0);
+    [[cell subviews][0] viewWithTag:100].hidden = (indexPath.row == 0);
     
     return cell;
 }

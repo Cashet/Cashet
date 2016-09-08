@@ -64,17 +64,17 @@
 - (AFJSONRequestSerializer*)_newSerializer
 {
     AFJSONRequestSerializer* reqSerializer = [AFJSONRequestSerializer serializer];
-    [reqSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [reqSerializer setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"];
     [reqSerializer setTimeoutInterval:20];
     
     return reqSerializer;
 }
 
-- (AFJSONResponseSerializer*)_newResponseSerializer
+- (AFHTTPResponseSerializer*)_newResponseSerializer
 {
-    AFJSONResponseSerializer* serializer = [AFJSONResponseSerializer serializer];
+    AFHTTPResponseSerializer* serializer = [AFHTTPResponseSerializer serializer];
     
-    serializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain", @"application/json", @"text/html", @"text/html; charset=utf-8", nil];
+    serializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain", @"text/xml", @"text/html", @"text/html; charset=utf-8", nil];
     NSMutableIndexSet* codes = [NSMutableIndexSet indexSetWithIndexesInRange: NSMakeRange(200, 100)];
     [codes addIndex: 400];
     [codes addIndex: 401];
@@ -89,37 +89,47 @@
     return serializer;
 }
 
-- (void)getProductsMatchingString:(NSString*)string callback:(void(^)(id response, NSError* error))callback
+- (void)getProductsMatchingString:(NSString*)string category:(NSString*)category page:(long)page callback:(void(^)(AmazonResponse* response, NSError* error))callback
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-
+    
     if (_internetReachable.isReachable){
         
-        AFHTTPRequestSerializer* reqSerializer = [self _newSerializer];
+        NSMutableArray* array = @[ [NSString stringWithFormat:@"AWSAccessKeyId=%@", self.credentials[@"AWSAccessKeyId"]],
+                                   [NSString stringWithFormat:@"AssociateTag=%@", self.credentials[@"AssociateTag"]],
+                                   @"Availability=Available",
+                                   [NSString stringWithFormat:@"Keywords=%@", [string urlencode]],
+                                   @"Operation=ItemSearch",
+                                   @"ResponseGroup=Medium",
+                                   //                            [NSString stringWithFormat:@"SearchIndex=%@", category],
+                                   @"SearchIndex=All",
+                                   @"Service=AWSECommerceService-Y",
+                                   [NSString stringWithFormat:@"Timestamp=%@", [[DateHelper UTFStringFromDate:[NSDate date]] urlencode]]
+                                   ].mutableCopy;
         
-        [self.netmanager setRequestSerializer:reqSerializer];
+        if (page != 0) {
+            [array insertObject:[NSString stringWithFormat:@"ItemPage=%ld", page] atIndex:3];
+        }
         
-        NSArray* array = @[ [NSString stringWithFormat:@"AWSAccessKeyId=%@", self.credentials[@"AWSAccessKeyId"]],
-                            [NSString stringWithFormat:@"AssociateTag=%@", self.credentials[@"AssociateTag"]],
-                            @"Availability=Available",
-                            [NSString stringWithFormat:@"Keywords=%@", [string urlencode]],
-                            @"Operation=ItemSearch",
-                            @"ResponseGroup=Small",
-                            @"SearchIndex=Jewelry", //
-                            @"Service=AWSECommerceService-Y",
-                            [NSString stringWithFormat:@"Timestamp=%@", [[DateHelper UTFStringFromDate:[NSDate date]] urlencode]]];
+        [array addObject:[NSString stringWithFormat:@"Signature=%@", [self _getSignatureFromParams:array]]];
         
-        NSString* url = [NSString stringWithFormat:@"onca/xml?%@&Signature=%@", [array componentsJoinedByString:@"&"], [self _getSignatureFromParams:array]];
+        NSLog(@"Params: %@", array);
+        
+        NSString* url = [NSString stringWithFormat:@"onca/xml?%@", [array componentsJoinedByString:@"&"]];
         
         [self.netmanager
          GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              
-             NSLog(@"Response object: %@", responseObject);
-                          
-             callback(responseObject, nil);
+             NSString *xml = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+             
+             AmazonResponse* amazonResponse = [[AmazonResponse alloc] initWithString:xml];
+             
+             NSLog(@"Response object: %@", amazonResponse);
+             
+             callback(amazonResponse, nil);
              
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-             NSLog(@"getUserCallback: %@", error);
+             NSLog(@"getProductsMatchingString: %@", error);
              callback(nil, [self _createErrorForMessage:@"An error ocurred, try again later." andCode:500]);
          }];
         
@@ -149,6 +159,11 @@
     [details setValue:message forKey:NSLocalizedDescriptionKey];
     
     return [NSError errorWithDomain:[[NSBundle mainBundle] bundleIdentifier] code:code userInfo:details];
+}
+
+- (void)getProductsMatchingString:(NSString*)string category:(NSString*)category callback:(void(^)(AmazonResponse* response, NSError* error))callback
+{
+    [self getProductsMatchingString:string category:category page:0 callback:callback];
 }
 
 @end

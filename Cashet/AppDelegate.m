@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "AmazonAPIProxy.h"
+#import "AmazonResponse.h"
 
 @interface AppDelegate ()
 
@@ -18,10 +19,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[AmazonAPIProxy sharedInstance] getProductsMatchingString:@"sarasa" callback:^(id response, NSError *error) {
-        
-    }];
-    
     return YES;
 }
 

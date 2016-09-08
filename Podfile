@@ -9,5 +9,6 @@ target 'Cashet' do
   pod "AFNetworking", "~> 3.0"
   pod "JSONModel"
   pod "JGProgressHUD", "~> 1.3"
+  pod "RaptureXML"
 
 end

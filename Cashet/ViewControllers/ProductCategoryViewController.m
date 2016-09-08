@@ -60,7 +60,7 @@
     
     [self showActivityIndicator];
     
-    [[Server sharedInstance] getProductsForActor:self.actor movie:self.movie callback:^(id response, NSError *error) {
+    [[Server sharedInstance] getProductsForActor:self.actor movie:self.movie category:self.category callback:^(id response, NSError *error) {
         
         [self hideActivityIndicator];
        
@@ -167,8 +167,6 @@
 #pragma mark - IBActions
 - (IBAction)requestProduct:(id)sender
 {
-    self.selectedProduct = self.items[((UIView*)sender).tag];
-    
     [self performSegueWithIdentifier:@"request product" sender:self];
 }
 

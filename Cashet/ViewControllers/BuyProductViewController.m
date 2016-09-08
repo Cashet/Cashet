@@ -10,4 +10,11 @@
 
 @implementation BuyProductViewController
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.product.amazonPage]]];
+}
+
 @end
