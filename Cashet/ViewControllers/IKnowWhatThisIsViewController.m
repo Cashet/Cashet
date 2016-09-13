@@ -7,18 +7,19 @@
 //
 
 #import "IKnowWhatThisIsViewController.h"
-#import "SearchViewTableViewCell.h"
+#import "IKnowWhatThisIsCell.h"
 #import "AmazonAPIProxy.h"
 #import "AmazonResponse.h"
 #import "AmazonItem.h"
 #import <UIImageView+AFNetworking.h>
+#import "Server.h"
+#import "BuyProductViewController.h"
 
 #define MAX_PAGES 5 // Defined by Amazon's API
 
 @interface IKnowWhatThisIsViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property(nonatomic, retain) NSMutableArray<AmazonItem*> *items;
-@property(nonatomic, assign) BOOL isSearching;
 @property(nonatomic, assign) AmazonResponse* response;
 @property(nonatomic, assign) long currentPage;
 
@@ -50,20 +51,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
 #pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"amazon product detail"]) {
+        BuyProductViewController* vc = segue.destinationViewController;
+        vc.product = self.product;
+    }
 }
-*/
 
 #pragma mark - UISearchBarDelegate
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-    self.isSearching = YES;
+
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
@@ -73,9 +73,7 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    NSLog(@"Text change - %d", self.isSearching);
-    
-    [self _search];
+
 }
 
 - (void)_search
@@ -84,7 +82,7 @@
     
     [self showActivityIndicator];
     
-    [[AmazonAPIProxy sharedInstance] getProductsMatchingString:self.product.name category:self.product.category.name callback:^(AmazonResponse* response, NSError *error) {
+    [[AmazonAPIProxy sharedInstance] getProductsMatchingString:self.searchBar.text category:self.product.category.name callback:^(AmazonResponse* response, NSError *error) {
         
         [self hideActivityIndicator];
         
@@ -139,18 +137,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == self.items.count) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Loading"];
-        UIActivityIndicatorView* activityIndicator = [[cell subviews][0] viewWithTag:100];
-        [activityIndicator startAnimating];
-        
         if (self.currentPage < MAX_PAGES) {
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Loading"];
+            UIActivityIndicatorView* activityIndicator = [[cell subviews][0] viewWithTag:100];
+            [activityIndicator startAnimating];
+            
             [self _loadMoreResults];
+            
+            return cell;
+        } else {
+            return [tableView dequeueReusableCellWithIdentifier:@"Last"];
         }
-        
-        return cell;
-        
     } else {
-        SearchViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+        IKnowWhatThisIsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
         
         AmazonItem* item = self.items[indexPath.row];
    
@@ -185,9 +184,15 @@
 
 - (NSAttributedString*)_attributedTextForText:(NSString*)text
 {
-    NSString* fulltext = [NSString stringWithFormat:@"Price %@", text];
+    NSString* price = text;
     
-    NSRange range = [fulltext rangeOfString:text];
+    if (!price) {
+        price = @"N/A";
+    }
+    
+    NSString* fulltext = [NSString stringWithFormat:@"Price: %@", price];
+    
+    NSRange range = [fulltext rangeOfString:price];
     
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:fulltext];
     
@@ -201,7 +206,10 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    cell.backgroundColor = [UIColor colorWithRed:22/225.0f green:22/225.0f blue:22/225.0f alpha:1];
+    // Remove seperator inset
+    if ([cell respondsToSelector : @selector (setSeparatorInset :)]) {
+        [cell setSeparatorInset : UIEdgeInsetsZero ];
+    }
     
     // Prevent the cell from inheriting the Table View's margin settings
     if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
@@ -215,10 +223,38 @@
     
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self _updateProductWithAmazonItem:self.items[indexPath.row]];
+    
+    [self performSegueWithIdentifier:@"amazon product detail" sender:self];
+}
+
+- (void)_updateProductWithAmazonItem:(AmazonItem*)item
+{
+    self.product.amazonLink = item.detailPageURL;
+    self.product.amazonId = item.ASIN;
+    self.product.productDescription = item.title;
+    self.product.price = @([item.lowestNewPriceFormatted stringByReplacingOccurrencesOfString:@"$" withString:@""].doubleValue);
+}
+
 #pragma mark - IBActions
 - (IBAction)submitButtonClicked:(id)sender
 {
-    NSLog(@"Submit");
+    [self _updateProductWithAmazonItem:self.items[((UIView*)sender).tag]];
+    
+    [self showActivityIndicator];
+    
+    [[Server sharedInstance] updateProduct:self.product callback:^(id response, NSError *error) {
+        [self hideActivityIndicator];
+        
+        if (!error) {
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        } else {
+            [self showErrorDialogWithMessage:error.localizedDescription];
+        }
+    }];
 }
 
 @end

@@ -17,6 +17,7 @@
 @property(nonatomic, retain) NSString* title;
 @property(nonatomic, retain) NSString* lowestNewPriceFormatted;
 @property(nonatomic, retain) NSString* imageURL;
+@property(nonatomic, retain) NSString* ASIN;
 
 - (id)initWithRXMLElement:(RXMLElement*)element;
 

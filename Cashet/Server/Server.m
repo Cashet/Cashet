@@ -16,6 +16,7 @@
 #import <JSONModel.h>
 #import "NSString+URLEncode.h"
 #import "GIResponse.h"
+#import "ProductSuscription.h"
 
 #define BASE_URL @"http://cashet-backend-stage.herokuapp.com/api/"
 
@@ -92,57 +93,40 @@
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-//    if (_internetReachable.isReachable){
-//        
-//        AFHTTPRequestSerializer* reqSerializer = [self _newSerializer];
-//        
-//        [self.netmanager setRequestSerializer:reqSerializer];
-//        
-//        
-//        [self.netmanager
-//         GET:@"categories" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//             
-//             NSLog(@"Response object: %@", responseObject);
-//             
-//             NSError* error = nil;
-//             
-//             ServerListResponse* serverResponse = [[ServerListResponse alloc] initWithDictionary:responseObject class:[Category class] error:&error];
-//             
-//             if (error) {
-//                callback(serverResponse, error);
-//                 
-//             } else {
-//                 NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:serverResponse.message andCode:500];
-//                 
-//                 callback(serverResponse, error);
-//             }
-//             
-//         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//             NSLog(@"getUserCallback: %@", error);
-//             callback(nil, [self _createErrorForMessage:@"An error ocurred, try again later." andCode:500]);
-//         }];
-//        
-//    } else {
-//        NSLog(@"No internet connection");
-//        callback(nil, [self _createErrorForMessage:@"No internet connection." andCode:0]);
-//    }
-
-    NSArray<NSString*>* categories = @[@"All",@"ArtsAndCrafts",@"Miscellaneous",@"Electronics",@"Jewelry",@"Photo",@"Shoes",@"Automotive",@"Pantry",@"MusicalInstruments",@"DigitalMusic",@"FashionGirls",@"FashionWomen",@"FashionMen",@"Kitchen",@"FashionBoys",@"Industrial",@"PetSupplies",@"Watches",@"OutdoorLiving",@"Toys",@"SportingGoods",@"Movies",@"Books",@"Collectibles",@"Handmade",@"Fashion",@"Tools",@"Baby",@"Apparel",@"DVD",@"Appliances",@"Music",@"LawnAndGarden",@"WirelessAccessories",@"Blended",@"Classical"];
-    
-    NSMutableArray<Category*> *list = [NSMutableArray new];
-    
-    for (int i = 0; i < categories.count; i++) {
-        Category* categoryObject = [Category new];
-        categoryObject.categoryId = @(i);
-        categoryObject.name = categories[i];
-        [list addObject:categoryObject];
+    if (_internetReachable.isReachable){
+        
+        AFHTTPRequestSerializer* reqSerializer = [self _newSerializer];
+        
+        [self.netmanager setRequestSerializer:reqSerializer];
+        
+        
+        [self.netmanager
+         GET:@"categories" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             
+             NSLog(@"Response object: %@", responseObject);
+             
+             NSError* error = nil;
+             
+             ServerListResponse* serverResponse = [[ServerListResponse alloc] initWithDictionary:responseObject class:[Category class] error:&error];
+             
+             if (error) {
+                callback(serverResponse, error);
+                 
+             } else {
+                 NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:serverResponse.message andCode:500];
+                 
+                 callback(serverResponse, error);
+             }
+             
+         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+             NSLog(@"getUserCallback: %@", error);
+             callback(nil, [self _createErrorForMessage:@"An error ocurred, try again later." andCode:500]);
+         }];
+        
+    } else {
+        NSLog(@"No internet connection");
+        callback(nil, [self _createErrorForMessage:@"No internet connection." andCode:0]);
     }
-    
-    ServerListResponse* response = [ServerListResponse new];
-    response.data = list;
-    response.success = YES;
-    
-    callback(response, nil);
 }
 
 - (NSError*)_createErrorForMessage:(NSString*)message andCode:(long)code
@@ -204,6 +188,56 @@
     }
 }
 
+- (void)updateProduct:(Product*)product callback:(void(^)(id response, NSError* error))callback
+{
+    if (_internetReachable.isReachable){
+        
+        NSDictionary* params = @{
+                                 @"description": product.productDescription,
+                                 @"price": product.price,
+                                 @"status": @"known",
+                                 @"amazon_id": product.amazonId,
+                                 @"amazon_link": product.amazonLink
+                                 };
+        
+        NSLog(@"Params: %@", params);
+        
+        AFHTTPRequestSerializer* reqSerializer = [self _newSerializer];
+        [self.netmanager setRequestSerializer:reqSerializer];
+        [self.netmanager
+         POST:[NSString stringWithFormat:@"products/%ld", product.productId.longValue] parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             
+             NSLog(@"Response object: %@", responseObject);
+             
+             if (!responseObject) {
+                 callback(nil, nil);
+                 
+             } else {
+                 NSError* error = nil;
+                 
+                 ServerResponse* serverResponse = [[ServerResponse alloc] initWithDictionary:responseObject class:[Product class] error:&error];
+                 
+                 if (error) {
+                     callback(serverResponse, error);
+                     
+                 } else {
+                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:serverResponse.message andCode:500];
+                     
+                     callback(serverResponse, error);
+                 }
+             }
+             
+         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+             NSLog(@"getUserCallback: %@", error);
+             callback(nil, [self _createErrorForMessage:@"An error ocurred, try again later." andCode:500]);
+         }];
+        
+    } else {
+        NSLog(@"No internet connection");
+        callback(nil, [self _createErrorForMessage:@"No internet connection." andCode:0]);
+    }
+}
+
 - (void)getProductsForActor:(MoviedatabaseItem*)actor movie:(MoviedatabaseItem*)movie category:(Category*)category callback:(void(^)(id response, NSError* error))callback;
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -212,7 +246,7 @@
         
         NSDictionary* params = @{@"movie_token": movie.identifier,
                                  @"actor_token": actor.identifier,
-//                                 @"category_id": category.categoryId
+                                 @"category_id": category.categoryId
                                  };
         
         NSLog(@"Params: %@", params);
@@ -231,6 +265,53 @@
                  NSError* error = nil;
                  
                  ServerListResponse* serverResponse = [[ServerListResponse alloc] initWithDictionary:responseObject class:[Product class] error:&error];
+                 
+                 if (error) {
+                     callback(serverResponse, error);
+                     
+                 } else {
+                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:serverResponse.message andCode:500];
+                     
+                     callback(serverResponse, error);
+                 }
+             }
+             
+         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+             NSLog(@"getUserCallback: %@", error);
+             callback(nil, [self _createErrorForMessage:@"An error ocurred, try again later." andCode:500]);
+         }];
+        
+    } else {
+        NSLog(@"No internet connection");
+        callback(nil, [self _createErrorForMessage:@"No internet connection." andCode:0]);
+    }
+}
+
+- (void)favoriteProduct:(Product*)product forUserWithEmail:(NSString*)email callback:(void(^)(id response, NSError* error))callback
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    if (_internetReachable.isReachable){
+        
+        NSDictionary* params = @{@"email": email
+                                 };
+        
+        NSLog(@"Params: %@", params);
+        
+        AFHTTPRequestSerializer* reqSerializer = [self _newSerializer];
+        [self.netmanager setRequestSerializer:reqSerializer];
+        [self.netmanager
+         POST:[NSString stringWithFormat:@"products/%ld/suscription", product.productId.longValue] parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             
+             NSLog(@"Response object: %@", responseObject);
+             
+             if (!responseObject) {
+                 callback(nil, nil);
+                 
+             } else {
+                 NSError* error = nil;
+                 
+                 ServerResponse* serverResponse = [[ServerResponse alloc] initWithDictionary:responseObject class:[ProductSuscription class] error:&error];
                  
                  if (error) {
                      callback(serverResponse, error);

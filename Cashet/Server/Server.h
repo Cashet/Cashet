@@ -18,6 +18,8 @@
 - (void)getWantedItems:(void(^)(id response, NSError* error))callback;
 - (void)getCategoriesCallback:(void(^)(id response, NSError* error))callback;
 - (void)postProduct:(Product*)product callback:(void(^)(id response, NSError* error))callback;
+- (void)updateProduct:(Product*)product callback:(void(^)(id response, NSError* error))callback;
 - (void)getProductsForActor:(MoviedatabaseItem*)actor movie:(MoviedatabaseItem*)movie category:(Category*)category callback:(void(^)(id response, NSError* error))callback;
+- (void)favoriteProduct:(Product*)product forUserWithEmail:(NSString*)email callback:(void(^)(id response, NSError* error))callback;
 
 @end

@@ -16,6 +16,7 @@
 		EE2389D21D6E37A000B421C8 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2389D11D6E37A000B421C8 /* Product.m */; };
 		EE2389D51D6E3EF700B421C8 /* CategoryItemProductState.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2389D41D6E3EF700B421C8 /* CategoryItemProductState.m */; };
 		EE2389D81D6E424A00B421C8 /* CategoryItemNotKnownState.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2389D71D6E424A00B421C8 /* CategoryItemNotKnownState.m */; };
+		EE3B39741D872FE000EA69B3 /* ProductSuscription.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3B39731D872FE000EA69B3 /* ProductSuscription.m */; };
 		EE46B38D1D7F1F01006AEB41 /* GIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = EE46B37B1D7F1F01006AEB41 /* GIImage.m */; };
 		EE46B38E1D7F1F01006AEB41 /* GIItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EE46B37D1D7F1F01006AEB41 /* GIItem.m */; };
 		EE46B38F1D7F1F01006AEB41 /* GIQueries.m in Sources */ = {isa = PBXBuildFile; fileRef = EE46B37F1D7F1F01006AEB41 /* GIQueries.m */; };
@@ -33,7 +34,7 @@
 		EE789BC01D78A21E00B75897 /* IWantThisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE789BBF1D78A21E00B75897 /* IWantThisViewController.m */; };
 		EE8812A31D7F5DA200E5DF57 /* credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE8812A21D7F5DA200E5DF57 /* credentials.plist */; };
 		EE92FE601D5CFAC800395DC7 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = EE92FE4C1D5CFAC800395DC7 /* Reachability.m */; };
-		EE92FE631D5CFAC800395DC7 /* SearchViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE92FE531D5CFAC800395DC7 /* SearchViewTableViewCell.m */; };
+		EE92FE631D5CFAC800395DC7 /* IKnowWhatThisIsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE92FE531D5CFAC800395DC7 /* IKnowWhatThisIsCell.m */; };
 		EE92FE641D5CFAC800395DC7 /* SubmitButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EE92FE551D5CFAC800395DC7 /* SubmitButton.m */; };
 		EE92FE651D5CFAC800395DC7 /* MyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE92FE581D5CFAC800395DC7 /* MyNavigationController.m */; };
 		EE92FE661D5CFAC800395DC7 /* IKnowWhatThisIsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE92FE5A1D5CFAC800395DC7 /* IKnowWhatThisIsViewController.m */; };
@@ -83,6 +84,8 @@
 		EE2389D41D6E3EF700B421C8 /* CategoryItemProductState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryItemProductState.m; sourceTree = "<group>"; };
 		EE2389D61D6E424A00B421C8 /* CategoryItemNotKnownState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryItemNotKnownState.h; sourceTree = "<group>"; };
 		EE2389D71D6E424A00B421C8 /* CategoryItemNotKnownState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryItemNotKnownState.m; sourceTree = "<group>"; };
+		EE3B39721D872FE000EA69B3 /* ProductSuscription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductSuscription.h; sourceTree = "<group>"; };
+		EE3B39731D872FE000EA69B3 /* ProductSuscription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductSuscription.m; sourceTree = "<group>"; };
 		EE46B37A1D7F1F01006AEB41 /* GIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GIImage.h; sourceTree = "<group>"; };
 		EE46B37B1D7F1F01006AEB41 /* GIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GIImage.m; sourceTree = "<group>"; };
 		EE46B37C1D7F1F01006AEB41 /* GIItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GIItem.h; sourceTree = "<group>"; };
@@ -116,8 +119,8 @@
 		EE8812A21D7F5DA200E5DF57 /* credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = credentials.plist; sourceTree = "<group>"; };
 		EE92FE4B1D5CFAC800395DC7 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		EE92FE4C1D5CFAC800395DC7 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		EE92FE521D5CFAC800395DC7 /* SearchViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewTableViewCell.h; sourceTree = "<group>"; };
-		EE92FE531D5CFAC800395DC7 /* SearchViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewTableViewCell.m; sourceTree = "<group>"; };
+		EE92FE521D5CFAC800395DC7 /* IKnowWhatThisIsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKnowWhatThisIsCell.h; sourceTree = "<group>"; };
+		EE92FE531D5CFAC800395DC7 /* IKnowWhatThisIsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKnowWhatThisIsCell.m; sourceTree = "<group>"; };
 		EE92FE541D5CFAC800395DC7 /* SubmitButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitButton.h; sourceTree = "<group>"; };
 		EE92FE551D5CFAC800395DC7 /* SubmitButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitButton.m; sourceTree = "<group>"; };
 		EE92FE571D5CFAC800395DC7 /* MyNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNavigationController.h; sourceTree = "<group>"; };
@@ -307,6 +310,8 @@
 				EEDF6BC61D6C93CA005D765B /* Category.m */,
 				EE2389D01D6E37A000B421C8 /* Product.h */,
 				EE2389D11D6E37A000B421C8 /* Product.m */,
+				EE3B39721D872FE000EA69B3 /* ProductSuscription.h */,
+				EE3B39731D872FE000EA69B3 /* ProductSuscription.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -335,8 +340,8 @@
 				EE2389CB1D6E337500B421C8 /* CategoryViewController */,
 				EE789BB81D7882DE00B75897 /* CheckButton.h */,
 				EE789BB91D7882DE00B75897 /* CheckButton.m */,
-				EE92FE531D5CFAC800395DC7 /* SearchViewTableViewCell.m */,
-				EE92FE521D5CFAC800395DC7 /* SearchViewTableViewCell.h */,
+				EE92FE531D5CFAC800395DC7 /* IKnowWhatThisIsCell.m */,
+				EE92FE521D5CFAC800395DC7 /* IKnowWhatThisIsCell.h */,
 				EE92FE541D5CFAC800395DC7 /* SubmitButton.h */,
 				EE92FE551D5CFAC800395DC7 /* SubmitButton.m */,
 				EE92FE851D5D1C3500395DC7 /* MovieActorSearchTableViewCell.h */,
@@ -534,6 +539,7 @@
 				EEDF6BC71D6C93CA005D765B /* Category.m in Sources */,
 				EE46B39A1D7F1FC6006AEB41 /* Server.m in Sources */,
 				EE46B3901D7F1F01006AEB41 /* GIRequest.m in Sources */,
+				EE3B39741D872FE000EA69B3 /* ProductSuscription.m in Sources */,
 				EE2389D21D6E37A000B421C8 /* Product.m in Sources */,
 				EEC2E5411D66370D00B37190 /* ProductCategoryTableViewCell.m in Sources */,
 				EE92FE661D5CFAC800395DC7 /* IKnowWhatThisIsViewController.m in Sources */,
@@ -558,7 +564,7 @@
 				EE92FE911D5D1D5700395DC7 /* ColorHelper.m in Sources */,
 				EED010191D677DDB00B8B2F5 /* CastCollection.m in Sources */,
 				EE92FE7B1D5D029D00395DC7 /* Item.m in Sources */,
-				EE92FE631D5CFAC800395DC7 /* SearchViewTableViewCell.m in Sources */,
+				EE92FE631D5CFAC800395DC7 /* IKnowWhatThisIsCell.m in Sources */,
 				EEB35DE81D74750F00A242F9 /* NSString+URLEncode.m in Sources */,
 				EEDF6BD01D6CC5F5005D765B /* ProductCategoryViewController.m in Sources */,
 				EE46B3A41D7F41A4006AEB41 /* AmazonAPIProxy.m in Sources */,

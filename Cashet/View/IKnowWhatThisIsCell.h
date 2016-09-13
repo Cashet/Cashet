@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SubmitButton.h"
 
-@interface SearchViewTableViewCell : UITableViewCell
+@interface IKnowWhatThisIsCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *productName;
 @property (weak, nonatomic) IBOutlet UIImageView *productImage;

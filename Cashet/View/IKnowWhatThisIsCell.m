@@ -6,9 +6,9 @@
 //  Copyright © 2016 Cashet. All rights reserved.
 //
 
-#import "SearchViewTableViewCell.h"
+#import "IKnowWhatThisIsCell.h"
 
-@implementation SearchViewTableViewCell
+@implementation IKnowWhatThisIsCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

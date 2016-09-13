@@ -19,7 +19,6 @@
 
 @property(nonatomic, retain) NSArray<MoviedatabaseItem*>* items;
 @property(nonatomic, retain) MoviedatabasePage* page;
-@property(nonatomic, assign) BOOL isSearching;
 @property(nonatomic, retain) MoviedatabaseItem* selectedItem;
 @property(nonatomic, retain) CastCollection* selectedItemCast;
 
@@ -58,7 +57,7 @@
 #pragma mark - UISearchBarDelegate
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-    self.isSearching = YES;
+
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar

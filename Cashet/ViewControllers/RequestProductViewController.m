@@ -44,11 +44,8 @@
     UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_selectCategory:)];
     [self.selectCategoryContainerView addGestureRecognizer:tapRecognizer];
     
-#pragma mark - Title?
     self.title = self.actor.name;
-    
-    self.searchBar.text = self.category.name;
-    
+        
     [self showActivityIndicator];
     
 #pragma mark - Search query?

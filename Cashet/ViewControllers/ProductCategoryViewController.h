@@ -20,6 +20,9 @@
 @property (weak, nonatomic) IBOutlet UIView *overlayView;
 @property (weak, nonatomic) IBOutlet UIView *requestProductContainerView;
 @property (weak, nonatomic) IBOutlet UIButton *requestProductButton;
+@property (weak, nonatomic) IBOutlet UIButton *allButton;
+@property (weak, nonatomic) IBOutlet UIButton *buyButton;
+@property (weak, nonatomic) IBOutlet UIButton *identifyButton;
 
 @property (weak, nonatomic) Category *category;
 @property (weak, nonatomic) MoviedatabaseItem *movie;

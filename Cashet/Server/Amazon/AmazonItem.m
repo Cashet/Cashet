@@ -16,6 +16,7 @@
     
     if (self) {
         self.detailPageURL = [element child:@"DetailPageURL"].text;
+        self.ASIN = [element child:@"ASIN"].text;
         self.imageURL = [[element child:@"LargeImage"] child:@"URL"].text;
         
         RXMLElement* attributes = [element child:@"ItemAttributes"];

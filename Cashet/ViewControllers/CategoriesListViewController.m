@@ -23,6 +23,7 @@
     self.selectedIndexPath = -1;
     
     [self.tableView setTableFooterView: [[UIView alloc] initWithFrame: CGRectZero]];
+    self.tableView.separatorColor = [UIColor clearColor];
 }
 
 #pragma mark - IBActions

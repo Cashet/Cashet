@@ -40,20 +40,13 @@
 - (void)_updateView
 {
     self.view.heartButton.hidden = YES;
-    self.view.descriptionLabel.text = self.model.description;
+    self.view.priceLabel.hidden = NO;
+    self.view.descriptionLabel.text = self.model.productDescription;
     self.view.priceLabel.attributedText = [self _priceText];
     [self.view.imageView setImageWithURL:[NSURL URLWithString:self.model.picture]];
     [self.view.bottomButton setTitle:@"BUY PRODUCT" forState:UIControlStateNormal];
     [self.view.bottomButton setImage:[UIImage imageNamed:@"cart"] forState:UIControlStateNormal];
     [self.view.bottomButton setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
-}
-
-//- (void)setView:(CategoryItemCollectionViewCell*)cell;
-//- (void)setModel:(NSDictionary*)model;
-
-- (NSAttributedString*)_descriptionText
-{
-    return [[NSAttributedString alloc] initWithString:self.model.description];
 }
 
 - (NSAttributedString*)_priceText

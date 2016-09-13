@@ -23,6 +23,7 @@
 @interface ProductCategoryViewController() <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (nonatomic, retain) NSArray<Product*>* items;
+@property (nonatomic, retain) NSMutableArray<Product*>* filteredItems;
 @property (retain, nonatomic) UIImage* image;
 @property (retain, nonatomic) Product* selectedProduct;
 
@@ -35,18 +36,31 @@
     [super viewDidLoad];
     
     self.image = [UIImage new];
-
-    self.items = [NSMutableArray new];
+    self.items = [NSArray new];
+    self.filteredItems = [NSMutableArray new];
 
     [self.collectionView reloadData];
     
     self.titleLabel.text = self.movie.title;
     self.subtitleLabel.text = self.actor.name;
     
+    [self _setupFilterButton:self.allButton];
+    [self _setupFilterButton:self.buyButton];
+    [self _setupFilterButton:self.identifyButton];
+    
+    [self _setButton:self.allButton selected:YES];
+    
     [self _addGradientToBanner];
     [self _addBorderToRequestProductButton];
     
     [self.imageView setImageWithURL:[NSURL URLWithString:[MovieDatabaseAPIProxy fullpathForLargeImage:self.movie.posterPath]]];
+}
+
+- (void)_setupFilterButton:(UIButton*)button
+{
+    button.layer.cornerRadius = self.allButton.frame.size.height/2;
+    button.layer.borderColor = [UIColor whiteColor].CGColor;
+    button.layer.borderWidth = 1;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -69,9 +83,30 @@
             
         } else {
             self.items = ((ServerListResponse*)response).data;
-            [self.collectionView reloadData];
+            
+            [self _filterItems];
         }
     }];
+}
+
+- (void)_filterItems
+{
+    NSString* filter = self.allButton.selected ? nil : (self.buyButton.selected ? @"known" : @"unknowable");
+    
+    if (!filter) {
+        self.filteredItems = [self.items mutableCopy];
+        
+    } else {
+        [self.filteredItems removeAllObjects];
+        
+        for (Product* product in self.items) {
+            if ([product.status isEqualToString:filter]) {
+                [self.filteredItems addObject:product];
+            }
+        }
+    }
+    
+    [self.collectionView reloadData];
 }
 
 - (void)_addGradientToBanner
@@ -96,12 +131,12 @@
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.items.count;
+    return self.filteredItems.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    Product* item = self.items[indexPath.row];
+    Product* item = self.filteredItems[indexPath.row];
     
     CategoryItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     cell.state = [item.status isEqualToString:@"unknowable"] ? [CategoryItemNotKnownState new] : [CategoryItemProductState new];
@@ -172,16 +207,49 @@
 
 - (IBAction)IWantThisClicked:(id)sender
 {
-    self.selectedProduct = self.items[((UIView*)sender).tag];
+    self.selectedProduct = self.filteredItems[((UIView*)sender).tag];
     
     [self performSegueWithIdentifier:@"I want this" sender:self];
 }
 
 - (IBAction)bottomButtonClicked:(id)sender
 {
-    self.selectedProduct = self.items[((UIView*)sender).tag];
+    self.selectedProduct = self.filteredItems[((UIView*)sender).tag];
     
     [self performSegueWithIdentifier:[self.selectedProduct.status isEqualToString:@"unknowable"] ? @"I know what this is" : @"buy product" sender:self];
+}
+
+- (IBAction)allButtonClicked:(id)sender
+{
+    [self _setButton:self.allButton selected:YES];
+    [self _setButton:self.buyButton selected:NO];
+    [self _setButton:self.identifyButton selected:NO];
+    
+    [self _filterItems];
+}
+
+- (void)_setButton:(UIButton*)button selected:(BOOL)selected
+{
+    button.selected = selected;
+    [button setBackgroundColor:button.selected ? [UIColor whiteColor] : [UIColor clearColor]];
+}
+
+- (IBAction)buyButtonClicked:(id)sender
+{
+    [self _setButton:self.allButton selected:NO];
+    [self _setButton:self.buyButton selected:YES];
+    [self _setButton:self.identifyButton selected:NO];
+    
+    [self _filterItems];
+}
+
+- (IBAction)identifyButtonClicked:(id)sender
+{
+    [self _setButton:self.allButton selected:NO];
+    [self _setButton:self.buyButton selected:NO];
+    [self _setButton:self.identifyButton selected:YES];
+    
+    [self _filterItems];
 }
 
 @end

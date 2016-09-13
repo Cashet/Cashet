@@ -7,6 +7,7 @@
 //
 
 #import "IWantThisViewController.h"
+#import "Server.h"
 
 @implementation IWantThisViewController
 
@@ -19,6 +20,8 @@
     self.titleLabel.text = self.product.productDescription;
     
     self.submitButton.layer.cornerRadius = self.submitButton.frame.size.height/2;
+    
+    self.emailTextField.layer.cornerRadius = self.emailTextField.frame.size.height/2;
     
     [self _setupEmailTextField];
 }
@@ -39,7 +42,19 @@
 #pragma mark - IBActions
 - (IBAction)submitButtonClicked:(id)sender
 {
-#pragma mark - Submit
+    [self showActivityIndicator];
+    
+    [[Server sharedInstance] favoriteProduct:self.product forUserWithEmail:self.emailTextField.text callback:^(id response, NSError *error) {
+        
+        [self hideActivityIndicator];
+        
+        if (!error) {
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        } else {
+            [self showErrorDialogWithMessage:error.localizedDescription];
+        }
+    }];
 }
 
 @end
