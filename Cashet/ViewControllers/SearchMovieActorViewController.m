@@ -32,6 +32,8 @@
     
     self.title = @"Ca$het";
     
+    [self noResultsViewHidden:NO];
+    
     [self.searchBar becomeFirstResponder];
     
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
@@ -89,7 +91,11 @@
             self.items = self.page.results;
             [self.tableView reloadData];
             
+            [self noResultsViewHidden:self.items.count != 0];
+            
         } else  {
+            [self noResultsViewHidden:NO];
+            
             [self showErrorDialogWithMessage:error.localizedDescription];
         }
     }];

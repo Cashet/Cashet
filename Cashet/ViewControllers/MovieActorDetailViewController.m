@@ -111,7 +111,19 @@
     cell.delegate = self;
     cell.moviedatabaseItem = self.items[indexPath.section];
     
-    [[Server sharedInstance] getCategoriesCallback:^(id response, NSError *error) {
+    MoviedatabaseItem* actor;
+    MoviedatabaseItem* movie;
+    
+    if ([self.mainItem.mediaType isEqualToString:@"person"]) {
+        actor = self.mainItem;
+        movie = self.items[indexPath.section];
+        
+    } else {
+        actor = self.items[indexPath.section];
+        movie = self.mainItem;
+    }
+    
+    [[Server sharedInstance] getCategoriesForActor:actor.identifier movie:movie.identifier callback:^(id response, NSError *error) {
         
         ServerListResponse* serverResponse = response;
         

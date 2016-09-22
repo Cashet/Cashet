@@ -13,5 +13,6 @@
 @property(nonatomic, retain) NSNumber* categoryId;
 @property(nonatomic, retain) NSNumber* parentId;
 @property(nonatomic, retain) NSString* name;
+@property(nonatomic, retain) NSString* picture;
 
 @end

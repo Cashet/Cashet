@@ -77,6 +77,7 @@
         //    [imageView setImageWithURL:[NSURL URLWithString:path]];
         cell.labelContainerView.hidden = NO;
         cell.productLabel.text = category.name;
+        [cell.productView setImageWithURL:[NSURL URLWithString:category.picture]];
     }
     
     return cell;

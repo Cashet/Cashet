@@ -36,6 +36,8 @@
     
     self.categoryLabel.text = self.category.name;
     self.selectedCategory = self.category;
+    
+    [self noResultsViewHidden:NO];
      
     [self _getCategories];
     
@@ -45,23 +47,6 @@
     [self.selectCategoryContainerView addGestureRecognizer:tapRecognizer];
     
     self.title = self.actor.name;
-        
-    [self showActivityIndicator];
-    
-#pragma mark - Search query?
-    [[GoogleAPIProxy sharedInstance] getImagesForString:[self _getQuery] callback:^(id response, NSError *error) {
-        
-        [self hideActivityIndicator];
-        
-        if (!error) {
-            self.response = response;
-            self.items = self.response.items.mutableCopy;
-            [self.collectionView reloadData];
-            
-        } else {
-            [self showErrorDialogWithMessage:error.localizedDescription];
-        }
-    }];
 }
 
 - (NSString*)_getQuery
@@ -126,18 +111,28 @@
 {
     GIRequest* nextRequest = self.response.queries.nextPage[0];
     
+    BOOL emptySearch = [self.searchBar.text isEqualToString:@""];
+    
+    [self noResultsViewHidden:!emptySearch];
+    
+    if (!emptySearch) {
 #pragma mark - Search query?
-    [[GoogleAPIProxy sharedInstance] getImagesForString:[self _getQuery] startIndex:nextRequest.startIndex.longValue callback:^(id response, NSError *error) {
-        
-        if (!error) {
-            self.response = response;
-            [self.items addObjectsFromArray:self.response.items];
-            [self.collectionView reloadData];
+        [[GoogleAPIProxy sharedInstance] getImagesForString:[self _getQuery] startIndex:nextRequest.startIndex.longValue callback:^(id response, NSError *error) {
             
-        } else {
-            [self showErrorDialogWithMessage:error.localizedDescription];
-        }
-    }];
+            if (!error) {
+                self.response = response;
+                [self.items addObjectsFromArray:self.response.items];
+                [self.collectionView reloadData];
+                
+                [self noResultsViewHidden:self.items.count != 0];
+                
+            } else {
+                [self noResultsViewHidden:NO];
+                
+                [self showErrorDialogWithMessage:error.localizedDescription];
+            }
+        }];
+    }
     
     UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"activity indicator" forIndexPath:indexPath];
     [[cell subviews][0] viewWithTag:100].hidden = (indexPath.row == 0);
@@ -269,19 +264,29 @@
     
     [self showActivityIndicator];
     
+    BOOL emptySearch = [self.searchBar.text isEqualToString:@""];
+    
+    [self noResultsViewHidden:!emptySearch];
+    
+    if (!emptySearch) {
 #pragma mark - Make search
-    [[GoogleAPIProxy sharedInstance] getImagesForString:[self _getQuery] callback:^(id response, NSError *error) {
-        [self hideActivityIndicator];
-        
-        if (!error) {
-            self.response = response;
-            self.items = self.response.items.mutableCopy;
-            [self.collectionView reloadData];
+        [[GoogleAPIProxy sharedInstance] getImagesForString:[self _getQuery] callback:^(id response, NSError *error) {
+            [self hideActivityIndicator];
             
-        } else  {
-            [self showErrorDialogWithMessage:error.localizedDescription];
-        }
-    }];
+            if (!error) {
+                self.response = response;
+                self.items = self.response.items.mutableCopy;
+                [self.collectionView reloadData];
+                
+                [self noResultsViewHidden:self.items.count != 0];
+                
+            } else  {
+                [self noResultsViewHidden:NO];
+                
+                [self showErrorDialogWithMessage:error.localizedDescription];
+            }
+        }];
+    }
 }
 
 @end

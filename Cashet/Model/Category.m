@@ -15,7 +15,8 @@
     return [[JSONKeyMapper alloc] initWithDictionary:@{
                                                        @"category_id":@"categoryId",
                                                        @"name":@"name",
-                                                       @"parent_id":@"parentId"
+                                                       @"parent_id":@"parentId",
+                                                       @"picture":@"picture"
                                                        }];
 }
 

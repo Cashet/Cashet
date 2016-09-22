@@ -15,6 +15,7 @@
 @property(nonatomic, retain) UIView *darkOverlay;
 @property(nonatomic, assign) int counter;
 @property(nonatomic, retain) UIImage* navigationBarBackgroundImage;
+@property (nonatomic, retain) UILabel* noResultsView;
 
 @end
 
@@ -144,5 +145,40 @@
     [self.HUD dismissAfterDelay:2.0];
 }
 
+- (void)noResultsViewHidden:(BOOL)hidden
+{
+    if (!self.noResultsView) {
+        [self _createNoResultsView];
+    }
+    
+    self.noResultsView.hidden = hidden;
+}
+
+- (void)_createNoResultsView
+{
+    NSString* text = @"No results";
+    
+    CGSize size = [text sizeWithAttributes: @{NSFontAttributeName: [UIFont systemFontOfSize:15]}];
+    
+    // Values are fractional -- you should take the ceilf to get equivalent values
+    CGSize adjustedSize = CGSizeMake(ceilf(size.width), ceilf(size.height));
+    
+    double x = (self.view.frame.size.width - adjustedSize.width) / 2;
+    double y = self.view.frame.origin.y + (self.view.frame.size.height - adjustedSize.height) / 2;
+    
+    self.noResultsView = [[UILabel alloc]initWithFrame:CGRectMake(x, y, adjustedSize.width, adjustedSize.height)];
+    self.noResultsView.text = text;
+    self.noResultsView.font = [UIFont systemFontOfSize:15];
+    self.noResultsView.numberOfLines = 1;
+    self.noResultsView.baselineAdjustment = UIBaselineAdjustmentAlignBaselines; // or UIBaselineAdjustmentAlignCenters, or UIBaselineAdjustmentNone
+    self.noResultsView.adjustsFontSizeToFitWidth = YES;
+    self.noResultsView.minimumScaleFactor = 10.0f/12.0f;
+    self.noResultsView.clipsToBounds = YES;
+    self.noResultsView.backgroundColor = [UIColor clearColor];
+    self.noResultsView.textColor = [UIColor whiteColor];
+    self.noResultsView.textAlignment = NSTextAlignmentCenter;
+    
+    [self.view addSubview:self.noResultsView];
+}
 
 @end

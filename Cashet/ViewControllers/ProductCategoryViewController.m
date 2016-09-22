@@ -79,12 +79,16 @@
         [self hideActivityIndicator];
        
         if (error) {
+            [self noResultsViewHidden:NO];
+            
             [self showErrorDialogWithMessage:error.localizedDescription];
             
         } else {
             self.items = ((ServerListResponse*)response).data;
             
             [self _filterItems];
+            
+            [self noResultsViewHidden:self.items.count != 0];
         }
     }];
 }

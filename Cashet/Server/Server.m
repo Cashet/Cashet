@@ -129,6 +129,50 @@
     }
 }
 
+- (void)getCategoriesForActor:(NSNumber*)actorId movie:(NSNumber*)movieId callback:(void(^)(id response, NSError* error))callback
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    if (_internetReachable.isReachable){
+        
+        AFHTTPRequestSerializer* reqSerializer = [self _newSerializer];
+        
+        [self.netmanager setRequestSerializer:reqSerializer];
+        
+        NSDictionary* params = @{@"movie_token": movieId,
+                                 @"actor_token": actorId};
+        
+        NSLog(@"Params: %@", params);
+        
+        [self.netmanager
+         GET:@"categories" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             
+             NSLog(@"Response object: %@", responseObject);
+             
+             NSError* error = nil;
+             
+             ServerListResponse* serverResponse = [[ServerListResponse alloc] initWithDictionary:responseObject class:[Category class] error:&error];
+             
+             if (error) {
+                 callback(serverResponse, error);
+                 
+             } else {
+                 NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:serverResponse.message andCode:500];
+                 
+                 callback(serverResponse, error);
+             }
+             
+         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+             NSLog(@"getUserCallback: %@", error);
+             callback(nil, [self _createErrorForMessage:@"An error ocurred, try again later." andCode:500]);
+         }];
+        
+    } else {
+        NSLog(@"No internet connection");
+        callback(nil, [self _createErrorForMessage:@"No internet connection." andCode:0]);
+    }
+}
+
 - (NSError*)_createErrorForMessage:(NSString*)message andCode:(long)code
 {
     NSMutableDictionary* details = [NSMutableDictionary dictionary];
