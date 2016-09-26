@@ -23,10 +23,12 @@
             NSMutableArray* data = [NSMutableArray new];
             
             for (NSDictionary* item in array) {
-                [data addObject:[[objectClass alloc] initWithDictionary:item error:err]];
+                id obj = [[objectClass alloc] initWithDictionary:item error:err];
                 
                 if (*err) {
                     break;
+                } else {
+                    [data addObject:obj];
                 }
             }
             

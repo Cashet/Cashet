@@ -183,14 +183,14 @@
                                                     <color key="textColor" red="0.40392156862745099" green="0.40392156862745099" blue="0.40392156862745099" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wpp-UP-TzP">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wpp-UP-TzP">
                                                     <rect key="frame" x="0.0" y="-1" width="87" height="100"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="75" id="Y8r-UU-Moz"/>
                                                     </constraints>
                                                 </imageView>
-                                                <view hidden="YES" alpha="0.5" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nSX-f8-dlw">
+                                                <view hidden="YES" alpha="0.5" contentMode="scaleAspectFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nSX-f8-dlw">
                                                     <rect key="frame" x="0.0" y="0.0" width="87" height="99"/>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -388,7 +388,7 @@ CQ
                                             <rect key="frame" x="0.0" y="0.0" width="160" height="107"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HoF-I8-hum">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HoF-I8-hum">
                                                     <rect key="frame" x="0.0" y="0.0" width="160" height="107"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="500" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nvy-xo-B44">
@@ -997,7 +997,7 @@ CQ
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ijl-E4-Kcb">
                                                     <rect key="frame" x="0.0" y="0.0" width="151" height="100"/>
                                                 </imageView>
-                                                <view hidden="YES" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7k-EF-UCa">
+                                                <view hidden="YES" alpha="0.5" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7k-EF-UCa">
                                                     <rect key="frame" x="0.0" y="0.0" width="151" height="100"/>
                                                     <color key="backgroundColor" red="0.50980395078659058" green="0.098039217293262482" blue="0.039215687662363052" alpha="1" colorSpace="calibratedRGB"/>
                                                 </view>
@@ -1431,6 +1431,6 @@ CQ
         <image name="view eye" width="13" height="7"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3EV-5y-RwG"/>
+        <segue reference="cIx-vO-Ew1"/>
     </inferredMetricsTieBreakers>
 </document>

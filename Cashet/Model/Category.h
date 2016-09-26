@@ -10,9 +10,10 @@
 
 @interface Category : JSONModel
 
-@property(nonatomic, retain) NSNumber* categoryId;
-@property(nonatomic, retain) NSNumber* parentId;
-@property(nonatomic, retain) NSString* name;
-@property(nonatomic, retain) NSString* picture;
+@property(nonatomic, retain) NSNumber<Optional>* categoryId;
+@property(nonatomic, retain) NSNumber<Optional>* parentId;
+@property(nonatomic, retain) NSString<Optional>* name;
+@property(nonatomic, retain) NSString<Optional>* picture;
+@property(nonatomic, retain) NSNumber<Optional>* products;
 
 @end

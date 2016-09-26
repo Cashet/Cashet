@@ -30,12 +30,7 @@
 
 - (IBAction)closeAction:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:^{
-
-        if (self.delegate) {
-            [self.delegate selectedCategory:nil];
-        }
-    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)doneAction:(id)sender

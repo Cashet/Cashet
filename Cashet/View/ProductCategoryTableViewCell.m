@@ -73,10 +73,8 @@
         
     } else {
         Category* category = self.items[indexPath.row - 1];
-        
-        //    [imageView setImageWithURL:[NSURL URLWithString:path]];
         cell.labelContainerView.hidden = NO;
-        cell.productLabel.text = category.name;
+        cell.productLabel.text = [NSString stringWithFormat:@"%@(%ld)", category.name, category.products.longValue];
         [cell.productView setImageWithURL:[NSURL URLWithString:category.picture]];
     }
     

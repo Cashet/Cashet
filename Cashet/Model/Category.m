@@ -10,13 +10,21 @@
 
 @implementation Category
 
+- (id)initWithDictionary:(NSDictionary *)dict error:(NSError *__autoreleasing *)err
+{
+    self = [super initWithDictionary:dict error:err];
+    
+    return self;
+}
+
 +(JSONKeyMapper*)keyMapper
 {
     return [[JSONKeyMapper alloc] initWithDictionary:@{
                                                        @"category_id":@"categoryId",
                                                        @"name":@"name",
                                                        @"parent_id":@"parentId",
-                                                       @"picture":@"picture"
+                                                       @"picture":@"picture",
+                                                       @"products":@"products"
                                                        }];
 }
 
