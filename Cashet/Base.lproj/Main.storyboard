@@ -834,6 +834,10 @@ CQ
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eMX-Dp-Uc5">
                                 <rect key="frame" x="20" y="40" width="560" height="540"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bci-nw-TH6">
+                                        <rect key="frame" x="-20" y="-39" width="600" height="597"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w3n-tt-X8r">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="44"/>
                                         <subviews>
@@ -906,7 +910,7 @@ CQ
                                         </connections>
                                     </tableView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="w3n-tt-X8r" firstAttribute="leading" secondItem="eMX-Dp-Uc5" secondAttribute="leading" id="5HG-7p-74r"/>
                                     <constraint firstItem="eQg-mf-Hna" firstAttribute="leading" secondItem="eMX-Dp-Uc5" secondAttribute="leading" id="Agn-jb-Bw0"/>
