@@ -17,11 +17,12 @@
 
 #define MAX_PAGES 5 // Defined by Amazon's API
 
-@interface IKnowWhatThisIsViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface IKnowWhatThisIsViewController () <UITableViewDelegate, UITableViewDataSource, IKnowWhatThisIsCellDelegate>
 
 @property(nonatomic, retain) NSMutableArray<AmazonItem*> *items;
-@property(nonatomic, assign) AmazonResponse* response;
+@property(nonatomic, retain) AmazonResponse* response;
 @property(nonatomic, assign) long currentPage;
+@property(nonatomic, assign) NSInteger selectedItemRow;
 
 @end
 
@@ -33,6 +34,7 @@
   
     self.title = @"I Know What This Is";
     
+    self.selectedItemRow = -1;
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     
     [[AmazonAPIProxy sharedInstance] getProductsMatchingString:self.product.name category:self.product.category.name callback:^(AmazonResponse* response, NSError *error) {
@@ -156,14 +158,15 @@
             return [tableView dequeueReusableCellWithIdentifier:@"Last"];
         }
     } else {
-        IKnowWhatThisIsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-        
         AmazonItem* item = self.items[indexPath.row];
    
+        IKnowWhatThisIsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
         cell.productName.text = item.title;
         cell.descriptionLabel.attributedText = [self _attributedTextForText: item.lowestNewPriceFormatted];
         [cell.productImage setImageWithURL:[NSURL URLWithString:item.imageURL]];
         cell.submitButton.tag = indexPath.row;
+        cell.delegate = self;
+        cell.tag = indexPath.row;
         
         return cell;
     }
@@ -243,6 +246,21 @@
     self.product.amazonId = item.ASIN;
     self.product.productDescription = item.title;
     self.product.price = @([item.lowestNewPriceFormatted stringByReplacingOccurrencesOfString:@"$" withString:@""].doubleValue);
+}
+
+#pragma mark - IKnowWhatThisIsCellDelegate
+- (void)IKnowWhatThisIsCell:(IKnowWhatThisIsCell*)cell checkButtonCheckedStatusChanged:(BOOL)checked
+{
+    if (self.selectedItemRow == -1) {
+        self.selectedItemRow = cell.tag;
+        return;
+    }
+    
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:self.selectedItemRow inSection:0];
+    
+    self.selectedItemRow = cell.tag;
+    
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:NO];
 }
 
 #pragma mark - IBActions

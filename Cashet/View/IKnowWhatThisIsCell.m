@@ -19,16 +19,25 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+    [self _setCheckButtonSelected:selected];
+}
+
+- (void)_setCheckButtonSelected:(BOOL)selected
+{
+    self.checkButton.selected = selected;
+    self.imageOverlay.hidden = !selected;
+    self.submitButton.selected = selected;
+    self.submitButton.userInteractionEnabled = selected;
 }
 
 #pragma mark - IBActions
 - (IBAction)checkButtonTapped:(id)sender
 {
-    self.checkButton.selected = !self.checkButton.selected;
-    self.imageOverlay.hidden = !self.checkButton.selected;
-    self.submitButton.selected = self.checkButton.selected;
-    self.submitButton.userInteractionEnabled = self.checkButton.selected;
+    [self _setCheckButtonSelected:!self.checkButton.selected];
+    
+    if (self.delegate) {
+        [self.delegate IKnowWhatThisIsCell:self checkButtonCheckedStatusChanged:self.checkButton.selected];
+    }
 }
 
 @end
