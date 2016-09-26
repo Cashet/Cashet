@@ -573,7 +573,6 @@ CQ
                                                 <rect key="frame" x="149" y="11" width="95" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="3rj-qu-WQC"/>
-                                                    <constraint firstAttribute="width" constant="95" id="NcP-6j-wpI"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -591,7 +590,6 @@ CQ
                                                 <rect key="frame" x="313" y="11" width="95" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="Qko-0e-Rj0"/>
-                                                    <constraint firstAttribute="width" constant="95" id="VMG-CB-usb"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -612,7 +610,9 @@ CQ
                                             <constraint firstItem="fDR-wm-CyX" firstAttribute="leading" secondItem="46o-ft-bhP" secondAttribute="trailing" constant="25" id="4yv-8y-UEA"/>
                                             <constraint firstItem="fDR-wm-CyX" firstAttribute="centerY" secondItem="RhX-EC-y3S" secondAttribute="centerY" id="8pL-tQ-Ipp"/>
                                             <constraint firstItem="46o-ft-bhP" firstAttribute="centerY" secondItem="RhX-EC-y3S" secondAttribute="centerY" id="8vs-B2-tQw"/>
+                                            <constraint firstItem="fWr-63-tUa" firstAttribute="leading" secondItem="fDR-wm-CyX" secondAttribute="trailing" constant="25" id="OmG-my-Spv"/>
                                             <constraint firstItem="46o-ft-bhP" firstAttribute="leading" secondItem="RhX-EC-y3S" secondAttribute="leading" constant="10" id="P0V-bd-jZf"/>
+                                            <constraint firstItem="fWr-63-tUa" firstAttribute="width" secondItem="fDR-wm-CyX" secondAttribute="width" id="cZh-WB-FSc"/>
                                             <constraint firstAttribute="trailing" secondItem="fWr-63-tUa" secondAttribute="trailing" constant="10" id="iBy-Xy-yq7"/>
                                         </constraints>
                                     </view>
@@ -636,8 +636,43 @@ CQ
                                     <constraint firstAttribute="height" constant="180" id="w9S-0p-adN"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3s5-ac-wc3" customClass="RequestProductContainerView">
+                                <rect key="frame" x="0.0" y="440" width="600" height="160"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Didn't find what you were looking for?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRa-BQ-jyj">
+                                        <rect key="frame" x="10" y="115" width="200" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gms-v4-o8P">
+                                        <rect key="frame" x="218" y="111" width="122" height="27"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="122" id="50P-cv-JrQ"/>
+                                            <constraint firstAttribute="height" constant="27" id="i8j-8t-7OY"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                        <state key="normal" title="Request Product">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="requestProduct:" destination="J7V-Kn-qvq" eventType="touchUpInside" id="d3u-ez-dkM"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="IRa-BQ-jyj" secondAttribute="bottom" constant="24" id="3ji-SJ-9r6"/>
+                                    <constraint firstItem="IRa-BQ-jyj" firstAttribute="centerY" secondItem="Gms-v4-o8P" secondAttribute="centerY" id="Vgs-HQ-eK9"/>
+                                    <constraint firstItem="IRa-BQ-jyj" firstAttribute="leading" secondItem="3s5-ac-wc3" secondAttribute="leading" constant="10" id="bgr-dZ-FdQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="Gms-v4-o8P" secondAttribute="trailing" constant="10" id="iw0-q0-EJ7"/>
+                                </constraints>
+                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WSz-zJ-sow">
-                                <rect key="frame" x="0.0" y="194" width="600" height="358"/>
+                                <rect key="frame" x="0.0" y="195" width="600" height="358"/>
                                 <color key="backgroundColor" red="0.12549020349979401" green="0.12549020349979401" blue="0.12549020349979401" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="14" minimumInteritemSpacing="0.0" id="Hh9-Nm-Bnu">
                                     <size key="itemSize" width="151" height="226"/>
@@ -747,41 +782,6 @@ CQ
                                     <outlet property="delegate" destination="J7V-Kn-qvq" id="jVq-tY-GAI"/>
                                 </connections>
                             </collectionView>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3s5-ac-wc3" customClass="RequestProductContainerView">
-                                <rect key="frame" x="0.0" y="440" width="600" height="160"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Didn't find what you were looking for?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRa-BQ-jyj">
-                                        <rect key="frame" x="10" y="115" width="200" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="9"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gms-v4-o8P">
-                                        <rect key="frame" x="218" y="111" width="122" height="27"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="122" id="50P-cv-JrQ"/>
-                                            <constraint firstAttribute="height" constant="27" id="i8j-8t-7OY"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
-                                        <state key="normal" title="Request Product">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="requestProduct:" destination="J7V-Kn-qvq" eventType="touchUpInside" id="d3u-ez-dkM"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" notEnabled="YES"/>
-                                </accessibility>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="IRa-BQ-jyj" secondAttribute="bottom" constant="24" id="3ji-SJ-9r6"/>
-                                    <constraint firstItem="IRa-BQ-jyj" firstAttribute="centerY" secondItem="Gms-v4-o8P" secondAttribute="centerY" id="Vgs-HQ-eK9"/>
-                                    <constraint firstItem="IRa-BQ-jyj" firstAttribute="leading" secondItem="3s5-ac-wc3" secondAttribute="leading" constant="10" id="bgr-dZ-FdQ"/>
-                                    <constraint firstAttribute="trailing" secondItem="Gms-v4-o8P" secondAttribute="trailing" constant="10" id="iw0-q0-EJ7"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.12549020349979401" green="0.12549020349979401" blue="0.12549020349979401" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -1444,6 +1444,6 @@ CQ
         <image name="view eye" width="13" height="7"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cIx-vO-Ew1"/>
+        <segue reference="3EV-5y-RwG"/>
     </inferredMetricsTieBreakers>
 </document>
