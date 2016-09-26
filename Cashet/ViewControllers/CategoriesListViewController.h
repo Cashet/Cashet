@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Category.h"
+#import "BaseViewController.h"
 
 @protocol CategoriesListViewControllerDelegate <NSObject>
 
@@ -15,7 +16,7 @@
 
 @end
 
-@interface CategoriesListViewController : UIViewController
+@interface CategoriesListViewController : BaseViewController
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 

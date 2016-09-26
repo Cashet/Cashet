@@ -26,6 +26,11 @@
     self.tableView.separatorColor = [UIColor clearColor];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 #pragma mark - IBActions
 
 - (IBAction)closeAction:(id)sender

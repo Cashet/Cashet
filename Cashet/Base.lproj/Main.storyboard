@@ -831,10 +831,6 @@ CQ
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K9g-N7-Dyj" userLabel="gradient background">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eMX-Dp-Uc5">
                                 <rect key="frame" x="20" y="40" width="560" height="540"/>
                                 <subviews>
@@ -925,13 +921,9 @@ CQ
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="eMX-Dp-Uc5" firstAttribute="top" secondItem="eYW-fQ-BUn" secondAttribute="bottom" constant="20" id="63b-7r-w1H"/>
-                            <constraint firstItem="K9g-N7-Dyj" firstAttribute="leading" secondItem="EsU-c0-G4r" secondAttribute="leading" id="75X-jR-LDK"/>
                             <constraint firstItem="eMX-Dp-Uc5" firstAttribute="leading" secondItem="EsU-c0-G4r" secondAttribute="leading" constant="20" id="7qH-E4-d90"/>
                             <constraint firstItem="MMc-Td-qbV" firstAttribute="top" secondItem="eMX-Dp-Uc5" secondAttribute="bottom" constant="20" id="FKT-ir-KlE"/>
-                            <constraint firstItem="K9g-N7-Dyj" firstAttribute="bottom" secondItem="MMc-Td-qbV" secondAttribute="top" id="TbM-2K-pRH"/>
                             <constraint firstAttribute="trailing" secondItem="eMX-Dp-Uc5" secondAttribute="trailing" constant="20" id="dRS-RA-4af"/>
-                            <constraint firstItem="K9g-N7-Dyj" firstAttribute="top" secondItem="EsU-c0-G4r" secondAttribute="top" id="lU6-fJ-y3R"/>
-                            <constraint firstAttribute="trailing" secondItem="K9g-N7-Dyj" secondAttribute="trailing" id="qWf-oV-eQY"/>
                         </constraints>
                     </view>
                     <connections>
