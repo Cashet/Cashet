@@ -120,13 +120,23 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.13725490196078433" green="0.18431372549019609" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="351-AL-fA4">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                                <color key="backgroundColor" red="0.0" green="0.50980392156862742" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="378-eF-SGp"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.10588235294117647" green="0.13725490196078433" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="P40-G0-07k" firstAttribute="bottom" secondItem="hBw-j2-53X" secondAttribute="top" id="7tW-fJ-hP2"/>
+                            <constraint firstItem="351-AL-fA4" firstAttribute="leading" secondItem="P40-G0-07k" secondAttribute="leading" id="8wA-az-PqS"/>
                             <constraint firstAttribute="trailing" secondItem="P40-G0-07k" secondAttribute="trailing" id="Aaj-xn-GQE"/>
                             <constraint firstItem="P40-G0-07k" firstAttribute="leading" secondItem="YoZ-qE-6ZZ" secondAttribute="leading" id="LcC-ZE-xEx"/>
                             <constraint firstItem="P40-G0-07k" firstAttribute="top" secondItem="YoZ-qE-6ZZ" secondAttribute="top" id="NBL-Mf-JEp"/>
+                            <constraint firstItem="351-AL-fA4" firstAttribute="trailing" secondItem="P40-G0-07k" secondAttribute="trailing" id="Uho-8y-e2m"/>
+                            <constraint firstItem="351-AL-fA4" firstAttribute="top" secondItem="P40-G0-07k" secondAttribute="top" id="fa9-yS-qro"/>
                         </constraints>
                     </view>
                     <connections>
@@ -205,6 +215,9 @@
                                                         <constraint firstAttribute="width" constant="22" id="X6J-hU-Kgn"/>
                                                     </constraints>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <state key="normal">
+                                                        <color key="titleColor" red="0.0" green="0.50980392156862742" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
                                                     <state key="selected" image="tick icon"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBound" value="NO"/>

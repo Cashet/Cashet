@@ -34,7 +34,6 @@
     self.title = @"I Know What This Is";
     
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
-    self.tableView.allowsSelection = NO;
     
     [[AmazonAPIProxy sharedInstance] getProductsMatchingString:self.product.name category:self.product.category.name callback:^(AmazonResponse* response, NSError *error) {
         
@@ -43,6 +42,14 @@
         
         self.items = self.response.items.mutableCopy;
     }];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:self.navigationItem.backBarButtonItem.style target:nil action:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning
