@@ -830,13 +830,13 @@ CQ
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bci-nw-TH6" userLabel="black overlay">
+                                <rect key="frame" x="0.0" y="1" width="600" height="598"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eMX-Dp-Uc5">
                                 <rect key="frame" x="20" y="40" width="560" height="540"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bci-nw-TH6">
-                                        <rect key="frame" x="-20" y="-39" width="600" height="597"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
-                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w3n-tt-X8r">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="44"/>
                                         <subviews>
@@ -888,6 +888,9 @@ CQ
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvw-ex-3Wj">
                                                             <rect key="frame" x="41" y="11" width="42" height="21"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="42" id="xt6-cC-367"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -896,6 +899,7 @@ CQ
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
+                                                        <constraint firstItem="gvw-ex-3Wj" firstAttribute="top" secondItem="j4g-yw-ULK" secondAttribute="topMargin" constant="3" id="UST-cT-bAI"/>
                                                         <constraint firstItem="gvw-ex-3Wj" firstAttribute="centerY" secondItem="j4g-yw-ULK" secondAttribute="centerY" id="Ugt-C4-9hg"/>
                                                         <constraint firstItem="gvw-ex-3Wj" firstAttribute="leading" secondItem="j4g-yw-ULK" secondAttribute="leading" constant="20" id="eVd-Rb-gsK"/>
                                                     </constraints>
@@ -923,10 +927,14 @@ CQ
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="MMc-Td-qbV" firstAttribute="top" secondItem="Bci-nw-TH6" secondAttribute="bottom" id="4ft-8b-Ycg"/>
                             <constraint firstItem="eMX-Dp-Uc5" firstAttribute="top" secondItem="eYW-fQ-BUn" secondAttribute="bottom" constant="20" id="63b-7r-w1H"/>
                             <constraint firstItem="eMX-Dp-Uc5" firstAttribute="leading" secondItem="EsU-c0-G4r" secondAttribute="leading" constant="20" id="7qH-E4-d90"/>
                             <constraint firstItem="MMc-Td-qbV" firstAttribute="top" secondItem="eMX-Dp-Uc5" secondAttribute="bottom" constant="20" id="FKT-ir-KlE"/>
                             <constraint firstAttribute="trailing" secondItem="eMX-Dp-Uc5" secondAttribute="trailing" constant="20" id="dRS-RA-4af"/>
+                            <constraint firstAttribute="trailing" secondItem="Bci-nw-TH6" secondAttribute="trailing" id="ln1-YN-nXL"/>
+                            <constraint firstItem="Bci-nw-TH6" firstAttribute="leading" secondItem="EsU-c0-G4r" secondAttribute="leading" id="nmA-Sh-Lfv"/>
+                            <constraint firstItem="Bci-nw-TH6" firstAttribute="top" secondItem="eYW-fQ-BUn" secondAttribute="bottom" constant="-20" id="zmw-vF-kcR"/>
                         </constraints>
                     </view>
                     <connections>
