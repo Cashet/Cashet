@@ -19,6 +19,16 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+}
+
+- (void)setFrame:(CGRect)frame
+{
+    [super setFrame:frame];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
     
     self.gradient = [CAGradientLayer layer];
     self.gradient.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);

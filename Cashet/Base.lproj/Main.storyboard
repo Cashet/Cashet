@@ -756,7 +756,7 @@ CQ
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gms-v4-o8P">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gms-v4-o8P">
                                         <rect key="frame" x="218" y="111" width="122" height="27"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="122" id="50P-cv-JrQ"/>
@@ -779,19 +779,18 @@ CQ
                                     <constraint firstAttribute="bottom" secondItem="IRa-BQ-jyj" secondAttribute="bottom" constant="24" id="3ji-SJ-9r6"/>
                                     <constraint firstItem="IRa-BQ-jyj" firstAttribute="centerY" secondItem="Gms-v4-o8P" secondAttribute="centerY" id="Vgs-HQ-eK9"/>
                                     <constraint firstItem="IRa-BQ-jyj" firstAttribute="leading" secondItem="3s5-ac-wc3" secondAttribute="leading" constant="10" id="bgr-dZ-FdQ"/>
-                                    <constraint firstAttribute="trailing" secondItem="Gms-v4-o8P" secondAttribute="trailing" constant="10" id="iw0-q0-EJ7"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.12549020349979401" green="0.12549020349979401" blue="0.12549020349979401" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="WSz-zJ-sow" secondAttribute="trailing" constant="4" id="6pg-xU-Sfz"/>
-                            <constraint firstItem="3s5-ac-wc3" firstAttribute="trailing" secondItem="120-5g-aAD" secondAttribute="trailing" id="F8w-Ea-jjN"/>
                             <constraint firstItem="WSz-zJ-sow" firstAttribute="leading" secondItem="120-5g-aAD" secondAttribute="leading" constant="10" id="RIQ-6R-ElQ"/>
                             <constraint firstItem="WSz-zJ-sow" firstAttribute="top" secondItem="l2h-yq-awX" secondAttribute="bottom" constant="14" id="XZx-eJ-9qM"/>
                             <constraint firstItem="3s5-ac-wc3" firstAttribute="leading" secondItem="120-5g-aAD" secondAttribute="leading" id="Y8a-Th-cVQ"/>
                             <constraint firstItem="bbZ-2s-pxl" firstAttribute="top" secondItem="WSz-zJ-sow" secondAttribute="bottom" constant="40" id="YOv-Je-u1K"/>
                             <constraint firstItem="AKn-JU-ysZ" firstAttribute="top" secondItem="uhT-jF-LKi" secondAttribute="bottom" constant="10" id="Zyt-kJ-KDh"/>
+                            <constraint firstItem="3s5-ac-wc3" firstAttribute="trailing" secondItem="120-5g-aAD" secondAttribute="trailing" id="cR3-gk-JXo"/>
                             <constraint firstAttribute="trailing" secondItem="l2h-yq-awX" secondAttribute="trailing" id="jgO-7l-OZ0"/>
                             <constraint firstItem="3s5-ac-wc3" firstAttribute="bottom" secondItem="bbZ-2s-pxl" secondAttribute="top" id="kca-CI-3cT"/>
                             <constraint firstItem="l2h-yq-awX" firstAttribute="leading" secondItem="120-5g-aAD" secondAttribute="leading" id="osn-4M-tPu"/>
@@ -1350,7 +1349,7 @@ CQ
                                 <rect key="frame" x="0.0" y="108" width="600" height="492"/>
                                 <color key="backgroundColor" red="0.086274509799999996" green="0.086274509799999996" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="0.0" reuseIdentifier="Cell" editingAccessoryType="disclosureIndicator" focusStyle="custom" rowHeight="58" id="K0c-V3-Ddb" customClass="MovieActorSearchTableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="0.0" reuseIdentifier="Cell" editingAccessoryType="disclosureIndicator" focusStyle="custom" rowHeight="58" id="K0c-V3-Ddb" customClass="MovieActorSearchTableViewCell">
                                         <rect key="frame" x="0.0" y="28" width="600" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K0c-V3-Ddb" id="kdK-jk-esW">
