@@ -152,54 +152,32 @@
     
     [self showActivityIndicator];
     
-    if ([self.selectedItem.mediaType isEqualToString:@"movie"]) {
+    [self _getCastForItem:self.selectedItem callback:^(id response, NSError *error) {
+        [self hideActivityIndicator];
         
-        [[MovieDatabaseAPIProxy sharedInstance] getCastForMovie:self.selectedItem.identifier.longValue callback:^(id response, NSError *error) {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         
-            [self hideActivityIndicator];
+        if (!error) {
+            self.selectedItemCast = response;
             
-            if (!error) {
-                
-                self.selectedItemCast = response;
-                
-                [self performSegueWithIdentifier:@"item detail" sender:self];
-                
-            } else {
-                [self showErrorDialogWithMessage:error.localizedDescription];
-            }
-        }];
+            [self performSegueWithIdentifier:@"item detail" sender:self];
+            
+        } else {
+            [self showErrorDialogWithMessage:error.localizedDescription];
+        }
+    }];
+}
+
+- (void)_getCastForItem:(MoviedatabaseItem*) item callback:(void(^)(id response, NSError* error))callback
+{
+    if ([self.selectedItem.mediaType isEqualToString:@"movie"]) {
+        [[MovieDatabaseAPIProxy sharedInstance] getCastForMovie:item.identifier.longValue callback:callback];
         
     } else if ([self.selectedItem.mediaType isEqualToString:@"tv"]) {
-        
-        [[MovieDatabaseAPIProxy sharedInstance] getCastForTv:self.selectedItem.identifier.longValue callback:^(id response, NSError *error) {
-            
-            [self hideActivityIndicator];
-            
-            if (!error) {
-                
-                self.selectedItemCast = response;
-                
-                [self performSegueWithIdentifier:@"item detail" sender:self];
-                
-            } else {
-                [self showErrorDialogWithMessage:error.localizedDescription];
-            }
-        }];
+        [[MovieDatabaseAPIProxy sharedInstance] getCastForTv:item.identifier.longValue callback:callback];
         
     } else {
-        [[MovieDatabaseAPIProxy sharedInstance] getMoviesForActor:self.selectedItem.identifier.longValue callback:^(id response, NSError *error) {
-            
-            [self hideActivityIndicator];
-            
-            if (!error) {
-                self.selectedItemCast = response;
-                
-                [self performSegueWithIdentifier:@"item detail" sender:self];
-                
-            } else {
-                [self showErrorDialogWithMessage:error.localizedDescription];
-            }
-        }];
+        [[MovieDatabaseAPIProxy sharedInstance] getMoviesForActor:self.selectedItem.identifier.longValue callback:callback];
     }
 }
 
