@@ -120,7 +120,7 @@
              
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"getUserCallback: %@", error);
-             callback(nil, [self _createErrorForMessage:@"An error ocurred, try again later." andCode:500]);
+             callback(nil, [self _createErrorForMessage:@"An error while retrieving categories. Try again later." andCode:500]);
          }];
         
     } else {
@@ -164,7 +164,7 @@
              
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"getUserCallback: %@", error);
-             callback(nil, [self _createErrorForMessage:@"An error ocurred, try again later." andCode:500]);
+             callback(nil, [self _createErrorForMessage:@"An error while retrieving categories. Try again later." andCode:500]);
          }];
         
     } else {
@@ -223,7 +223,7 @@
          
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"getUserCallback: %@", error);
-             callback(nil, [self _createErrorForMessage:@"An error ocurred, try again later." andCode:500]);
+             callback(nil, [self _createErrorForMessage:@"An error ocurred while requesting product. Try again later." andCode:500]);
          }];
         
     } else {
@@ -273,7 +273,7 @@
              
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"getUserCallback: %@", error);
-             callback(nil, [self _createErrorForMessage:@"An error ocurred, try again later." andCode:500]);
+             callback(nil, [self _createErrorForMessage:@"An error ocurred while identifying product. Try again later." andCode:500]);
          }];
         
     } else {
@@ -322,7 +322,7 @@
              
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"getUserCallback: %@", error);
-             callback(nil, [self _createErrorForMessage:@"An error ocurred, try again later." andCode:500]);
+             callback(nil, [self _createErrorForMessage:@"An error ocurred while getting the products. Try again later." andCode:500]);
          }];
         
     } else {
@@ -369,7 +369,7 @@
              
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"getUserCallback: %@", error);
-             callback(nil, [self _createErrorForMessage:@"An error ocurred, try again later." andCode:500]);
+             callback(nil, [self _createErrorForMessage:@"An error ocurred while setting product as favorite. Try again later." andCode:500]);
          }];
         
     } else {
