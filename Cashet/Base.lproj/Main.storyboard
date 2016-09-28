@@ -756,7 +756,7 @@ CQ
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gms-v4-o8P">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gms-v4-o8P">
                                         <rect key="frame" x="218" y="111" width="122" height="27"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="122" id="50P-cv-JrQ"/>
@@ -777,6 +777,7 @@ CQ
                                 </accessibility>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="IRa-BQ-jyj" secondAttribute="bottom" constant="24" id="3ji-SJ-9r6"/>
+                                    <constraint firstAttribute="trailing" secondItem="Gms-v4-o8P" secondAttribute="trailing" constant="8" id="E43-Cv-ZV5"/>
                                     <constraint firstItem="IRa-BQ-jyj" firstAttribute="centerY" secondItem="Gms-v4-o8P" secondAttribute="centerY" id="Vgs-HQ-eK9"/>
                                     <constraint firstItem="IRa-BQ-jyj" firstAttribute="leading" secondItem="3s5-ac-wc3" secondAttribute="leading" constant="10" id="bgr-dZ-FdQ"/>
                                 </constraints>
