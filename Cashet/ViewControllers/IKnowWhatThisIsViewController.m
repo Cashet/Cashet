@@ -246,6 +246,7 @@
     self.product.amazonId = item.ASIN;
     self.product.productDescription = item.title;
     self.product.price = @([item.lowestNewPriceFormatted stringByReplacingOccurrencesOfString:@"$" withString:@""].doubleValue);
+    self.product.picture = item.imageURL;
 }
 
 #pragma mark - IKnowWhatThisIsCellDelegate

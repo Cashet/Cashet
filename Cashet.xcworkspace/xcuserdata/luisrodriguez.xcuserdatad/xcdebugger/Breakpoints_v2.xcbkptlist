@@ -26,13 +26,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cashet/ViewControllers/IKnowWhatThisIsViewController.m"
-            timestampString = "496610111.257303"
+            timestampString = "497546760.502331"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "254"
-            endingLineNumber = "254"
-            landmarkName = "-IKnowWhatThisIsCell:checkButtonCheckedStatusChanged:"
-            landmarkType = "5">
+            startingLineNumber = "274"
+            endingLineNumber = "274"
+            landmarkName = "-submitButtonClicked:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[IKnowWhatThisIsViewController submitButtonClicked:]"
+                  moduleName = "Cashet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luisrodriguez/Desktop/Proyectos/Cashet/Cashet/ViewControllers/IKnowWhatThisIsViewController.m"
+                  timestampString = "497549008.529942"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "274"
+                  endingLineNumber = "274"
+                  offsetFromSymbolStart = "239">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__53-[IKnowWhatThisIsViewController submitButtonClicked:]_block_invoke"
+                  moduleName = "Cashet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luisrodriguez/Desktop/Proyectos/Cashet/Cashet/ViewControllers/IKnowWhatThisIsViewController.m"
+                  timestampString = "497549008.532116"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "274"
+                  endingLineNumber = "274"
+                  offsetFromSymbolStart = "30">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -41,14 +73,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Cashet/View/RequestProductContainerView.m"
-            timestampString = "496688587.107708"
+            filePath = "Cashet/ViewControllers/IKnowWhatThisIsViewController.m"
+            timestampString = "497546699.858271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "-setFrame:"
-            landmarkType = "5">
+            startingLineNumber = "245"
+            endingLineNumber = "245"
+            landmarkName = "-_updateProductWithAmazonItem:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -57,14 +89,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Cashet/View/RequestProductContainerView.m"
-            timestampString = "496688587.107708"
+            filePath = "Cashet/ViewControllers/ProductCategoryViewController.m"
+            timestampString = "497546888.48885"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
-            landmarkName = "-layoutSubviews"
-            landmarkType = "5">
+            startingLineNumber = "209"
+            endingLineNumber = "209"
+            landmarkName = "-requestProduct:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -73,14 +105,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Cashet/View/RequestProductContainerView.m"
-            timestampString = "496688577.297297"
+            filePath = "Cashet/ViewControllers/RequestProductViewController.m"
+            timestampString = "497549007.417156"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "-awakeFromNib"
-            landmarkType = "5">
+            startingLineNumber = "235"
+            endingLineNumber = "235"
+            landmarkName = "-selectedCategory:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
