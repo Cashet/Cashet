@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "AmazonAPIProxy.h"
 #import "AmazonResponse.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @interface AppDelegate ()
 
@@ -19,6 +21,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [Fabric with:@[[Crashlytics class]]];
+    
     return YES;
 }
 

@@ -10,5 +10,7 @@ target 'Cashet' do
   pod "JSONModel"
   pod "JGProgressHUD", "~> 1.3"
   pod "RaptureXML"
+  pod 'Fabric'
+  pod 'Crashlytics'
 
 end
