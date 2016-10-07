@@ -241,7 +241,8 @@
                                  @"price": product.price,
                                  @"status": @"known",
                                  @"amazon_id": product.amazonId,
-                                 @"amazon_link": product.amazonLink
+                                 @"amazon_link": product.amazonLink,
+                                 @"picture": product.picture
                                  };
         
         NSLog(@"Params: %@", params);
