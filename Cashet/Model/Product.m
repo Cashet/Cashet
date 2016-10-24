@@ -35,7 +35,9 @@
                                                        @"updated":@"updated",
                                                        @"category":@"category",
                                                        @"amazon_link":@"amazonLink",
-                                                       @"amazon_id":@"amazonId"
+                                                       @"amazon_id":@"amazonId",
+                                                       @"movie_name":@"movieName",
+                                                       @"actor_name":@"actorName"
                                                        }];
 }
 

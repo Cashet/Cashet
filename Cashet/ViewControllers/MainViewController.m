@@ -13,6 +13,8 @@
 #import "Server.h"
 #import "ServerResponse.h"
 #import "ServerListResponse.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
+#import "BuyProductViewController.h"
 
 @interface MainViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -22,8 +24,8 @@
 @property(nonatomic, retain) NSMutableArray *filteredContentList;
 @property(nonatomic, assign) BOOL isSearching;
 
-@property(nonatomic, retain) NSMutableArray<NSDictionary*>* trendingItemsPlaceholders;
-@property(nonatomic, retain) NSMutableArray<NSDictionary*>* wantedItemsPlaceholders;
+@property(nonatomic, retain) NSArray<Product*>* wantedProducts;
+@property(nonatomic, retain) NSArray<Product*>* trendingProducts;
 
 @end
 
@@ -36,14 +38,47 @@
     self.title = @"Ca$het";
     
     [self.tapView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_doSearch)]];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
-    self.trendingItemsPlaceholders = [NSMutableArray new];
-    [self.trendingItemsPlaceholders addObject:@{@"movie":@"Terminator 2:\nJudgment Day", @"actor":@"Arnold Schwarzenegger", @"item":@"Glasses", @"image":@"terminator 2"}];
-    [self.trendingItemsPlaceholders addObject:@{@"movie":@"Word War Z", @"actor":@"Brad Pitt", @"item":@"T-Shirt", @"image":@"world war z"}];
-    [self.trendingItemsPlaceholders addObject:@{@"movie":@"Prometheus", @"actor":@"Noomi Rapace", @"item":@"Dress", @"image":@"prometheus"}];
-    [self.trendingItemsPlaceholders addObject:@{@"movie":@"SecondHand\nLions", @"actor":@"Haley Joel Osment", @"item":@"Pants", @"image":@"secondhand lions"}];
+    self.trendingItems = [NSArray new];
     
-    self.wantedItemsPlaceholders = self.trendingItemsPlaceholders;
+    [[Server sharedInstance] getTrendingProductsWithCallback:^(id response, NSError *error) {
+        
+        [self hideActivityIndicator];
+        
+        if (error) {
+            [self noResultsViewHidden:NO];
+            
+            [self showErrorDialogWithMessage:error.localizedDescription];
+            
+        } else {
+            self.trendingProducts = ((ServerListResponse*)response).data;
+            
+            [self.collectionView reloadData];
+        }
+    }];
+    
+    self.wantedProducts = [NSArray new];
+    
+    [[Server sharedInstance] getWantedProductsWithCallback:^(id response, NSError *error) {
+        
+        [self hideActivityIndicator];
+        
+        if (error) {
+            [self noResultsViewHidden:NO];
+            
+            [self showErrorDialogWithMessage:error.localizedDescription];
+            
+        } else {
+            self.wantedProducts = ((ServerListResponse*)response).data;
+            
+            [self.collectionView reloadData];
+        }
+    }];
 }
 
 - (void)_doSearch
@@ -70,23 +105,30 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return self.trendingItemsPlaceholders.count;
+        return self.trendingProducts.count;
         
     } else {
-        return self.wantedItemsPlaceholders.count;
+        return self.wantedProducts.count;
     }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary* item = self.trendingItemsPlaceholders[indexPath.row];
+    Product* item = nil;
     
+    if (indexPath.section == 0) {
+        item = self.trendingProducts[indexPath.row];
+        
+    } else {
+        item = self.wantedProducts[indexPath.row];
+    }
+
     ItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    [cell.imageView setImage:[UIImage imageNamed:item[@"image"]]];
-    cell.movieLabel.text = item[@"movie"];
-    cell.actorLabel.text = item[@"actor"];
-    cell.viewCountLabel.text = @"500";
-    cell.itemLabel.text = item[@"item"];
+    [cell.imageView setImageWithURL:[NSURL URLWithString:item.picture]];
+    cell.movieLabel.text = item.movieName;
+    cell.actorLabel.text = item.actorName;
+    cell.viewCountLabel.text = [item.views stringValue];
+    cell.itemLabel.text = item.category.name;
     
     return cell;
 }
@@ -113,16 +155,30 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGRect frame = self.view.frame;
-    CGFloat scale = (frame.size.width/2) / 160;
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGSize size = CGSizeMake(screenWidth, screenWidth * 107 / 160);
     
-    return CGSizeMake(frame.size.width/2, 107 * scale);
+    return size;
 }
 
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    Product* item = nil;
+    
+    if (indexPath.section == 0) {
+        item = self.trendingProducts[indexPath.row];
+        
+    } else {
+        item = self.wantedProducts[indexPath.row];
+    }
+    
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    BuyProductViewController* vc =[storyboard instantiateViewControllerWithIdentifier:@"BuyProductViewController"];
+    vc.product = item;
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

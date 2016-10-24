@@ -30,5 +30,7 @@
 @property (nonatomic, retain) Category<Optional>* category;
 @property (nonatomic, retain) NSString<Optional>* amazonLink;
 @property (nonatomic, retain) NSString<Optional>* amazonId;
-
+@property (nonatomic, retain) NSNumber<Optional>* views;
+@property (nonatomic, retain) NSString<Optional>* movieName;
+@property (nonatomic, retain) NSString<Optional>* actorName;
 @end

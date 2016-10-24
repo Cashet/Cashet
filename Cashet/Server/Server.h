@@ -22,5 +22,8 @@
 - (void)updateProduct:(Product*)product callback:(void(^)(id response, NSError* error))callback;
 - (void)getProductsForActor:(MoviedatabaseItem*)actor movie:(MoviedatabaseItem*)movie category:(Category*)category callback:(void(^)(id response, NSError* error))callback;
 - (void)favoriteProduct:(Product*)product forUserWithEmail:(NSString*)email callback:(void(^)(id response, NSError* error))callback;
+- (void)getTrendingProductsWithCallback:(void(^)(id response, NSError* error))callback;
+- (void)getWantedProductsWithCallback:(void(^)(id response, NSError* error))callback;
+- (void)setViewsForProduct:(Product*)product callback:(void(^)(id response, NSError* error))callback;
 
 @end

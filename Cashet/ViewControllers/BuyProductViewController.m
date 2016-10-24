@@ -7,6 +7,7 @@
 //
 
 #import "BuyProductViewController.h"
+#import "Server.h"
 
 @interface BuyProductViewController() <UIWebViewDelegate>
 
@@ -25,6 +26,14 @@
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.product.amazonLink]]];
     
     self.webView.delegate = self;
+    
+    [[Server sharedInstance] setViewsForProduct:self.product callback:^(id response, NSError *error) {
+        if (error) {
+            
+        } else {
+            
+        }
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
