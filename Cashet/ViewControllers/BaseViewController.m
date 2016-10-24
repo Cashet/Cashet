@@ -24,7 +24,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationBarBackgroundImage = [UIImage imageNamed:@"navigation bar background"];
+    UIImage *originalImage = [UIImage imageNamed:@"navigation bar background"];
+    // scaling set to 2.0 makes the image 1/2 the size.
+    self.navigationBarBackgroundImage =
+    [UIImage imageWithCGImage:[originalImage CGImage]
+                        scale:(originalImage.scale *  originalImage.size.width / self.view.frame.size.width)
+                  orientation:(originalImage.imageOrientation)];
     
     _darkOverlay = [[UIView alloc] initWithFrame:self.view.frame];
     [_darkOverlay setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5f]];

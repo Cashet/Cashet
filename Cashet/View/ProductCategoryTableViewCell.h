@@ -16,6 +16,7 @@
 
 - (void)productCategoryTableViewCell:(ProductCategoryTableViewCell*)cell didSelectCategory:(Category*)category;
 - (void)productCategoryTableViewCell:(ProductCategoryTableViewCell*)cell moviedatabaseItem:(MoviedatabaseItem*)item;
+- (void)productCategoryTableViewCell:(ProductCategoryTableViewCell*)cell addAmazonProductForMoviedatabaseItem:(MoviedatabaseItem*)item;
 
 @end
 

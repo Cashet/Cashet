@@ -16,6 +16,7 @@
 #import "Category.h"
 #import "ProductCategoryViewController.h"
 #import "CastCollection.h"
+#import "AddAmazonProductViewController.h"
 
 @interface MovieActorDetailViewController() <ProductCategoryTableViewCellDelegate>
 
@@ -77,6 +78,8 @@
     self.navigationController.navigationBar.shadowImage = self.image;
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.view.backgroundColor = [UIColor clearColor];
+    
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -195,6 +198,26 @@
     self.selectedIndexPath = cell.indexPath;
     
     [self performSegueWithIdentifier:@"showCategory" sender:self];
+}
+
+- (void)productCategoryTableViewCell:(ProductCategoryTableViewCell *)cell addAmazonProductForMoviedatabaseItem:(MoviedatabaseItem *)item
+{
+    Product* product = [Product new];
+
+    if ([self.mainItem.mediaType isEqualToString:@"person"]) {
+        product.actor = self.mainItem;
+        product.movie = item;
+        
+    } else {
+        product.actor = item;
+        product.movie = self.mainItem;
+    }
+    
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    AddAmazonProductViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"AddAmazonProductViewController"];
+    vc.product = product;
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)productCategoryTableViewCell:(ProductCategoryTableViewCell *)cell moviedatabaseItem:(MoviedatabaseItem *)item

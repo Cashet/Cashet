@@ -187,12 +187,15 @@
     
     if (_internetReachable.isReachable){
         
-        NSDictionary* params = @{@"category_id": product.category.categoryId,
+        NSMutableDictionary* params = @{@"category_id": product.category.categoryId,
                                  @"movie_token": product.movie.identifier,
                                  @"actor_token": product.actor.identifier,
-                                 @"picture": product.picture,
                                  @"name": product.name,
-                                 @"description": product.productDescription};
+                                 @"description": product.productDescription}.mutableCopy;
+        
+        if (product.picture) {
+            [params setObject:product.picture forKey:@"picture"];
+        }
         
         NSLog(@"Params: %@", params);
         

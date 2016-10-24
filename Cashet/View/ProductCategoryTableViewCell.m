@@ -11,6 +11,7 @@
 #import <UIImageView+AFNetworking.h>
 #import "MovieDatabaseAPIProxy.h"
 #import "ProductTableViewCell.h"
+#import "AddAmazonProductViewController.h"
 
 @interface ProductCategoryTableViewCell() <UITableViewDelegate, UITableViewDataSource>
 
@@ -57,7 +58,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.items.count + 1;
+    return self.items.count + 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -67,11 +68,18 @@
     
     if (indexPath.row == 0) {
         cell.labelContainerView.hidden = YES;
+        cell.plusIcon.hidden = YES;
         
         NSString* posterPath = self.moviedatabaseItem.profilePath ? self.moviedatabaseItem.profilePath : self.moviedatabaseItem.posterPath;
         [cell.productView setImageWithURL:[NSURL URLWithString:[MovieDatabaseAPIProxy fullpathForLargeImage:posterPath]]];
         
+    } else if (indexPath.row == self.items.count + 1) {
+        cell.plusIcon.hidden = NO;
+        cell.labelContainerView.hidden = YES;
+        
     } else {
+        cell.plusIcon.hidden = YES;
+        
         Category* category = self.items[indexPath.row - 1];
         cell.labelContainerView.hidden = NO;
         cell.productLabel.text = [NSString stringWithFormat:@"%@(%ld)", category.name, category.products.longValue];
@@ -94,6 +102,9 @@
     if (self.delegate) {
         if (indexPath.row == 0) {
             [self.delegate productCategoryTableViewCell:self moviedatabaseItem:self.moviedatabaseItem];
+            
+        } else if (indexPath.row == self.items.count + 1) {
+            [self.delegate productCategoryTableViewCell:self addAmazonProductForMoviedatabaseItem:self.moviedatabaseItem];
             
         } else {
             [self.delegate productCategoryTableViewCell:self didSelectCategory:self.items[indexPath.row-1]];

@@ -19,6 +19,7 @@
 #import "IWantThisViewController.h"
 #import "BuyProductViewController.h"
 #import "IKnowWhatThisIsViewController.h"
+#import "AddAmazonProductViewController.h"
 
 @interface ProductCategoryViewController() <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -254,6 +255,20 @@
     [self _setButton:self.identifyButton selected:YES];
     
     [self _filterItems];
+}
+
+- (IBAction)addProduct:(id)sender
+{
+    Product* product = [Product new];
+    product.actor = self.actor;
+    product.movie = self.movie;
+    product.category = self.category;
+    
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    AddAmazonProductViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"AddAmazonProductViewController"];
+    vc.product = product;
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
