@@ -47,8 +47,10 @@
 {
     [super viewWillAppear:animated];
     
-    [self noResultsViewHidden:NO];
-    
+    if (_trendingItems.count == 0 && _wantedItems.count == 0) {
+        [self noResultsViewHidden:NO];
+    }
+        
     [[Server sharedInstance] getTrendingProductsWithCallback:^(id response, NSError *error) {
         
         [self hideActivityIndicator];
@@ -128,7 +130,7 @@
     [cell.imageView setImageWithURL:[NSURL URLWithString:item.picture]];
     cell.movieLabel.text = item.movieName;
     cell.actorLabel.text = item.actorName;
-    cell.viewCountLabel.text = [item.views stringValue];
+    cell.viewCountLabel.text = item.views ? [item.views stringValue] : @"0";
     cell.itemLabel.text = item.category.name;
     
     return cell;
@@ -166,20 +168,15 @@
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    Product* item = nil;
-    
     if (indexPath.section == 0) {
-        item = self.trendingProducts[indexPath.row];
+        Product* item = self.trendingProducts[indexPath.row];
         
-    } else {
-        item = self.wantedProducts[indexPath.row];
+        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        BuyProductViewController* vc =[storyboard instantiateViewControllerWithIdentifier:@"BuyProductViewController"];
+        vc.product = item;
+        
+        [self.navigationController pushViewController:vc animated:YES];
     }
-    
-    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    BuyProductViewController* vc =[storyboard instantiateViewControllerWithIdentifier:@"BuyProductViewController"];
-    vc.product = item;
-    
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
