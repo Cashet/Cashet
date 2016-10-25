@@ -38,42 +38,43 @@
     self.title = @"Ca$het";
     
     [self.tapView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_doSearch)]];
+    
+    self.trendingItems = [NSArray new];
+    self.wantedProducts = [NSArray new];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    self.trendingItems = [NSArray new];
+    [self noResultsViewHidden:NO];
     
     [[Server sharedInstance] getTrendingProductsWithCallback:^(id response, NSError *error) {
         
         [self hideActivityIndicator];
         
         if (error) {
-            [self noResultsViewHidden:NO];
-            
             [self showErrorDialogWithMessage:error.localizedDescription];
             
         } else {
+            [self noResultsViewHidden:YES];
+            
             self.trendingProducts = ((ServerListResponse*)response).data;
             
             [self.collectionView reloadData];
         }
     }];
     
-    self.wantedProducts = [NSArray new];
-    
     [[Server sharedInstance] getWantedProductsWithCallback:^(id response, NSError *error) {
         
         [self hideActivityIndicator];
         
         if (error) {
-            [self noResultsViewHidden:NO];
-            
             [self showErrorDialogWithMessage:error.localizedDescription];
             
         } else {
+            [self noResultsViewHidden:YES];
+            
             self.wantedProducts = ((ServerListResponse*)response).data;
             
             [self.collectionView reloadData];
