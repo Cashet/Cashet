@@ -64,18 +64,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ProductTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    cell.productView.image = nil;
     
     if (indexPath.row == 0) {
         cell.labelContainerView.hidden = YES;
         cell.plusIcon.hidden = YES;
         
         NSString* posterPath = self.moviedatabaseItem.profilePath ? self.moviedatabaseItem.profilePath : self.moviedatabaseItem.posterPath;
-        [cell.productView setImageWithURL:[NSURL URLWithString:[MovieDatabaseAPIProxy fullpathForLargeImage:posterPath]]];
+        
+        [self _imageView:cell.productView setImageWithURL:[NSURL URLWithString:[MovieDatabaseAPIProxy fullpathForLargeImage:posterPath]]];
         
     } else if (indexPath.row == self.items.count + 1) {
         cell.plusIcon.hidden = NO;
         cell.labelContainerView.hidden = YES;
+        cell.productView.image = nil;
         
     } else {
         cell.plusIcon.hidden = YES;
@@ -83,10 +84,22 @@
         Category* category = self.items[indexPath.row - 1];
         cell.labelContainerView.hidden = NO;
         cell.productLabel.text = [NSString stringWithFormat:@"%@(%ld)", category.name, category.products.longValue];
-        [cell.productView setImageWithURL:[NSURL URLWithString:category.picture]];
+        [self _imageView:cell.productView setImageWithURL:[NSURL URLWithString:category.picture]];
     }
     
     return cell;
+}
+
+- (void)_imageView:(UIImageView*)imageView setImageWithURL:(NSURL*)url
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+    
+    __block UIImageView* imageViewRef = imageView;
+    
+    [imageView setImageWithURLRequest:request placeholderImage:nil success:nil failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+        imageViewRef.image = nil;
+    }];
 }
 
 - (void)setItems:(NSArray<Category *> *)items
