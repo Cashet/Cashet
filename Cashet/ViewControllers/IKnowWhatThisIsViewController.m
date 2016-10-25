@@ -146,7 +146,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == self.items.count) {
-        if (self.currentPage < MAX_PAGES) {
+        if (indexPath.row == 0) {
+            return [tableView dequeueReusableCellWithIdentifier:@"Last"];
+            
+        } else if (self.currentPage < MAX_PAGES) {
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Loading"];
             UIActivityIndicatorView* activityIndicator = [[cell subviews][0] viewWithTag:100];
             [activityIndicator startAnimating];
@@ -154,6 +157,7 @@
             [self _loadMoreResults];
             
             return cell;
+            
         } else {
             return [tableView dequeueReusableCellWithIdentifier:@"Last"];
         }
