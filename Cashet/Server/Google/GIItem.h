@@ -17,6 +17,6 @@
 
 @property(nonatomic, retain) NSString* title;
 @property(nonatomic, retain) NSString* mime;
-@property(nonatomic, retain) GIImage* image;
+@property(nonatomic, retain) NSString* link;
 
 @end

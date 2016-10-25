@@ -1194,7 +1194,7 @@ CQ
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UtV-w0-FZX">
                                 <color key="backgroundColor" red="0.17647059261798859" green="0.17647059261798859" blue="0.17647059261798859" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="110" id="nZp-Nz-3Ke" customClass="ProductCategoryTableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="110" id="nZp-Nz-3Ke" customClass="ProductCategoryTableViewCell">
                                         <rect key="frame" x="0.0" y="28" width="375" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nZp-Nz-3Ke" id="UEu-7o-0n6">
@@ -1287,7 +1287,7 @@ CQ
                                             <outlet property="tableView" destination="y6x-P5-RkZ" id="XHB-zd-YOY"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" rowHeight="40" id="vr3-iS-DK1">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" rowHeight="40" id="vr3-iS-DK1">
                                         <rect key="frame" x="0.0" y="138" width="375" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vr3-iS-DK1" id="wFA-42-0Ek">
@@ -1703,6 +1703,6 @@ CQ
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="3EV-5y-RwG"/>
-        <segue reference="fzP-bC-nKf"/>
+        <segue reference="N9b-ta-QFZ"/>
     </inferredMetricsTieBreakers>
 </document>

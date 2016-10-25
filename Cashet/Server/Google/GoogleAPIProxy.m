@@ -104,9 +104,9 @@
         NSMutableDictionary* params = @{@"key":@"AIzaSyBKeQgy8BNHUZ4gwbGczZsAItkZBNzWb-Y",
                                         @"cx":@"011078278173139930926:gw94m4z8q1g",
                                         @"q":string,
-                                        @"searchType":@"image",}.mutableCopy;
-//                                        @"imgSize": @"xlarge|xxlarge|huge"}.mutableCopy;
-        
+                                        @"searchType":@"image",
+                                        @"imgSize": @"medium"}.mutableCopy;
+    
         if (startIndex > 0) {
             [params setObject:[NSNumber numberWithInteger:startIndex] forKey:@"start"];
         }

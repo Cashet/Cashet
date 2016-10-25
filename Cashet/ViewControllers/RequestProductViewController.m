@@ -25,6 +25,7 @@
 @property (nonatomic, retain) NSArray<Category*>* categories;
 @property (nonatomic, retain) Category* selectedCategory;
 @property (nonatomic, retain) NSIndexPath* selectedIndexpath;
+@property (nonatomic, assign) long totalResults;
 
 @end
 
@@ -47,6 +48,8 @@
     [self.selectCategoryContainerView addGestureRecognizer:tapRecognizer];
     
     self.title = self.actor.name;
+    
+    self.totalResults = LONG_MAX;
 }
 
 - (NSString*)_getQuery
@@ -94,7 +97,7 @@
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.items.count + 1;
+    return MIN(self.items.count + 1, self.totalResults);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -121,13 +124,23 @@
             
             if (!error) {
                 self.response = response;
-                [self.items addObjectsFromArray:self.response.items];
+                
+                if (self.response.error) {
+                    self.totalResults = self.items.count;
+                    
+                } else {
+                    [self.items addObjectsFromArray:self.response.items];
+                    
+                    GIRequest* request = self.response.queries.nextPage[0];
+                    self.totalResults = request.totalResults.longValue;
+                }
+                
                 [self.collectionView reloadData];
                 
                 [self noResultsViewHidden:self.items.count != 0];
                 
             } else {
-                [self noResultsViewHidden:NO];
+                [self noResultsViewHidden:!emptySearch];
                 
                 [self showErrorDialogWithMessage:error.localizedDescription];
             }
@@ -142,13 +155,27 @@
 
 - (UICollectionViewCell*)_collectionView:(UICollectionView *)collectionView normalViewRowForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    GIImage* item = self.items[indexPath.row].image;
+    GIItem* item = self.items[indexPath.row];
     
     GoogleImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     cell.selected = (self.selectedIndexpath && indexPath.row == self.selectedIndexpath.row);
-    [cell.imageView setImageWithURL:[NSURL URLWithString:item.thumbnailLink]];
+    cell.imageView.image = nil;
+    [cell.imageView cancelImageDownloadTask];
+    [self _imageView:cell.imageView setImageWithURL:[NSURL URLWithString:item.link]];
     
     return cell;
+}
+
+- (void)_imageView:(UIImageView*)imageView setImageWithURL:(NSURL*)url
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+    
+    __block UIImageView* imageViewRef = imageView;
+    
+    [imageView setImageWithURLRequest:request placeholderImage:nil success:nil failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+        imageViewRef.image = nil;
+    }];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -210,7 +237,7 @@
         Product* product = [Product new];
         product.actor = self.actor;
         product.movie = self.movie;
-        product.picture = self.items[_selectedIndexpath.row].image.thumbnailLink;
+        product.picture = self.items[_selectedIndexpath.row].link;
         product.category = self.selectedCategory;
         product.productDescription = [NSString stringWithFormat:@"%@, %@ in %@", self.actor.name, self.searchBar.text, [self.movie.mediaType isEqualToString:@"movie"] ? self.movie.title : self.movie.name];
         product.name = self.searchBar.text;
