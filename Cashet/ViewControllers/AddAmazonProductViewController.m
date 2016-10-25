@@ -38,19 +38,11 @@
 {
     [super viewDidLoad];
     
-    self.title = @"I Know What This Is";
+    self.title = @"Submit a new product";
     
     self.selectedItemRow = -1;
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
-    
-//    [[AmazonAPIProxy sharedInstance] getProductsMatchingString:@"" category:self.product.category.name callback:^(AmazonResponse* response, NSError *error) {
-//        
-//        self.currentPage = 0;
-//        self.response = response;
-//        
-//        self.items = self.response.items.mutableCopy;
-//    }];
-    
+        
     [self _getCategories];
 }
 
