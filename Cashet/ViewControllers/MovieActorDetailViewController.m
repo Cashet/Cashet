@@ -135,10 +135,14 @@
                 cell.items = serverResponse.data;
                 
             } else {
+                cell.items = [NSArray new];
+                
                 [self showErrorDialogWithMessage:serverResponse.message];
             }
             
         } else {
+            cell.items = [NSArray new];
+            
             [self showErrorDialogWithMessage:error.localizedDescription];
         }
     }];
