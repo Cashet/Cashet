@@ -27,13 +27,9 @@
     
     self.webView.delegate = self;
     
-    [[Server sharedInstance] setViewsForProduct:self.product callback:^(id response, NSError *error) {
-        if (error) {
-            
-        } else {
-            
-        }
-    }];
+    if (self.product.productId) {
+        [[Server sharedInstance] setViewsForProduct:self.product callback:nil];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
