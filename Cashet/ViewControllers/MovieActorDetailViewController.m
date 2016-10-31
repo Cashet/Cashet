@@ -63,10 +63,10 @@
 - (NSString*)_subtitle
 {
     if([self.mainItem.mediaType isEqualToString:@"person"]) {
-        return [NSString stringWithFormat:@"%d Movie%@", self.items.count, self.items.count > 0 ? @"s" : @""];
+        return [NSString stringWithFormat:@"%ld Movie%@", self.items.count, self.items.count > 0 ? @"s" : @""];
         
     } else {
-        return [NSString stringWithFormat:@"%d Actor%@", self.items.count, self.items.count > 0 ? @"s" : @""];;
+        return [NSString stringWithFormat:@"%ld Actor%@", self.items.count, self.items.count > 0 ? @"s" : @""];
     }
 }
 

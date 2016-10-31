@@ -47,7 +47,7 @@
 {
     [super viewWillAppear:animated];
     
-    if (_trendingItems.count == 0 && _wantedItems.count == 0) {
+    if (self.trendingProducts.count == 0 && self.wantedProducts.count == 0) {
         [self noResultsViewHidden:NO];
     }
         
@@ -56,12 +56,15 @@
         [self hideActivityIndicator];
         
         if (error) {
+            
             [self showErrorDialogWithMessage:error.localizedDescription];
             
         } else {
-            [self noResultsViewHidden:YES];
-            
             self.trendingProducts = ((ServerListResponse*)response).data;
+            
+            if (self.trendingProducts.count != 0 || self.wantedProducts.count != 0) {
+                [self noResultsViewHidden:YES];
+            }
             
             [self.collectionView reloadData];
         }
@@ -75,9 +78,11 @@
             [self showErrorDialogWithMessage:error.localizedDescription];
             
         } else {
-            [self noResultsViewHidden:YES];
-            
             self.wantedProducts = ((ServerListResponse*)response).data;
+            
+            if (self.trendingProducts.count != 0 || self.wantedProducts.count != 0) {
+                [self noResultsViewHidden:YES];
+            }
             
             [self.collectionView reloadData];
         }
@@ -168,7 +173,16 @@
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    Product* item = nil;
+    
     if (indexPath.section == 0) {
+        item = self.trendingProducts[indexPath.row];
+        
+    } else {
+        item = self.wantedProducts[indexPath.row];
+    }
+    
+    if (item.amazonLink && ![item.amazonLink isEqualToString:@""]) {
         Product* item = self.trendingProducts[indexPath.row];
         
         UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
