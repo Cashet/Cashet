@@ -60,6 +60,7 @@
 		EEC2E53E1D6630E200B37190 /* MovieActorDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC2E53D1D6630E200B37190 /* MovieActorDetailViewController.m */; };
 		EEC2E5411D66370D00B37190 /* ProductCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC2E5401D66370D00B37190 /* ProductCategoryTableViewCell.m */; };
 		EEC2E5441D665B2200B37190 /* ProductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC2E5431D665B2200B37190 /* ProductTableViewCell.m */; };
+		EEC6181C1DC8DF0C00E5D0F1 /* MyImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC6181B1DC8DF0C00E5D0F1 /* MyImageView.m */; };
 		EED010191D677DDB00B8B2F5 /* CastCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = EED010181D677DDB00B8B2F5 /* CastCollection.m */; };
 		EEDF6BC71D6C93CA005D765B /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDF6BC61D6C93CA005D765B /* Category.m */; };
 		EEDF6BD01D6CC5F5005D765B /* ProductCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDF6BCF1D6CC5F5005D765B /* ProductCategoryViewController.m */; };
@@ -170,6 +171,8 @@
 		EEC2E5401D66370D00B37190 /* ProductCategoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductCategoryTableViewCell.m; sourceTree = "<group>"; };
 		EEC2E5421D665B2200B37190 /* ProductTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductTableViewCell.h; sourceTree = "<group>"; };
 		EEC2E5431D665B2200B37190 /* ProductTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductTableViewCell.m; sourceTree = "<group>"; };
+		EEC6181A1DC8DF0C00E5D0F1 /* MyImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyImageView.h; sourceTree = "<group>"; };
+		EEC6181B1DC8DF0C00E5D0F1 /* MyImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyImageView.m; sourceTree = "<group>"; };
 		EED010171D677DDB00B8B2F5 /* CastCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CastCollection.h; sourceTree = "<group>"; };
 		EED010181D677DDB00B8B2F5 /* CastCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CastCollection.m; sourceTree = "<group>"; };
 		EEDF6BC51D6C93CA005D765B /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
@@ -364,6 +367,8 @@
 				EEA3FF391D6F6E29006DE280 /* RequestProductContainerView.m */,
 				EEB35DEF1D74888500A242F9 /* GoogleImageCell.h */,
 				EEB35DF01D74888500A242F9 /* GoogleImageCell.m */,
+				EEC6181A1DC8DF0C00E5D0F1 /* MyImageView.h */,
+				EEC6181B1DC8DF0C00E5D0F1 /* MyImageView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -574,6 +579,7 @@
 				EEBD78881D8097100087A160 /* AmazonItem.m in Sources */,
 				EE2389D51D6E3EF700B421C8 /* CategoryItemProductState.m in Sources */,
 				EE92FE651D5CFAC800395DC7 /* MyNavigationController.m in Sources */,
+				EEC6181C1DC8DF0C00E5D0F1 /* MyImageView.m in Sources */,
 				EE92FE601D5CFAC800395DC7 /* Reachability.m in Sources */,
 				EE46B3911D7F1F01006AEB41 /* GIResponse.m in Sources */,
 				EE0314961D5BB75E00C873B2 /* AppDelegate.m in Sources */,
