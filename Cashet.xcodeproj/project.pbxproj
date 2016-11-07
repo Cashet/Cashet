@@ -60,7 +60,6 @@
 		EEC2E53E1D6630E200B37190 /* MovieActorDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC2E53D1D6630E200B37190 /* MovieActorDetailViewController.m */; };
 		EEC2E5411D66370D00B37190 /* ProductCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC2E5401D66370D00B37190 /* ProductCategoryTableViewCell.m */; };
 		EEC2E5441D665B2200B37190 /* ProductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC2E5431D665B2200B37190 /* ProductTableViewCell.m */; };
-		EEC6181C1DC8DF0C00E5D0F1 /* MyImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC6181B1DC8DF0C00E5D0F1 /* MyImageView.m */; };
 		EED010191D677DDB00B8B2F5 /* CastCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = EED010181D677DDB00B8B2F5 /* CastCollection.m */; };
 		EEDF6BC71D6C93CA005D765B /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDF6BC61D6C93CA005D765B /* Category.m */; };
 		EEDF6BD01D6CC5F5005D765B /* ProductCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDF6BCF1D6CC5F5005D765B /* ProductCategoryViewController.m */; };
@@ -171,8 +170,6 @@
 		EEC2E5401D66370D00B37190 /* ProductCategoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductCategoryTableViewCell.m; sourceTree = "<group>"; };
 		EEC2E5421D665B2200B37190 /* ProductTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductTableViewCell.h; sourceTree = "<group>"; };
 		EEC2E5431D665B2200B37190 /* ProductTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductTableViewCell.m; sourceTree = "<group>"; };
-		EEC6181A1DC8DF0C00E5D0F1 /* MyImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyImageView.h; sourceTree = "<group>"; };
-		EEC6181B1DC8DF0C00E5D0F1 /* MyImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyImageView.m; sourceTree = "<group>"; };
 		EED010171D677DDB00B8B2F5 /* CastCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CastCollection.h; sourceTree = "<group>"; };
 		EED010181D677DDB00B8B2F5 /* CastCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CastCollection.m; sourceTree = "<group>"; };
 		EEDF6BC51D6C93CA005D765B /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
@@ -367,8 +364,6 @@
 				EEA3FF391D6F6E29006DE280 /* RequestProductContainerView.m */,
 				EEB35DEF1D74888500A242F9 /* GoogleImageCell.h */,
 				EEB35DF01D74888500A242F9 /* GoogleImageCell.m */,
-				EEC6181A1DC8DF0C00E5D0F1 /* MyImageView.h */,
-				EEC6181B1DC8DF0C00E5D0F1 /* MyImageView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -579,7 +574,6 @@
 				EEBD78881D8097100087A160 /* AmazonItem.m in Sources */,
 				EE2389D51D6E3EF700B421C8 /* CategoryItemProductState.m in Sources */,
 				EE92FE651D5CFAC800395DC7 /* MyNavigationController.m in Sources */,
-				EEC6181C1DC8DF0C00E5D0F1 /* MyImageView.m in Sources */,
 				EE92FE601D5CFAC800395DC7 /* Reachability.m in Sources */,
 				EE46B3911D7F1F01006AEB41 /* GIResponse.m in Sources */,
 				EE0314961D5BB75E00C873B2 /* AppDelegate.m in Sources */,
@@ -677,17 +671,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(SDKROOT)/usr/include/libxml2",
-					"$(inherited)",
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
-					"\"${PODS_ROOT}/Headers/Public/JGProgressHUD\"",
-					"\"${PODS_ROOT}/Headers/Public/JSONModel\"",
-					"\"${PODS_ROOT}/Headers/Public/RaptureXML\"",
-					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
-					"\"${PODS_ROOT}/Headers/Public/Crashlytics\"",
-				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -727,17 +710,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(SDKROOT)/usr/include/libxml2",
-					"$(inherited)",
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
-					"\"${PODS_ROOT}/Headers/Public/JGProgressHUD\"",
-					"\"${PODS_ROOT}/Headers/Public/JSONModel\"",
-					"\"${PODS_ROOT}/Headers/Public/RaptureXML\"",
-					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
-					"\"${PODS_ROOT}/Headers/Public/Crashlytics\"",
-				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
@@ -755,17 +727,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEVELOPMENT_TEAM = P33KBKP926;
-				HEADER_SEARCH_PATHS = (
-					"$(SDKROOT)/usr/include/libxml2",
-					"$(inherited)",
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
-					"\"${PODS_ROOT}/Headers/Public/JGProgressHUD\"",
-					"\"${PODS_ROOT}/Headers/Public/JSONModel\"",
-					"\"${PODS_ROOT}/Headers/Public/RaptureXML\"",
-					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
-					"\"${PODS_ROOT}/Headers/Public/Crashlytics\"",
-				);
 				INFOPLIST_FILE = Cashet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -773,7 +734,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "e137c24d-2864-4a99-ab5f-04b952687a76";
 				PROVISIONING_PROFILE_SPECIFIER = "Cashet Dev";
-				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -786,17 +746,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				DEVELOPMENT_TEAM = P33KBKP926;
-				HEADER_SEARCH_PATHS = (
-					"$(SDKROOT)/usr/include/libxml2",
-					"$(inherited)",
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
-					"\"${PODS_ROOT}/Headers/Public/JGProgressHUD\"",
-					"\"${PODS_ROOT}/Headers/Public/JSONModel\"",
-					"\"${PODS_ROOT}/Headers/Public/RaptureXML\"",
-					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
-					"\"${PODS_ROOT}/Headers/Public/Crashlytics\"",
-				);
 				INFOPLIST_FILE = Cashet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -804,7 +753,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "98aa6638-5cb3-4462-8d8e-9abc84efcb44";
 				PROVISIONING_PROFILE_SPECIFIER = "Cashet Ad Hoc";
-				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};

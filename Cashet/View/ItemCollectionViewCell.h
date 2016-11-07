@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ItemCollectionViewCell : UITableViewCell
+@interface ItemCollectionViewCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *viewCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *movieLabel;
 @property (weak, nonatomic) IBOutlet UILabel *actorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *itemLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *productImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end

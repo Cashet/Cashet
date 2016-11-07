@@ -16,7 +16,7 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import "BuyProductViewController.h"
 
-@interface MainViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource>
+@interface MainViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property(nonatomic, retain) NSArray<Item*>* trendingItems;
 @property(nonatomic, retain) NSArray<Item*>* wantedItems;
@@ -41,10 +41,6 @@
     
     self.trendingItems = [NSArray new];
     self.wantedProducts = [NSArray new];
-    self.trendingProducts = [NSArray new];
-    
-    [self.tableView setTableFooterView: [[UIView alloc] initWithFrame: CGRectZero]];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -70,7 +66,7 @@
                 [self noResultsViewHidden:YES];
             }
             
-            [self.tableView reloadData];
+            [self.collectionView reloadData];
         }
     }];
     
@@ -88,7 +84,7 @@
                 [self noResultsViewHidden:YES];
             }
             
-            [self.tableView reloadData];
+            [self.collectionView reloadData];
         }
     }];
 }
@@ -113,9 +109,8 @@
 }
 */
 
-#pragma mark - UITableViewDataSource
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+#pragma mark - UICollectionViewDataSource
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if (section == 0) {
         return self.trendingProducts.count;
@@ -125,8 +120,7 @@
     }
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     Product* item = nil;
     
@@ -136,9 +130,9 @@
     } else {
         item = self.wantedProducts[indexPath.row];
     }
-    
-    ItemCollectionViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    [cell.productImageView setImageWithURL:[NSURL URLWithString:item.picture]];
+
+    ItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    [cell.imageView setImageWithURL:[NSURL URLWithString:item.picture]];
     cell.movieLabel.text = item.movieName;
     cell.actorLabel.text = item.actorName;
     cell.viewCountLabel.text = item.views ? [item.views stringValue] : @"0";
@@ -147,43 +141,36 @@
     return cell;
 }
 
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
-{
-    return 160;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 44;
-}
-
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 2;
-    
 }
 
-// Note:
-//            1) Must subclass UITableViewHeaderFooterView
-//            1) [self.tableView registerNib:[UINib nibWithNibName:@"YourNibName" bundle:nil] forHeaderFooterViewReuseIdentifier:@"SectionIdentifier"];
-//
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"header"];
+    UICollectionReusableView* cell = [collectionView dequeueReusableSupplementaryViewOfKind:kind
+                                                                        withReuseIdentifier:@"header"
+                                                                               forIndexPath:indexPath];
     
     UIImageView* imageView = [cell viewWithTag:100];
-    [imageView setImage:[UIImage imageNamed:section == 0 ? @"star" : @"heart"]];
+    [imageView setImage:[UIImage imageNamed:indexPath.section == 0 ? @"star" : @"heart"]];
     
     UILabel* label = [cell viewWithTag:200];
-    label.text = section == 0 ? @"Trending Items" : @"Wanted Items";
+    label.text = indexPath.section == 0 ? @"Trending Items" : @"Wanted Items";
     
     return cell;
 }
 
-#pragma mark - UITableViewDelegate
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGRect frame = self.view.frame;
+    CGFloat scale = (frame.size.width/2) / 160;
+    
+    return CGSizeMake(frame.size.width/2, 107 * scale);
+}
+
+#pragma mark - UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     Product* item = nil;
     
@@ -204,25 +191,5 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Remove seperator inset
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [cell setSeparatorInset:UIEdgeInsetsZero];
-    }
-    
-    // Prevent the cell from inheriting the Table View's margin settings
-    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
-        [cell setPreservesSuperviewLayoutMargins:NO];
-    }
-    
-    // Explictly set your cell's layout margins
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        [cell setLayoutMargins:UIEdgeInsetsZero];
-    }
-    
-}
-
 
 @end
