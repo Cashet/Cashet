@@ -18,12 +18,6 @@
 
 @interface MainViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
-@property(nonatomic, retain) NSArray<Item*>* trendingItems;
-@property(nonatomic, retain) NSArray<Item*>* wantedItems;
-@property(nonatomic, retain) NSMutableArray *dropdownItems;
-@property(nonatomic, retain) NSMutableArray *filteredContentList;
-@property(nonatomic, assign) BOOL isSearching;
-
 @property(nonatomic, retain) NSArray<Product*>* wantedProducts;
 @property(nonatomic, retain) NSArray<Product*>* trendingProducts;
 
@@ -39,7 +33,7 @@
     
     [self.tapView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_doSearch)]];
     
-    self.trendingItems = [NSArray new];
+    self.trendingProducts = [NSArray new];
     self.wantedProducts = [NSArray new];
 }
 
@@ -47,26 +41,17 @@
 {
     [super viewWillAppear:animated];
     
-    if (self.trendingProducts.count == 0 && self.wantedProducts.count == 0) {
-        [self noResultsViewHidden:NO];
-    }
-        
     [[Server sharedInstance] getTrendingProductsWithCallback:^(id response, NSError *error) {
         
         [self hideActivityIndicator];
         
         if (error) {
-            
             [self showErrorDialogWithMessage:error.localizedDescription];
             
         } else {
             self.trendingProducts = ((ServerListResponse*)response).data;
             
-            if (self.trendingProducts.count != 0 || self.wantedProducts.count != 0) {
-                [self noResultsViewHidden:YES];
-            }
-            
-            [self.collectionView reloadData];
+            [self.trendingCollectionView reloadData];
         }
     }];
     
@@ -79,12 +64,8 @@
             
         } else {
             self.wantedProducts = ((ServerListResponse*)response).data;
-            
-            if (self.trendingProducts.count != 0 || self.wantedProducts.count != 0) {
-                [self noResultsViewHidden:YES];
-            }
-            
-            [self.collectionView reloadData];
+                       
+            [self.wantedCollectionView reloadData];
         }
     }];
 }
@@ -112,7 +93,7 @@
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (section == 0) {
+    if (collectionView == self.trendingCollectionView) {
         return self.trendingProducts.count;
         
     } else {
@@ -124,7 +105,7 @@
 {
     Product* item = nil;
     
-    if (indexPath.section == 0) {
+    if (collectionView == self.trendingCollectionView) {
         item = self.trendingProducts[indexPath.row];
         
     } else {
@@ -143,30 +124,12 @@
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 2;
-}
-
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-{
-    UICollectionReusableView* cell = [collectionView dequeueReusableSupplementaryViewOfKind:kind
-                                                                        withReuseIdentifier:@"header"
-                                                                               forIndexPath:indexPath];
-    
-    UIImageView* imageView = [cell viewWithTag:100];
-    [imageView setImage:[UIImage imageNamed:indexPath.section == 0 ? @"star" : @"heart"]];
-    
-    UILabel* label = [cell viewWithTag:200];
-    label.text = indexPath.section == 0 ? @"Trending Items" : @"Wanted Items";
-    
-    return cell;
+    return 1;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGRect frame = self.view.frame;
-    CGFloat scale = (frame.size.width/2) / 160;
-    
-    return CGSizeMake(frame.size.width/2, 107 * scale);
+    return CGSizeMake(collectionView.frame.size.width*2/3, collectionView.frame.size.height);
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -174,7 +137,7 @@
 {
     Product* item = nil;
     
-    if (indexPath.section == 0) {
+    if (collectionView == self.trendingCollectionView) {
         item = self.trendingProducts[indexPath.row];
         
     } else {

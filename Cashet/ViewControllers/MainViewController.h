@@ -12,7 +12,8 @@
 @interface MainViewController : BaseViewController
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UICollectionView *trendingCollectionView;
+@property (weak, nonatomic) IBOutlet UICollectionView *wantedCollectionView;
 @property (weak, nonatomic) IBOutlet UIView *tapView;
 
 @end
