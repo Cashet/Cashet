@@ -288,8 +288,6 @@
     self.product.picture = item.imageURL;
     self.product.category = self.selectedCategory;
     self.product.name = item.title;
-    self.product.actorName = self.product.actor.name;
-    self.product.movieName = self.product.movie.name;
     self.product.status = @"known";
 }
 

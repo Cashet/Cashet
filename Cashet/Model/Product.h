@@ -16,8 +16,6 @@
 @property (nonatomic, retain) MoviedatabaseItem<Ignore>* actor;
 
 @property (nonatomic, retain) NSNumber<Optional>* productId;
-@property (nonatomic, retain) NSNumber<Optional>* movieToken;
-@property (nonatomic, retain) NSNumber<Optional>* actorToken;
 @property (nonatomic, retain) NSString<Optional>* name;
 @property (nonatomic, retain) NSString<Optional>* productDescription;
 @property (nonatomic, retain) NSNumber<Optional>* price;
@@ -31,6 +29,11 @@
 @property (nonatomic, retain) NSString<Optional>* amazonLink;
 @property (nonatomic, retain) NSString<Optional>* amazonId;
 @property (nonatomic, retain) NSNumber<Optional>* views;
+@property (nonatomic, retain) NSNumber<Optional>* movieToken;
 @property (nonatomic, retain) NSString<Optional>* movieName;
+@property (nonatomic, retain) NSString<Optional>* movieImage;
+@property (nonatomic, retain) NSNumber<Optional>* actorToken;
 @property (nonatomic, retain) NSString<Optional>* actorName;
+@property (nonatomic, retain) NSString<Optional>* actorImage;
+
 @end

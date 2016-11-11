@@ -17,6 +17,7 @@
 #import "NSString+URLEncode.h"
 #import "GIResponse.h"
 #import "ProductSuscription.h"
+#import "MovieDatabaseAPIProxy.h"
 
 #define BASE_URL @"http://cashet-backend-stage.herokuapp.com/api/"
 
@@ -188,12 +189,14 @@
     if (_internetReachable.isReachable){
         
         NSMutableDictionary* params = @{@"category_id": product.category.categoryId,
-                                 @"movie_token": product.movie.identifier,
-                                 @"actor_token": product.actor.identifier,
-                                 @"name": product.name,
-                                 @"description": product.productDescription,
-                                 @"movie_name": product.movie.name == nil ? product.movie.title : product.movie.name,
-                                 @"actor_name": product.actor.name
+                                        @"movie_token": product.movie.identifier,
+                                        @"actor_token": product.actor.identifier,
+                                        @"name": product.name,
+                                        @"description": product.productDescription,
+                                        @"movie_name": product.movie.name == nil ? product.movie.title : product.movie.name,
+                                        @"movie_image": [MovieDatabaseAPIProxy fullpathForLargeImage:product.movie.posterPath],
+                                        @"actor_name": product.actor.name,
+                                        @"actor_image": [MovieDatabaseAPIProxy fullpathForLargeImage:product.actor.posterPath]
                                         }.mutableCopy;
         
         if (product.picture) {
