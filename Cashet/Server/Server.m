@@ -114,7 +114,7 @@
                 callback(serverResponse, error);
                  
              } else {
-                 NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:serverResponse.message andCode:500];
+                 NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error while retrieving categories. Try again later." andCode:500];
                  
                  callback(serverResponse, error);
              }
@@ -158,7 +158,7 @@
                  callback(serverResponse, error);
                  
              } else {
-                 NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:serverResponse.message andCode:500];
+                 NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error while retrieving categories. Try again later." andCode:500];
                  
                  callback(serverResponse, error);
              }
@@ -240,7 +240,7 @@
                      callback(serverResponse, error);
                      
                  } else {
-                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:serverResponse.message andCode:500];
+                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error ocurred while requesting product. Try again later." andCode:500];
                      
                      callback(serverResponse, error);
                  }
@@ -291,7 +291,7 @@
                      callback(serverResponse, error);
                      
                  } else {
-                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:serverResponse.message andCode:500];
+                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error ocurred while identifying product. Try again later." andCode:500];
                      
                      callback(serverResponse, error);
                  }
@@ -340,7 +340,7 @@
                      callback(serverResponse, error);
                      
                  } else {
-                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:serverResponse.message andCode:500];
+                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error ocurred while getting the products. Try again later." andCode:500];
                      
                      callback(serverResponse, error);
                  }
@@ -387,7 +387,7 @@
                      callback(serverResponse, error);
                      
                  } else {
-                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:serverResponse.message andCode:500];
+                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error ocurred while getting the products. Try again later." andCode:500];
                      
                      callback(serverResponse, error);
                  }
@@ -434,7 +434,7 @@
                      callback(serverResponse, error);
                      
                  } else {
-                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:serverResponse.message andCode:500];
+                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error ocurred while getting the products. Try again later." andCode:500];
                      
                      callback(serverResponse, error);
                  }
@@ -481,7 +481,7 @@
                      callback(serverResponse, error);
                      
                  } else {
-                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:serverResponse.message andCode:500];
+                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error ocurred while setting product as favorite. Try again later." andCode:500];
                      
                      callback(serverResponse, error);
                  }
@@ -527,7 +527,7 @@
                      callback(serverResponse, error);
                      
                  } else {
-                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:serverResponse.message andCode:500];
+                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error ocurred while identifying product. Try again later." andCode:500];
                      
                      callback(serverResponse, error);
                  }
