@@ -20,6 +20,7 @@
 #import "MovieDatabaseAPIProxy.h"
 
 #define BASE_URL @"http://cashet-backend-stage.herokuapp.com/api/"
+//#define LOG_RESPONSE
 
 @interface Server()
 
@@ -92,7 +93,9 @@
 
 - (void)getCategoriesCallback:(void(^)(id response, NSError* error))callback
 {
+#ifdef LOG_RESPONSE
     NSLog(@"%s", __PRETTY_FUNCTION__);
+#endif
     
     if (_internetReachable.isReachable){
         
@@ -104,7 +107,9 @@
         [self.netmanager
          GET:@"categories" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              
+#ifdef LOG_RESPONSE
              NSLog(@"Response object: %@", responseObject);
+#endif
              
              NSError* error = nil;
              
@@ -132,7 +137,9 @@
 
 - (void)getCategoriesForActor:(NSNumber*)actorId movie:(NSNumber*)movieId callback:(void(^)(id response, NSError* error))callback
 {
+#ifdef LOG_RESPONSE
     NSLog(@"%s", __PRETTY_FUNCTION__);
+#endif
     
     if (_internetReachable.isReachable){
         
@@ -147,8 +154,9 @@
         
         [self.netmanager
          GET:@"categories" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-             
+#ifdef LOG_RESPONSE
              NSLog(@"Response object: %@", responseObject);
+#endif
              
              NSError* error = nil;
              
@@ -184,7 +192,9 @@
 
 - (void)postProduct:(Product*)product callback:(void(^)(id response, NSError* error))callback
 {
+#ifdef LOG_RESPONSE
     NSLog(@"%s", __PRETTY_FUNCTION__);
+#endif
     
     if (_internetReachable.isReachable){
         
@@ -196,7 +206,7 @@
                                         @"movie_name": product.movie.name == nil ? product.movie.title : product.movie.name,
                                         @"movie_image": [MovieDatabaseAPIProxy fullpathForLargeImage:product.movie.posterPath],
                                         @"actor_name": product.actor.name,
-                                        @"actor_image": [MovieDatabaseAPIProxy fullpathForLargeImage:product.actor.posterPath]
+                                        @"actor_image": [MovieDatabaseAPIProxy fullpathForLargeImage:product.actor.profilePath]
                                         }.mutableCopy;
         
         if (product.picture) {
@@ -218,15 +228,17 @@
         if (product.amazonLink) {
             [params setObject:product.amazonLink forKey:@"amazon_link"];
         }
-        
+#ifdef LOG_RESPONSE
         NSLog(@"Params: %@", params);
+#endif
         
         AFHTTPRequestSerializer* reqSerializer = [self _newSerializer];
         [self.netmanager setRequestSerializer:reqSerializer];
         [self.netmanager
          POST:@"products" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-             
+#ifdef LOG_RESPONSE
              NSLog(@"Response object: %@", responseObject);
+#endif
              
              if (!responseObject) {
                  callback(nil, nil);
@@ -269,15 +281,18 @@
                                  @"amazon_link": product.amazonLink,
                                  @"picture": product.picture
                                  };
-        
+#ifdef LOG_RESPONSE
         NSLog(@"Params: %@", params);
+#endif
         
         AFHTTPRequestSerializer* reqSerializer = [self _newSerializer];
         [self.netmanager setRequestSerializer:reqSerializer];
         [self.netmanager
          POST:[NSString stringWithFormat:@"products/%ld", product.productId.longValue] parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-             
+
+#ifdef LOG_RESPONSE
              NSLog(@"Response object: %@", responseObject);
+#endif
              
              if (!responseObject) {
                  callback(nil, nil);
@@ -310,7 +325,9 @@
 
 - (void)getProductsForActor:(MoviedatabaseItem*)actor movie:(MoviedatabaseItem*)movie category:(Category*)category callback:(void(^)(id response, NSError* error))callback;
 {
+#ifdef LOG_RESPONSE
     NSLog(@"%s", __PRETTY_FUNCTION__);
+#endif
     
     if (_internetReachable.isReachable){
         
@@ -318,15 +335,17 @@
                                  @"actor_token": actor.identifier,
                                  @"category_id": category.categoryId
                                  };
-        
+#ifdef LOG_RESPONSE
         NSLog(@"Params: %@", params);
+#endif
         
         AFHTTPRequestSerializer* reqSerializer = [self _newSerializer];
         [self.netmanager setRequestSerializer:reqSerializer];
         [self.netmanager
          GET:@"products" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-             
+#ifdef LOG_RESPONSE
              NSLog(@"Response object: %@", responseObject);
+#endif
              
              if (!responseObject) {
                  callback(nil, nil);
@@ -359,21 +378,26 @@
 
 - (void)getTrendingProductsWithCallback:(void(^)(id response, NSError* error))callback
 {
+#ifdef LOG_RESPONSE
     NSLog(@"%s", __PRETTY_FUNCTION__);
+#endif
     
     if (_internetReachable.isReachable){
         
         NSDictionary* params = @{@"trending": @"1",
                                  @"limit": @"3"};
-    
+#ifdef LOG_RESPONSE
         NSLog(@"Params: %@", params);
+#endif
         
         AFHTTPRequestSerializer* reqSerializer = [self _newSerializer];
         [self.netmanager setRequestSerializer:reqSerializer];
         [self.netmanager
          GET:@"products" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-             
+
+#ifdef LOG_RESPONSE
              NSLog(@"Response object: %@", responseObject);
+#endif
              
              if (!responseObject) {
                  callback(nil, nil);
@@ -406,21 +430,26 @@
 
 - (void)getWantedProductsWithCallback:(void(^)(id response, NSError* error))callback
 {
+#ifdef LOG_RESPONSE
     NSLog(@"%s", __PRETTY_FUNCTION__);
+#endif
     
     if (_internetReachable.isReachable){
         
         NSDictionary* params = @{@"wanteds": @"1",
                                  @"limit": @"3"};
-        
+#ifdef LOG_RESPONSE
         NSLog(@"Params: %@", params);
+#endif
         
         AFHTTPRequestSerializer* reqSerializer = [self _newSerializer];
         [self.netmanager setRequestSerializer:reqSerializer];
         [self.netmanager
          GET:@"products" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-             
+
+#ifdef LOG_RESPONSE
              NSLog(@"Response object: %@", responseObject);
+#endif
              
              if (!responseObject) {
                  callback(nil, nil);
@@ -453,21 +482,26 @@
 
 - (void)favoriteProduct:(Product*)product forUserWithEmail:(NSString*)email callback:(void(^)(id response, NSError* error))callback
 {
+#ifdef LOG_RESPONSE
     NSLog(@"%s", __PRETTY_FUNCTION__);
+#endif
     
     if (_internetReachable.isReachable){
         
         NSDictionary* params = @{@"email": email
                                  };
-        
+#ifdef LOG_RESPONSE
         NSLog(@"Params: %@", params);
+#endif
         
         AFHTTPRequestSerializer* reqSerializer = [self _newSerializer];
         [self.netmanager setRequestSerializer:reqSerializer];
         [self.netmanager
          POST:[NSString stringWithFormat:@"products/%ld/suscription", product.productId.longValue] parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              
+#ifdef LOG_RESPONSE
              NSLog(@"Response object: %@", responseObject);
+#endif
              
              if (!responseObject) {
                  callback(nil, nil);
@@ -505,15 +539,18 @@
         NSDictionary* params = @{
                                  @"pk": product.productId
                                  };
-        
+#ifdef LOG_RESPONSE
         NSLog(@"Params: %@", params);
+#endif
         
         AFHTTPRequestSerializer* reqSerializer = [self _newSerializer];
         [self.netmanager setRequestSerializer:reqSerializer];
         [self.netmanager
          POST:[NSString stringWithFormat:@"products/%ld/views", product.productId.longValue] parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              
+#ifdef LOG_RESPONSE
              NSLog(@"Response object: %@", responseObject);
+#endif
              
              if (!responseObject) {
                  callback(nil, nil);

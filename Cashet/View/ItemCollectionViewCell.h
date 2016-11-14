@@ -7,6 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Product.h"
+
+@protocol ItemCollectionViewCellDelegate <NSObject>
+
+- (void)productTouched:(Product*)product;
+- (void)actorTouched:(Product*)product;
+- (void)movieTouched:(Product*)product;
+
+@end
 
 @interface ItemCollectionViewCell : UICollectionViewCell
 
@@ -14,6 +23,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *movieLabel;
 @property (weak, nonatomic) IBOutlet UILabel *actorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *itemLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIImageView *actorImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *productImageView;
+@property (weak, nonatomic) IBOutlet UIView *gradientContainerView;
+@property (weak, nonatomic) IBOutlet UIView *topBarView;
+
+@property (weak, nonatomic) id<ItemCollectionViewCellDelegate> delegate;
+@property (retain, nonatomic) Product* product;
 
 @end

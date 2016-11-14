@@ -16,7 +16,7 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import "BuyProductViewController.h"
 
-@interface MainViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface MainViewController () <UICollectionViewDelegate, UICollectionViewDataSource, ItemCollectionViewCellDelegate>
 
 @property(nonatomic, retain) NSArray<Product*>* wantedProducts;
 @property(nonatomic, retain) NSArray<Product*>* trendingProducts;
@@ -35,6 +35,9 @@
     
     self.trendingProducts = [NSArray new];
     self.wantedProducts = [NSArray new];
+    
+    self.trendingCollectionView.allowsSelection = NO;
+    self.wantedCollectionView.allowsSelection = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -113,11 +116,8 @@
     }
 
     ItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    [cell.imageView setImageWithURL:[NSURL URLWithString:item.picture]];
-    cell.movieLabel.text = item.movieName;
-    cell.actorLabel.text = item.actorName;
-    cell.viewCountLabel.text = item.views ? [item.views stringValue] : @"0";
-    cell.itemLabel.text = item.category.name;
+    cell.product = item;
+    cell.delegate = self;
     
     return cell;
 }
@@ -129,30 +129,30 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(collectionView.frame.size.width*2/3, collectionView.frame.size.height);
+    return CGSizeMake(collectionView.frame.size.width*2/3 - 30, collectionView.frame.size.height);
 }
 
-#pragma mark - UICollectionViewDelegate
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - ItemCollectionViewCellDelegate
+- (void)productTouched:(Product*)product
 {
-    Product* item = nil;
-    
-    if (collectionView == self.trendingCollectionView) {
-        item = self.trendingProducts[indexPath.row];
-        
-    } else {
-        item = self.wantedProducts[indexPath.row];
-    }
-    
-    if (item.amazonLink && ![item.amazonLink isEqualToString:@""]) {
-        Product* item = self.trendingProducts[indexPath.row];
-        
+    if (product.amazonLink && ![product.amazonLink isEqualToString:@""]) {
+
         UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         BuyProductViewController* vc =[storyboard instantiateViewControllerWithIdentifier:@"BuyProductViewController"];
-        vc.product = item;
-        
+        vc.product = product;
+
         [self.navigationController pushViewController:vc animated:YES];
     }
+}
+
+- (void)actorTouched:(Product*)product
+{
+    
+}
+
+- (void)movieTouched:(Product*)product
+{
+    
 }
 
 @end
