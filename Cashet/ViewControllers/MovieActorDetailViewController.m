@@ -41,6 +41,32 @@
     
     self.titleLabel.text = [self _title];
     self.subtitleLabel.text = [self _subtitle];
+    
+    [self _getCategories];
+}
+
+- (void)_getCategories
+{
+    [self showActivityIndicator];
+    
+    [[Server sharedInstance] getCategoriesCallback:^(id response, NSError *error) {
+        
+        [self hideActivityIndicator];
+        
+        ServerListResponse* serverResponse = response;
+        
+        if (!error) {
+            if (serverResponse.success) {
+                self.categories = serverResponse.data;
+                
+            } else {
+                [self showErrorDialogWithMessage:serverResponse.message];
+            }
+            
+        } else {
+            [self showErrorDialogWithMessage:error.localizedDescription];
+        }
+    }];
 }
 
 - (void)_setImage
@@ -196,7 +222,7 @@
 }
 
 #pragma mark - ProductCategoryTableViewCellDelegate
-- (void)productCategoryTableViewCell:(ProductCategoryTableViewCell*)cell didSelectCategory:(Category*)category
+- (void)productCategoryTableViewCell:(ProductCategoryTableViewCell*)cell didSelectCategory:(Category*)category fromCategories:(NSArray<Category*>*) categories
 {
     self.selectedCategory = category;
     self.selectedIndexPath = cell.indexPath;
@@ -217,9 +243,23 @@
         product.movie = self.mainItem;
     }
     
+    NSMutableDictionary* selectableCategories = [[NSMutableDictionary alloc] initWithCapacity:self.categories.count];
+    
+    for (Category* category in self.categories) {
+        [selectableCategories setObject:category forKey:category.categoryId];
+    }
+    
+    for (Category* categoryToRemove in cell.items) {
+        [selectableCategories removeObjectForKey:categoryToRemove.categoryId];
+    }
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     AddAmazonProductViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"AddAmazonProductViewController"];
     vc.product = product;
+    vc.categories = [selectableCategories.allValues sortedArrayUsingDescriptors:sortDescriptors];
     
     [self.navigationController pushViewController:vc animated:YES];
 }

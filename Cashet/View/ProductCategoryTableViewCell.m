@@ -120,7 +120,7 @@
             [self.delegate productCategoryTableViewCell:self addAmazonProductForMoviedatabaseItem:self.moviedatabaseItem];
             
         } else {
-            [self.delegate productCategoryTableViewCell:self didSelectCategory:self.items[indexPath.row-1]];
+            [self.delegate productCategoryTableViewCell:self didSelectCategory:self.items[indexPath.row-1] fromCategories:self.items];
         }
     }
     

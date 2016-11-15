@@ -18,5 +18,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
 
 @property (nonatomic, retain) Product* product;
+@property (nonatomic, retain) NSArray<Category*>* categories;
 
 @end

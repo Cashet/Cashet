@@ -27,7 +27,6 @@
 @property(nonatomic, retain) AmazonResponse* response;
 @property(nonatomic, assign) long currentPage;
 @property(nonatomic, assign) NSInteger selectedItemRow;
-@property (nonatomic, retain) NSArray<Category*>* categories;
 @property (nonatomic, retain) Category* selectedCategory;
 
 @end
@@ -42,36 +41,6 @@
     
     self.selectedItemRow = -1;
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
-        
-    [self _getCategories];
-}
-
-- (void)_getCategories
-{
-    [self showActivityIndicator];
-    
-    [[Server sharedInstance] getCategoriesCallback:^(id response, NSError *error) {
-        
-        [self hideActivityIndicator];
-        
-        ServerListResponse* serverResponse = response;
-        
-        if (!error) {
-            if (serverResponse.success) {
-                self.categories = serverResponse.data;
-                
-                self.selectedCategory = self.categories[0];
-                
-                self.categoryLabel.text = self.categories[0].name;
-                
-            } else {
-                [self showErrorDialogWithMessage:serverResponse.message];
-            }
-            
-        } else {
-            [self showErrorDialogWithMessage:error.localizedDescription];
-        }
-    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated

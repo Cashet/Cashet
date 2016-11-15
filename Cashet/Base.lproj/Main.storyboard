@@ -484,7 +484,7 @@ CQ
                                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="go1-Tv-H1L" userLabel="Actor button">
                                                     <frame key="frameInset" minX="115" minY="105" width="46" height="30"/>
                                                     <connections>
-                                                        <action selector="actorTouched:" destination="cRu-h0-Q4J" eventType="touchUpInside" id="EN1-oC-U4Q"/>
+                                                        <action selector="touchedActor:" destination="cRu-h0-Q4J" eventType="touchUpInside" id="Xu7-zA-G5q"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xll-eS-cVK">
