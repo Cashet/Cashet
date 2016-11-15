@@ -189,7 +189,6 @@
         vc.actor = self.actor;
         vc.movie = self.movie;
         vc.category = self.category;
-        vc.categories = @[self.category];
         
     } else if ([segue.identifier isEqualToString:@"I know what this is"]) {
         IKnowWhatThisIsViewController* vc = segue.destinationViewController;

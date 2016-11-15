@@ -44,6 +44,7 @@
     
     if (self.categories && self.categories.count > 0) {
         self.categoryLabel.text = self.categories[0].name;
+        self.selectedCategory = self.categories[0];
     }
 }
 

@@ -25,6 +25,7 @@
 @property (nonatomic, retain) Category* selectedCategory;
 @property (nonatomic, retain) NSIndexPath* selectedIndexpath;
 @property (nonatomic, assign) long totalResults;
+@property (nonatomic, retain) NSArray<Category*>* categories;
 
 @end
 
@@ -47,6 +48,30 @@
     self.title = self.actor.name;
     
     self.totalResults = LONG_MAX;
+    
+    [self _getCategories];
+}
+
+- (void)_getCategories
+{
+    [self showActivityIndicator];
+    
+    [[Server sharedInstance] getCategoriesCallback:^(id response, NSError *error) {
+        [self hideActivityIndicator];
+        
+        ServerListResponse* serverResponse = response;
+        
+        if (!error) {
+            
+            if (serverResponse.success) {
+                    self.categories = serverResponse.data;
+            } else {
+                [self showErrorDialogWithMessage:serverResponse.message];
+            }
+        } else {
+            [self showErrorDialogWithMessage:error.localizedDescription];
+        }
+    }];
 }
 
 - (NSString*)_getQuery
@@ -190,12 +215,12 @@
 {
     NSMutableString* message = [NSMutableString new];
     
-    if (!self.selectedIndexpath) {
-        [message appendString:@"Select an image."];
-    }
-    
     if (!self.selectedCategory) {
         [message appendString:@"\nSelect a category."];
+    }
+    
+    if ([self.searchBar.text isEqualToString:@""]) {
+        [message appendString:@"\nAdd a text for the search."];
     }
     
     if (message.length > 0) {
@@ -210,10 +235,13 @@
         Product* product = [Product new];
         product.actor = self.actor;
         product.movie = self.movie;
-        product.picture = self.items[_selectedIndexpath.row].link;
         product.category = self.selectedCategory;
         product.productDescription = [NSString stringWithFormat:@"%@, %@ in %@", self.actor.name, self.searchBar.text, [self.movie.mediaType isEqualToString:@"movie"] ? self.movie.title : self.movie.name];
         product.name = self.searchBar.text;
+        
+        if (self.selectedIndexpath) {
+            product.picture = self.items[_selectedIndexpath.row].link;
+        }
         
         [[Server sharedInstance] postProduct:product callback:^(id response, NSError *error) {
             

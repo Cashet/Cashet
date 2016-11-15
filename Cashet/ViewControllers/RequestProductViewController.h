@@ -22,6 +22,5 @@
 @property (nonatomic, retain) MoviedatabaseItem* actor;
 @property (nonatomic, retain) MoviedatabaseItem* movie;
 @property (nonatomic, retain) Category* category;
-@property (nonatomic, retain) NSArray<Category*>* categories;
 
 @end
