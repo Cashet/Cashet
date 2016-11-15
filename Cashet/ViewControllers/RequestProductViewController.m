@@ -22,7 +22,6 @@
 
 @property (nonatomic, retain) GIResponse* response;
 @property (nonatomic, retain) NSMutableArray<GIItem*>* items;
-@property (nonatomic, retain) NSArray<Category*>* categories;
 @property (nonatomic, retain) Category* selectedCategory;
 @property (nonatomic, retain) NSIndexPath* selectedIndexpath;
 @property (nonatomic, assign) long totalResults;
@@ -39,9 +38,7 @@
     self.selectedCategory = self.category;
     
     [self noResultsViewHidden:NO];
-     
-    [self _getCategories];
-    
+
     self.continueButton.layer.cornerRadius = self.continueButton.frame.size.height/2;
     
     UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_selectCategory:)];
@@ -55,30 +52,6 @@
 - (NSString*)_getQuery
 {
     return [NSString stringWithFormat:@"%@ %@ %@", self.actor.name, self.movie.title, self.searchBar.text];
-}
-
-- (void)_getCategories
-{
-    [self showActivityIndicator];
-    
-    [[Server sharedInstance] getCategoriesCallback:^(id response, NSError *error) {
-        
-        [self hideActivityIndicator];
-        
-        ServerListResponse* serverResponse = response;
-        
-        if (!error) {
-            if (serverResponse.success) {
-                self.categories = serverResponse.data;
-                
-            } else {
-                [self showErrorDialogWithMessage:serverResponse.message];
-            }
-            
-        } else {
-            [self showErrorDialogWithMessage:error.localizedDescription];
-        }
-    }];
 }
 
 #pragma mark - Navigation

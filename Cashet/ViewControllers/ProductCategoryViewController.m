@@ -189,6 +189,7 @@
         vc.actor = self.actor;
         vc.movie = self.movie;
         vc.category = self.category;
+        vc.categories = @[self.category];
         
     } else if ([segue.identifier isEqualToString:@"I know what this is"]) {
         IKnowWhatThisIsViewController* vc = segue.destinationViewController;
@@ -267,6 +268,7 @@
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     AddAmazonProductViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"AddAmazonProductViewController"];
     vc.product = product;
+    vc.categories = @[self.category];
     
     [self.navigationController pushViewController:vc animated:YES];
 }

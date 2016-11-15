@@ -41,6 +41,10 @@
     
     self.selectedItemRow = -1;
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
+    
+    if (self.categories && self.categories.count > 0) {
+        self.categoryLabel.text = self.categories[0].name;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
