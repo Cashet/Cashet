@@ -165,7 +165,7 @@
 		EEBD78861D8097100087A160 /* AmazonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmazonItem.h; sourceTree = "<group>"; };
 		EEBD78871D8097100087A160 /* AmazonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmazonItem.m; sourceTree = "<group>"; };
 		EEC2E53C1D6630E200B37190 /* MovieActorDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieActorDetailViewController.h; sourceTree = "<group>"; };
-		EEC2E53D1D6630E200B37190 /* MovieActorDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieActorDetailViewController.m; sourceTree = "<group>"; };
+		EEC2E53D1D6630E200B37190 /* MovieActorDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieActorDetailViewController.m; sourceTree = "<group>"; wrapsLines = 0; };
 		EEC2E53F1D66370D00B37190 /* ProductCategoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductCategoryTableViewCell.h; sourceTree = "<group>"; };
 		EEC2E5401D66370D00B37190 /* ProductCategoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductCategoryTableViewCell.m; sourceTree = "<group>"; };
 		EEC2E5421D665B2200B37190 /* ProductTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductTableViewCell.h; sourceTree = "<group>"; };

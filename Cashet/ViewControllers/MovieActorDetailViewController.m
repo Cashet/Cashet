@@ -125,12 +125,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.items.count;
+    return self.items.count + 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return section == self.items.count ? 0 : 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -187,7 +187,11 @@
 
 - (NSString*)_sectionTitleForSectionIndex:(NSInteger)index
 {
-    MoviedatabaseItem* item = self.items[index];
+    if (index == 0) {
+        return @"";
+    }
+    
+    MoviedatabaseItem* item = self.items[index - 1];
     
     if ([item.mediaType isEqualToString:@"movie"]) {
         return item.title;
@@ -202,7 +206,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 35;
+    return section == 0 ? 1 : 35;
 }
 
 #pragma mark - Navigation

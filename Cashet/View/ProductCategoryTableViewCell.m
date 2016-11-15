@@ -64,6 +64,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ProductTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    cell.productView.image = nil;
     
     if (indexPath.row == 0) {
         cell.labelContainerView.hidden = YES;
