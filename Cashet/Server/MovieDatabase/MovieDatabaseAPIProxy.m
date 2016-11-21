@@ -243,4 +243,106 @@
     }
 }
 
+- (void)getActor:(long)actorId callback:(void(^)(id response, NSError* error))callback
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    if (_internetReachable.isReachable){
+        
+        AFJSONRequestSerializer* reqSerializer = [self _newSerializer];
+        
+        [self.netmanager setRequestSerializer:reqSerializer];
+        
+        NSDictionary* params = @{@"api_key":API_KEY};
+        
+        [self.netmanager
+         GET:[NSString stringWithFormat:@"person/%ld", actorId] parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             
+             NSLog(@"Response object: %@", responseObject);
+             
+             NSError* error = nil;
+             
+             MoviedatabaseItem* item = [[MoviedatabaseItem alloc] initWithDictionary:responseObject error:&error];
+             
+             callback(item, error);
+             
+         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+             NSLog(@"getUserCallback: %@", error);
+             callback(nil, [self _createErrorForMessage:@"An error ocurred, try again later." andCode:500]);
+         }];
+        
+    } else {
+        NSLog(@"No internet connection");
+        callback(nil, [self _createErrorForMessage:@"No internet connection." andCode:0]);
+    }
+}
+
+- (void)getMovie:(long)movieId callback:(void(^)(id response, NSError* error))callback
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    if (_internetReachable.isReachable){
+        
+        AFJSONRequestSerializer* reqSerializer = [self _newSerializer];
+        
+        [self.netmanager setRequestSerializer:reqSerializer];
+        
+        NSDictionary* params = @{@"api_key":API_KEY};
+        
+        [self.netmanager
+         GET:[NSString stringWithFormat:@"movie/%ld", movieId] parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             
+             NSLog(@"Response object: %@", responseObject);
+             
+             NSError* error = nil;
+             
+             MoviedatabaseItem* item = [[MoviedatabaseItem alloc] initWithDictionary:responseObject error:&error];
+             
+             callback(item, error);
+             
+         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+             NSLog(@"getUserCallback: %@", error);
+             callback(nil, [self _createErrorForMessage:@"An error ocurred, try again later." andCode:500]);
+         }];
+        
+    } else {
+        NSLog(@"No internet connection");
+        callback(nil, [self _createErrorForMessage:@"No internet connection." andCode:0]);
+    }
+}
+
+- (void)getTv:(long)tvId callback:(void(^)(id response, NSError* error))callback
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    if (_internetReachable.isReachable){
+        
+        AFJSONRequestSerializer* reqSerializer = [self _newSerializer];
+        
+        [self.netmanager setRequestSerializer:reqSerializer];
+        
+        NSDictionary* params = @{@"api_key":API_KEY};
+        
+        [self.netmanager
+         GET:[NSString stringWithFormat:@"tv/%ld", tvId] parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             
+             NSLog(@"Response object: %@", responseObject);
+             
+             NSError* error = nil;
+             
+             MoviedatabaseItem* item = [[MoviedatabaseItem alloc] initWithDictionary:responseObject error:&error];
+             
+             callback(item, error);
+             
+         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+             NSLog(@"getUserCallback: %@", error);
+             callback(nil, [self _createErrorForMessage:@"An error ocurred, try again later." andCode:500]);
+         }];
+        
+    } else {
+        NSLog(@"No internet connection");
+        callback(nil, [self _createErrorForMessage:@"No internet connection." andCode:0]);
+    }
+}
+
 @end

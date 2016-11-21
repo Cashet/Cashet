@@ -15,6 +15,7 @@
 #import "ServerListResponse.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import "BuyProductViewController.h"
+#import "MovieActorDetailViewController.h"
 
 @interface MainViewController () <UICollectionViewDelegate, UICollectionViewDataSource, ItemCollectionViewCellDelegate>
 
@@ -147,12 +148,120 @@
 
 - (void)actorTouched:(Product*)product
 {
+    [self showActivityIndicator];
     
+    [[MovieDatabaseAPIProxy sharedInstance] getActor:product.moviedatabaseActorId.longValue callback:^(id response, NSError *error) {
+        
+        if (!error) {
+            MoviedatabaseItem* item = (MoviedatabaseItem*)response;
+            
+            [[MovieDatabaseAPIProxy sharedInstance] getMoviesForActor:item.identifier.longValue callback:^(id response, NSError *error) {
+                
+                [self hideActivityIndicator];
+                
+                if (!error) {
+                    item.mediaType = @"person";
+                    
+                    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                    MovieActorDetailViewController* vc =[storyboard instantiateViewControllerWithIdentifier:@"ItemDetailViewController"];
+                    vc.mainItem = item;
+                    vc.items = ((CastCollection*)response).cast;
+                    
+                    [self.navigationController pushViewController:vc animated:YES];
+                    
+                } else {
+                    [self showErrorDialogWithMessage:error.localizedDescription];
+                }
+            }];
+            
+        } else {
+            [self hideActivityIndicator];
+            
+            [self showErrorDialogWithMessage:error.localizedDescription];
+        }
+    }];
 }
 
 - (void)movieTouched:(Product*)product
 {
+    if (product.moviedatabaseMovieId) {
+        [self _showMovieForProduct:product];
+        
+    } else {
+        [self _showTvForProduct:product];
+    }
+}
+
+- (void)_showMovieForProduct:(Product*)product
+{
+    [self showActivityIndicator];
     
+    [[MovieDatabaseAPIProxy sharedInstance] getMovie:product.moviedatabaseMovieId.longValue callback:^(id response, NSError *error) {
+        
+        if (!error) {
+            MoviedatabaseItem* item = (MoviedatabaseItem*)response;
+            
+            [[MovieDatabaseAPIProxy sharedInstance] getCastForMovie:item.identifier.longValue callback:^(id response, NSError *error) {
+                
+                [self hideActivityIndicator];
+                
+                if (!error) {
+                    item.mediaType = @"movie";
+                    
+                    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                    MovieActorDetailViewController* vc =[storyboard instantiateViewControllerWithIdentifier:@"ItemDetailViewController"];
+                    vc.mainItem = item;
+                    vc.items = ((CastCollection*)response).cast;
+                    
+                    [self.navigationController pushViewController:vc animated:YES];
+                    
+                } else {
+                    [self showErrorDialogWithMessage:error.localizedDescription];
+                }
+            }];
+            
+        } else {
+            [self hideActivityIndicator];
+            
+            [self showErrorDialogWithMessage:error.localizedDescription];
+        }
+    }];
+}
+
+- (void)_showTvForProduct:(Product*)product
+{
+    [self showActivityIndicator];
+    
+    [[MovieDatabaseAPIProxy sharedInstance] getTv:product.moviedatabaseMovieId.longValue callback:^(id response, NSError *error) {
+        
+        if (!error) {
+            MoviedatabaseItem* item = (MoviedatabaseItem*)response;
+            
+            [[MovieDatabaseAPIProxy sharedInstance] getCastForMovie:item.identifier.longValue callback:^(id response, NSError *error) {
+                
+                [self hideActivityIndicator];
+                
+                if (!error) {
+                    item.mediaType = @"tv";
+                    
+                    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                    MovieActorDetailViewController* vc =[storyboard instantiateViewControllerWithIdentifier:@"ItemDetailViewController"];
+                    vc.mainItem = item;
+                    vc.items = ((CastCollection*)response).cast;
+                    
+                    [self.navigationController pushViewController:vc animated:YES];
+                    
+                } else {
+                    [self showErrorDialogWithMessage:error.localizedDescription];
+                }
+            }];
+            
+        } else {
+            [self hideActivityIndicator];
+            
+            [self showErrorDialogWithMessage:error.localizedDescription];
+        }
+    }];
 }
 
 @end

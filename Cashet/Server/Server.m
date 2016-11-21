@@ -203,11 +203,20 @@
                                         @"actor_token": product.actor.identifier,
                                         @"name": product.name,
                                         @"description": product.productDescription,
-                                        @"movie_name": product.movie.name == nil ? product.movie.title : product.movie.name,
                                         @"movie_image": [MovieDatabaseAPIProxy fullpathForLargeImage:product.movie.posterPath],
                                         @"actor_name": product.actor.name,
-                                        @"actor_image": [MovieDatabaseAPIProxy fullpathForLargeImage:product.actor.profilePath]
+                                        @"actor_image": [MovieDatabaseAPIProxy fullpathForLargeImage:product.actor.profilePath],
+                                        @"moviedatabase_actor_id": product.actor.identifier
                                         }.mutableCopy;
+        
+        if ([product.movie.mediaType isEqualToString:@"movie"]) {
+            [params setObject:product.movie.title forKey:@"movie_name"];
+            [params setObject:product.movie.identifier forKey:@"moviedatabase_movie_id"];
+            
+        } else {
+            [params setObject:product.movie.name forKey:@"movie_name"];
+            [params setObject:product.movie.identifier forKey:@"moviedatabase_tv_id"];
+        }
         
         if (product.picture) {
             [params setObject:product.picture forKey:@"picture"];

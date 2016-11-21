@@ -19,5 +19,8 @@
 - (void)getCastForMovie:(long)movieId callback:(void(^)(id response, NSError* error))callback;
 - (void)getCastForTv:(long)tvId callback:(void(^)(id response, NSError* error))callback;
 - (void)getMoviesForActor:(long)actorId callback:(void(^)(id response, NSError* error))callback;
+- (void)getActor:(long)actorId callback:(void(^)(id response, NSError* error))callback;
+- (void)getMovie:(long)movieId callback:(void(^)(id response, NSError* error))callback;
+- (void)getTv:(long)tvId callback:(void(^)(id response, NSError* error))callback;
 
 @end

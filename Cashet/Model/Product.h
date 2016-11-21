@@ -32,8 +32,11 @@
 @property (nonatomic, retain) NSNumber<Optional>* movieToken;
 @property (nonatomic, retain) NSString<Optional>* movieName;
 @property (nonatomic, retain) NSString<Optional>* movieImage;
+@property (nonatomic, retain) NSNumber<Optional>* moviedatabaseMovieId;
 @property (nonatomic, retain) NSNumber<Optional>* actorToken;
 @property (nonatomic, retain) NSString<Optional>* actorName;
 @property (nonatomic, retain) NSString<Optional>* actorImage;
+@property (nonatomic, retain) NSNumber<Optional>* moviedatabaseActorId;
+@property (nonatomic, retain) NSNumber<Optional>* moviedatabaseTvId;
 
 @end

@@ -39,7 +39,9 @@
                                                        @"movie_name":@"movieName",
                                                        @"movie_image":@"movieImage",
                                                        @"actor_name":@"actorName",
-                                                       @"actor_image":@"actorImage"
+                                                       @"actor_image":@"actorImage",
+                                                       @"moviedatabase_movie_id": @"moviedatabaseMovieId",
+                                                       @"moviedatabase_actor_id": @"moviedatabaseActorId",
                                                        }];
 }
 
