@@ -10,7 +10,7 @@
 
 @interface CategoriesListViewController() <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, assign) NSInteger selectedIndexPath;
+@property (nonatomic, assign) long selectedIndexPath;
 
 @end
 
@@ -42,7 +42,7 @@
 {
     [self dismissViewControllerAnimated:YES completion:^{
 
-        if (self.delegate) {
+        if (self.delegate && self.selectedIndexPath > 0) {
             [self.delegate selectedCategory:self.categories[self.selectedIndexPath]];
         }
     }];
@@ -70,7 +70,7 @@
     UILabel* label = [cell viewWithTag:100];
     label.text = string;
     
-    cell.backgroundColor = self.selectedIndexPath == indexPath.row? [UIColor colorWithRed:130/255.0f green:25/255.0f blue:10/255.0f alpha:1] : [UIColor clearColor];
+    cell.backgroundColor = self.selectedIndexPath == indexPath.row ? [UIColor colorWithRed:130/255.0f green:25/255.0f blue:10/255.0f alpha:1] : [UIColor clearColor];
     
     return cell;
 }
