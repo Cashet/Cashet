@@ -43,6 +43,7 @@
     self.view.priceLabel.hidden = NO;
     self.view.descriptionLabel.text = self.model.productDescription;
     self.view.priceLabel.attributedText = [self _priceText];
+    self.view.productNameContainerView.hidden = YES;
     [self.view.imageView setImageWithURL:[NSURL URLWithString:self.model.picture]];
     [self.view.bottomButton setTitle:@"BUY PRODUCT" forState:UIControlStateNormal];
     [self.view.bottomButton setImage:[UIImage imageNamed:@"cart"] forState:UIControlStateNormal];

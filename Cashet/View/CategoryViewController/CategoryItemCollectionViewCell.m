@@ -19,6 +19,13 @@
     self.bottomButton.layer.cornerRadius = self.bottomButton.frame.size.height/2;
 }
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.productNameContainerView.layer.cornerRadius = self.productNameContainerView.frame.size.height / 2;
+}
+
 - (void)setState:(id<CategoryItemCellState>)state
 {
     _state = state;

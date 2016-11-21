@@ -42,7 +42,14 @@
     self.view.heartButton.hidden = NO;
     self.view.descriptionLabel.attributedText = [self _descriptionText];
     self.view.priceLabel.hidden = YES;
-    [self.view.imageView setImageWithURL:[NSURL URLWithString:self.model.picture]];
+    self.view.productNameContainerView.hidden = (self.model.picture != nil);
+    if (self.model.picture) {
+        [self.view.imageView setImageWithURL:[NSURL URLWithString:self.model.picture]];
+        
+    } else {
+        self.view.productNameLabel.text = self.model.name;
+    }
+    
     [self.view.bottomButton setTitle:@"I KNOW WHAT THIS IS" forState:UIControlStateNormal];
     [self.view.bottomButton setImage:[UIImage imageNamed:@"aim"] forState:UIControlStateNormal];
     [self.view.bottomButton setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];

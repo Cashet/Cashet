@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bottomButtonLabel;
+@property (weak, nonatomic) IBOutlet UILabel *productNameLabel;
+@property (weak, nonatomic) IBOutlet UIView *productNameContainerView;
 
 @property (retain, nonatomic) id<CategoryItemCellState> state;
 @property (retain, nonatomic) Product* model;
