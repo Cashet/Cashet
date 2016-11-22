@@ -151,6 +151,30 @@
     [self.HUD dismissAfterDelay:2.0];
 }
 
+- (void)showErrorDialogWithButtonWithMessage:(NSString*)message callback:(void(^)())callback
+{
+    // Create the alert controller
+    UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"Timeout error" message:message preferredStyle:UIAlertControllerStyleAlert];
+
+    // Create the actions
+    UIAlertAction* close = [UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    UIAlertAction* retry = [UIAlertAction actionWithTitle:@"Retry" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        callback();
+    }];
+    
+    // Add the actions
+    [alertController addAction:retry];
+    [alertController addAction:close];
+        
+    // Present the controller
+    [self presentViewController:alertController animated:true completion:^{
+        
+    }];
+}
+
 - (void)noResultsViewHidden:(BOOL)hidden
 {
     if (!self.noResultsView) {

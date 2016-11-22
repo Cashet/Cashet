@@ -287,6 +287,11 @@
     
     [self showActivityIndicator];
     
+    [self _postProduct:self.product];
+}
+
+- (void)_postProduct:(Product*)product
+{
     [[Server sharedInstance] postProduct:self.product callback:^(id response, NSError *error) {
         
         [self hideActivityIndicator];
@@ -295,7 +300,14 @@
             [self.navigationController popViewControllerAnimated:YES];
             
         } else {
-            [self showErrorDialogWithMessage:error.localizedDescription];
+            if (error.code == NSURLErrorTimedOut) {
+                [self showErrorDialogWithButtonWithMessage:error.localizedDescription callback:^{
+                    [self _postProduct:product];
+                }];
+                
+            } else {
+                [self showErrorDialogWithMessage:error.localizedDescription];
+            }
         }
     }];
 }

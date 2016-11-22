@@ -64,10 +64,18 @@
             }
             
         } else {
-            [self showErrorDialogWithMessage:error.localizedDescription];
+            if (error.code == NSURLErrorTimedOut) {
+                [self showErrorDialogWithButtonWithMessage:error.localizedDescription callback:^{
+                    [self _getCategories];
+                }];
+                
+            } else {
+                [self showErrorDialogWithMessage:error.localizedDescription];
+            }
         }
     }];
 }
+
 
 - (void)_setImage
 {
@@ -152,7 +160,15 @@
         movie = self.mainItem;
     }
     
-    [[Server sharedInstance] getCategoriesForActor:actor.identifier movie:movie.identifier callback:^(id response, NSError *error) {
+    [self _getCategoriesForCell:cell actor:actor.identifier movie:movie.identifier];
+    
+    return cell;
+}
+
+
+- (void)_getCategoriesForCell:(ProductCategoryTableViewCell*)cell actor:(NSNumber*)actorId movie:(NSNumber*)movieId
+{
+    [[Server sharedInstance] getCategoriesForActor:actorId movie:movieId callback:^(id response, NSError *error) {
         
         ServerListResponse* serverResponse = response;
         
@@ -169,11 +185,16 @@
         } else {
             cell.items = [NSArray new];
             
-            [self showErrorDialogWithMessage:error.localizedDescription];
+            if (error.code == NSURLErrorTimedOut) {
+                [self showErrorDialogWithButtonWithMessage:error.localizedDescription callback:^{
+                    [self _getCategoriesForCell:cell actor:actorId movie:movieId];
+                }];
+                
+            } else {
+                [self showErrorDialogWithMessage:error.localizedDescription];
+            }
         }
     }];
-    
-    return cell;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

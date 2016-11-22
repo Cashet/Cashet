@@ -273,16 +273,28 @@
 {
     [self _updateProductWithAmazonItem:self.items[((UIView*)sender).tag]];
     
+    [self _updateProduct:self.product];
+}
+
+- (void)_updateProduct:(Product*)product
+{
     [self showActivityIndicator];
     
-    [[Server sharedInstance] updateProduct:self.product callback:^(id response, NSError *error) {
+    [[Server sharedInstance] updateProduct:product callback:^(id response, NSError *error) {
         [self hideActivityIndicator];
         
         if (!error) {
             [self.navigationController popViewControllerAnimated:YES];
             
         } else {
-            [self showErrorDialogWithMessage:error.localizedDescription];
+            if (error.code == NSURLErrorTimedOut) {
+                [self showErrorDialogWithButtonWithMessage:error.localizedDescription callback:^{
+                    [self _updateProduct:product];
+                }];
+                
+            } else {
+                [self showErrorDialogWithMessage:error.localizedDescription];
+            }
         }
     }];
 }

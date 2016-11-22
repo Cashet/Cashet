@@ -73,16 +73,28 @@
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.view.backgroundColor = [UIColor clearColor];
     
+    [self _getProductsForActor:self.actor movie:self.movie category:self.category];
+}
+
+- (void)_getProductsForActor:(MoviedatabaseItem*)actor movie:(MoviedatabaseItem*)movie category:(Category*)category
+{
     [self showActivityIndicator];
     
-    [[Server sharedInstance] getProductsForActor:self.actor movie:self.movie category:self.category callback:^(id response, NSError *error) {
+    [[Server sharedInstance] getProductsForActor:actor movie:movie category:category callback:^(id response, NSError *error) {
         
         [self hideActivityIndicator];
-       
+        
         if (error) {
             [self noResultsViewHidden:NO];
             
-            [self showErrorDialogWithMessage:error.localizedDescription];
+            if (error.code == NSURLErrorTimedOut) {
+                [self showErrorDialogWithButtonWithMessage:error.localizedDescription callback:^{
+                    [self _getProductsForActor:actor movie:movie category:category];
+                }];
+                
+            } else {
+                [self showErrorDialogWithMessage:error.localizedDescription];
+            }
             
         } else {
             self.items = ((ServerListResponse*)response).data;
@@ -136,10 +148,27 @@
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.filteredItems.count;
+    return self.filteredItems.count + 1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == self.filteredItems.count) {
+        return [self _plusButtonCellForCollectionView:collectionView atIndexPath:indexPath];
+        
+    } else {
+        return [self _regularCellForCollectionView:collectionView atIndexPath:indexPath];
+    }
+}
+
+- (UICollectionViewCell*)_plusButtonCellForCollectionView:(UICollectionView *)collectionView atIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Plus" forIndexPath:indexPath];
+    
+    return cell;
+}
+
+- (UICollectionViewCell*)_regularCellForCollectionView:(UICollectionView *)collectionView atIndexPath:(NSIndexPath *)indexPath
 {
     Product* item = self.filteredItems[indexPath.row];
     
@@ -178,7 +207,9 @@
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (indexPath.row == self.filteredItems.count) {
+        [self addProduct:nil];
+    }
 }
 
 #pragma mark - Navigation

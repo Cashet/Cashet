@@ -20,7 +20,7 @@
 #import "MovieDatabaseAPIProxy.h"
 
 #define BASE_URL @"http://cashet-backend-stage.herokuapp.com/api/"
-//#define LOG_RESPONSE
+#define LOG_RESPONSE
 
 @interface Server()
 
@@ -67,7 +67,7 @@
 {
     AFHTTPRequestSerializer* reqSerializer = [AFHTTPRequestSerializer serializer];
     [reqSerializer setValue:@"application/x-www-form-urlencoded; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
-    [reqSerializer setTimeoutInterval:20];
+    [reqSerializer setTimeoutInterval:2];
     
     return reqSerializer;
 }
@@ -119,14 +119,14 @@
                 callback(serverResponse, error);
                  
              } else {
-                 NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error while retrieving categories. Try again later." andCode:500];
+                 NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error while retrieving categories. Try again later." andCode:error.code];
                  
                  callback(serverResponse, error);
              }
              
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"getUserCallback: %@", error);
-             callback(nil, [self _createErrorForMessage:@"An error while retrieving categories. Try again later." andCode:500]);
+             callback(nil, [self _createErrorForMessage:@"An error while retrieving categories. Try again later." andCode:error.code]);
          }];
         
     } else {
@@ -166,14 +166,14 @@
                  callback(serverResponse, error);
                  
              } else {
-                 NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error while retrieving categories. Try again later." andCode:500];
+                 NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error while retrieving categories. Try again later." andCode:error.code];
                  
                  callback(serverResponse, error);
              }
              
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"getUserCallback: %@", error);
-             callback(nil, [self _createErrorForMessage:@"An error while retrieving categories. Try again later." andCode:500]);
+             callback(nil, [self _createErrorForMessage:@"An error while retrieving categories. Try again later." andCode:error.code]);
          }];
         
     } else {
@@ -261,7 +261,7 @@
                      callback(serverResponse, error);
                      
                  } else {
-                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error ocurred while requesting product. Try again later." andCode:500];
+                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error ocurred while requesting product. Try again later." andCode:error.code];
                      
                      callback(serverResponse, error);
                  }
@@ -269,7 +269,7 @@
          
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"getUserCallback: %@", error);
-             callback(nil, [self _createErrorForMessage:@"An error ocurred while requesting product. Try again later." andCode:500]);
+             callback(nil, [self _createErrorForMessage:@"An error ocurred while requesting product. Try again later." andCode:error.code]);
          }];
         
     } else {
@@ -315,7 +315,7 @@
                      callback(serverResponse, error);
                      
                  } else {
-                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error ocurred while identifying product. Try again later." andCode:500];
+                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error ocurred while identifying product. Try again later." andCode:error.code];
                      
                      callback(serverResponse, error);
                  }
@@ -323,7 +323,7 @@
              
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"getUserCallback: %@", error);
-             callback(nil, [self _createErrorForMessage:@"An error ocurred while identifying product. Try again later." andCode:500]);
+             callback(nil, [self _createErrorForMessage:@"An error ocurred while identifying product. Try again later." andCode:error.code]);
          }];
         
     } else {
@@ -368,7 +368,7 @@
                      callback(serverResponse, error);
                      
                  } else {
-                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error ocurred while getting the products. Try again later." andCode:500];
+                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error ocurred while getting the products. Try again later." andCode:error.code];
                      
                      callback(serverResponse, error);
                  }
@@ -376,7 +376,7 @@
              
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"getUserCallback: %@", error);
-             callback(nil, [self _createErrorForMessage:@"An error ocurred while getting the products. Try again later." andCode:500]);
+             callback(nil, [self _createErrorForMessage:@"An error ocurred while getting the products. Try again later." andCode:error.code]);
          }];
         
     } else {
@@ -420,7 +420,7 @@
                      callback(serverResponse, error);
                      
                  } else {
-                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error ocurred while getting the products. Try again later." andCode:500];
+                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error ocurred while getting the products. Try again later." andCode:error.code];
                      
                      callback(serverResponse, error);
                  }
@@ -428,7 +428,7 @@
              
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"getUserCallback: %@", error);
-             callback(nil, [self _createErrorForMessage:@"An error ocurred while getting the products. Try again later." andCode:500]);
+             callback(nil, [self _createErrorForMessage:@"An error ocurred while getting the products. Try again later." andCode:error.code]);
          }];
         
     } else {
@@ -472,7 +472,7 @@
                      callback(serverResponse, error);
                      
                  } else {
-                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error ocurred while getting the products. Try again later." andCode:500];
+                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error ocurred while getting the products. Try again later." andCode:error.code];
                      
                      callback(serverResponse, error);
                  }
@@ -480,7 +480,7 @@
              
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"getUserCallback: %@", error);
-             callback(nil, [self _createErrorForMessage:@"An error ocurred while getting the products. Try again later." andCode:500]);
+             callback(nil, [self _createErrorForMessage:@"An error ocurred while getting the products. Try again later." andCode:error.code]);
          }];
         
     } else {
@@ -524,7 +524,7 @@
                      callback(serverResponse, error);
                      
                  } else {
-                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error ocurred while setting product as favorite. Try again later." andCode:500];
+                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error ocurred while setting product as favorite. Try again later." andCode:error.code];
                      
                      callback(serverResponse, error);
                  }
@@ -532,7 +532,7 @@
              
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"getUserCallback: %@", error);
-             callback(nil, [self _createErrorForMessage:@"An error ocurred while setting product as favorite. Try again later." andCode:500]);
+             callback(nil, [self _createErrorForMessage:@"An error ocurred while setting product as favorite. Try again later." andCode:error.code]);
          }];
         
     } else {
@@ -573,7 +573,7 @@
                      callback(serverResponse, error);
                      
                  } else {
-                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error ocurred while identifying product. Try again later." andCode:500];
+                     NSError* error = serverResponse.success ? nil : [self _createErrorForMessage:@"An error ocurred while identifying product. Try again later." andCode:error.code];
                      
                      callback(serverResponse, error);
                  }
@@ -581,7 +581,7 @@
              
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"getUserCallback: %@", error);
-             callback(nil, [self _createErrorForMessage:@"An error ocurred while identifying product. Try again later." andCode:500]);
+             callback(nil, [self _createErrorForMessage:@"An error ocurred while identifying product. Try again later." andCode:error.code]);
          }];
         
     } else {

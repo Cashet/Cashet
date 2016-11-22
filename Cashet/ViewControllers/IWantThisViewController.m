@@ -42,6 +42,11 @@
 #pragma mark - IBActions
 - (IBAction)submitButtonClicked:(id)sender
 {
+    [self _favoriteProduct:self.product email:self.emailTextField.text];
+}
+
+- (void)_favoriteProduct:(Product*)product email:(NSString*)email
+{
     [self showActivityIndicator];
     
     [[Server sharedInstance] favoriteProduct:self.product forUserWithEmail:self.emailTextField.text callback:^(id response, NSError *error) {
@@ -52,7 +57,14 @@
             [self.navigationController popViewControllerAnimated:YES];
             
         } else {
-            [self showErrorDialogWithMessage:error.localizedDescription];
+            if (error.code == NSURLErrorTimedOut) {
+                [self showErrorDialogWithButtonWithMessage:error.localizedDescription callback:^{
+                    [self _favoriteProduct:product email:email];
+                }];
+                
+            } else {
+                [self showErrorDialogWithMessage:error.localizedDescription];
+            }
         }
     }];
 }

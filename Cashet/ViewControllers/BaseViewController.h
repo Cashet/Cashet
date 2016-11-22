@@ -17,6 +17,7 @@
 - (void)showDarkOverlay;
 - (void)hideDarkOverlay;
 - (void)showErrorDialogWithMessage:(NSString*)errorMessage;
+- (void)showErrorDialogWithButtonWithMessage:(NSString*)message callback:(void(^)())callback;
 - (void)noResultsViewHidden:(BOOL)hidden;
 
 @end

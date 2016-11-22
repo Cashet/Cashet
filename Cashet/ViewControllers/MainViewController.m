@@ -45,12 +45,25 @@
 {
     [super viewWillAppear:animated];
     
+    [self _getTrendingProducts];
+    [self _getWantedProducts];
+}
+
+- (void)_getTrendingProducts
+{
     [[Server sharedInstance] getTrendingProductsWithCallback:^(id response, NSError *error) {
         
         [self hideActivityIndicator];
         
         if (error) {
-            [self showErrorDialogWithMessage:error.localizedDescription];
+            if (error.code == NSURLErrorTimedOut) {
+                [self showErrorDialogWithButtonWithMessage:error.localizedDescription callback:^{
+                    [self _getTrendingProducts];
+                }];
+                
+            } else {
+                [self showErrorDialogWithMessage:error.localizedDescription];
+            }
             
         } else {
             self.trendingProducts = ((ServerListResponse*)response).data;
@@ -58,17 +71,27 @@
             [self.trendingCollectionView reloadData];
         }
     }];
-    
+}
+
+- (void)_getWantedProducts
+{
     [[Server sharedInstance] getWantedProductsWithCallback:^(id response, NSError *error) {
         
         [self hideActivityIndicator];
         
         if (error) {
-            [self showErrorDialogWithMessage:error.localizedDescription];
+            if (error.code == NSURLErrorTimedOut) {
+                [self showErrorDialogWithButtonWithMessage:error.localizedDescription callback:^{
+                    [self _getWantedProducts];
+                }];
+                
+            } else {
+                [self showErrorDialogWithMessage:error.localizedDescription];
+            }
             
         } else {
             self.wantedProducts = ((ServerListResponse*)response).data;
-                       
+            
             [self.wantedCollectionView reloadData];
         }
     }];

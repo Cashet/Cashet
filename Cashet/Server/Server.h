@@ -14,8 +14,6 @@
 
 + (Server*)sharedInstance;
 
-- (void)getTrendingItems:(void(^)(id response, NSError* error))callback;
-- (void)getWantedItems:(void(^)(id response, NSError* error))callback;
 - (void)getCategoriesForActor:(NSNumber*)actorId movie:(NSNumber*)movieId callback:(void(^)(id response, NSError* error))callback;
 - (void)getCategoriesCallback:(void(^)(id response, NSError* error))callback;
 - (void)postProduct:(Product*)product callback:(void(^)(id response, NSError* error))callback;

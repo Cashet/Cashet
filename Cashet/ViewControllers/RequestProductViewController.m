@@ -69,7 +69,14 @@
                 [self showErrorDialogWithMessage:serverResponse.message];
             }
         } else {
-            [self showErrorDialogWithMessage:error.localizedDescription];
+            if (error.code == NSURLErrorTimedOut) {
+                [self showErrorDialogWithButtonWithMessage:error.localizedDescription callback:^{
+                    [self _getCategories];
+                }];
+                
+            } else {
+                [self showErrorDialogWithMessage:error.localizedDescription];
+            }
         }
     }];
 }
@@ -243,18 +250,30 @@
             product.picture = self.items[_selectedIndexpath.row].link;
         }
         
-        [[Server sharedInstance] postProduct:product callback:^(id response, NSError *error) {
+        [self _postProduct:product];
+    }
+}
+
+- (void)_postProduct:(Product*)product
+{
+    [[Server sharedInstance] postProduct:product callback:^(id response, NSError *error) {
+        
+        [self hideActivityIndicator];
+        
+        if (!error) {
+            [self.navigationController popViewControllerAnimated:YES];
             
-            [self hideActivityIndicator];
-            
-            if (!error) {
-                [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            if (error.code == NSURLErrorTimedOut) {
+                [self showErrorDialogWithButtonWithMessage:error.localizedDescription callback:^{
+                    [self _postProduct:product];
+                }];
                 
             } else {
                 [self showErrorDialogWithMessage:error.localizedDescription];
             }
-        }];
-    }
+        }
+    }];
 }
 
 #pragma mark - CategoriesListViewControllerDelegate
