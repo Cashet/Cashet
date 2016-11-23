@@ -20,7 +20,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-        
+    
     self.gradient = [CAGradientLayer layer];
     self.gradient.frame = CGRectMake(0, self.bounds.size.height* 2/3, self.bounds.size.width, self.bounds.size.height/3);
     self.gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:0 green:0 blue:0 alpha:0] CGColor], (id)[[UIColor blackColor] CGColor], nil];
@@ -70,7 +70,7 @@
     self.movieLabel.text = product.movieName;
     self.actorLabel.text = product.actorName;
     self.viewCountLabel.text = product.views ? [product.views stringValue] : @"0";
-    self.itemLabel.text = product.category.name;
+    self.itemLabel.text = [product.status isEqualToString:@"known"] ? product.name : product.category.name;
 }
 
 @end

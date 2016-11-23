@@ -19,7 +19,8 @@
 #import "ProductSuscription.h"
 #import "MovieDatabaseAPIProxy.h"
 
-#define BASE_URL @"http://cashet-backend-stage.herokuapp.com/api/"
+#define TIME_OUT    20
+#define BASE_URL    @"http://cashet-backend-stage.herokuapp.com/api/"
 #define LOG_RESPONSE
 
 @interface Server()
@@ -67,7 +68,7 @@
 {
     AFHTTPRequestSerializer* reqSerializer = [AFHTTPRequestSerializer serializer];
     [reqSerializer setValue:@"application/x-www-form-urlencoded; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
-    [reqSerializer setTimeoutInterval:2];
+    [reqSerializer setTimeoutInterval:TIME_OUT];
     
     return reqSerializer;
 }
