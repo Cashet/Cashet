@@ -16,6 +16,7 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import "BuyProductViewController.h"
 #import "MovieActorDetailViewController.h"
+#import "AmazonAPIProxy.h"
 
 @interface MainViewController () <UICollectionViewDelegate, UICollectionViewDataSource, ItemCollectionViewCellDelegate>
 
@@ -29,9 +30,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        
-    self.title = @"Ca$het";
     
+    self.title = @"Ca$het";
+   
     [self.tapView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_doSearch)]];
     
     self.trendingProducts = [NSArray new];

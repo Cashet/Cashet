@@ -85,7 +85,6 @@
         [self hideActivityIndicator];
         
         if (error) {
-            [self noResultsViewHidden:NO];
             
             if (error.code == NSURLErrorTimedOut) {
                 [self showErrorDialogWithButtonWithMessage:error.localizedDescription callback:^{
@@ -100,8 +99,6 @@
             self.items = ((ServerListResponse*)response).data;
             
             [self _filterItems];
-            
-            [self noResultsViewHidden:self.items.count != 0];
         }
     }];
 }

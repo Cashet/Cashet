@@ -65,7 +65,14 @@
 {
     _product = product;
     
-    [self.productImageView setImageWithURL:[NSURL URLWithString:product.picture]];
+    if (product.picture) {
+        [self.productImageView setImageWithURL:[NSURL URLWithString:product.picture]];
+        self.productImageView.contentMode = UIViewContentModeScaleAspectFill;
+    } else {
+        self.productImageView.image = [UIImage imageNamed:product.category.name];
+        self.productImageView.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    
     [self.actorImageView setImageWithURL:[NSURL URLWithString:product.actorImage]];
     self.movieLabel.text = product.movieName;
     self.actorLabel.text = product.actorName;

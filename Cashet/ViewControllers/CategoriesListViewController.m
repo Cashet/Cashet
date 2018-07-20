@@ -42,7 +42,7 @@
 {
     [self dismissViewControllerAnimated:YES completion:^{
 
-        if (self.delegate && self.selectedIndexPath > 0) {
+        if (self.delegate && self.selectedIndexPath >= 0) {
             [self.delegate selectedCategory:self.categories[self.selectedIndexPath]];
         }
     }];

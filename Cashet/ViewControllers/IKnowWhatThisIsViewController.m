@@ -249,6 +249,7 @@
     self.product.amazonLink = item.detailPageURL;
     self.product.amazonId = item.ASIN;
     self.product.productDescription = item.title;
+    self.product.name = item.title;
     self.product.price = @([item.lowestNewPriceFormatted stringByReplacingOccurrencesOfString:@"$" withString:@""].doubleValue);
     self.product.picture = item.imageURL;
 }

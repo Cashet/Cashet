@@ -455,7 +455,7 @@
 				TargetAttributes = {
 					EE03148D1D5BB75E00C873B2 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = P33KBKP926;
+						DevelopmentTeam = 97HWLMAZLK;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -726,14 +726,15 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				DEVELOPMENT_TEAM = P33KBKP926;
+				DEVELOPMENT_TEAM = 97HWLMAZLK;
 				INFOPLIST_FILE = Cashet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ar.com.moobile.Cashet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cashet.Cashet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e137c24d-2864-4a99-ab5f-04b952687a76";
+				PROVISIONING_PROFILE = "b4c6044c-8976-405e-a97f-314bb37fad9c";
 				PROVISIONING_PROFILE_SPECIFIER = "Cashet Dev";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -745,14 +746,15 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
-				DEVELOPMENT_TEAM = P33KBKP926;
+				DEVELOPMENT_TEAM = 97HWLMAZLK;
 				INFOPLIST_FILE = Cashet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ar.com.moobile.Cashet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cashet.Cashet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "98aa6638-5cb3-4462-8d8e-9abc84efcb44";
-				PROVISIONING_PROFILE_SPECIFIER = "Cashet Ad Hoc";
+				PROVISIONING_PROFILE = "bde259b8-0363-4b63-9024-e37e8373e8d6";
+				PROVISIONING_PROFILE_SPECIFIER = "Cashet App Store";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

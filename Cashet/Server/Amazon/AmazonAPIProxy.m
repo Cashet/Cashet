@@ -101,7 +101,7 @@
                                    [NSString stringWithFormat:@"Keywords=%@", [string urlencode]],
                                    @"Operation=ItemSearch",
                                    @"ResponseGroup=Medium",
-                                   //                            [NSString stringWithFormat:@"SearchIndex=%@", category],
+//                                   [NSString stringWithFormat:@"SearchIndex=%@", [category urlencode]],
                                    @"SearchIndex=All",
                                    @"Service=AWSECommerceService-Y",
                                    [NSString stringWithFormat:@"Timestamp=%@", [[DateHelper UTFStringFromDate:[NSDate date]] urlencode]]
